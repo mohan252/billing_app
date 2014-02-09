@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using Infragistics.Win.UltraWinGrid;
-using Excel = Microsoft.Office.Interop.Excel;
+//using Excel = Microsoft.Office.Interop.Excel;
 
 namespace BillingApplication
 {
@@ -144,13 +144,13 @@ namespace BillingApplication
                 dt.Columns.Add("SR.NO", typeof(Int32));
                 dt.Columns["SR.NO"].SetOrdinal(0);
             }
-            if (dt.Rows != null && dt.Rows.Count > 0)
-            {
-                if(ckDate.Checked)
-                    Common.ExportToExcel(path, dt, aGENTSTableAdapter.GetData(), cbAddress.Text, dpTo.Value,"PENDINGAMT","");
-                else
-                    Common.ExportToExcel(path, dt, aGENTSTableAdapter.GetData(), cbAddress.Text, DateTime.MinValue,"PENDINGAMT","");
-            }
+            //if (dt.Rows != null && dt.Rows.Count > 0)
+            //{
+            //    if(ckDate.Checked)
+            //        Common.ExportToExcel(path, dt, aGENTSTableAdapter.GetData(), cbAddress.Text, dpTo.Value,"PENDINGAMT","");
+            //    else
+            //        Common.ExportToExcel(path, dt, aGENTSTableAdapter.GetData(), cbAddress.Text, DateTime.MinValue,"PENDINGAMT","");
+            //}
             MessageBox.Show("Exported to " + path + " successfully");
             //change cursor to normal
             this.Cursor = original;

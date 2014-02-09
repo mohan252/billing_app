@@ -361,10 +361,10 @@ namespace BillingApplication
                 dt.Columns["PARTY"].SetOrdinal(4);
                 dt.Columns["AGENT"].SetOrdinal(5);
                 dt.Columns[amtColumn].SetOrdinal(6);
-                if (ckDate.Checked)
-                    Common.ExportToExcel(path, dt, aGENTSTableAdapter.GetData(), cbAddress.Text, dpTo.Value, amtColumn, "COMISSIONSTMT");
-                else
-                    Common.ExportToExcel(path, dt, aGENTSTableAdapter.GetData(), cbAddress.Text, DateTime.MinValue, amtColumn, "COMISSIONSTMT");
+                //if (ckDate.Checked)
+                //    Common.ExportToExcel(path, dt, aGENTSTableAdapter.GetData(), cbAddress.Text, dpTo.Value, amtColumn, "COMISSIONSTMT");
+                //else
+                //    Common.ExportToExcel(path, dt, aGENTSTableAdapter.GetData(), cbAddress.Text, DateTime.MinValue, amtColumn, "COMISSIONSTMT");
             }
             MessageBox.Show("Exported to " + path + " successfully");
             //change cursor to normal
