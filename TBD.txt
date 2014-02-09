@@ -1,0 +1,7 @@
+data labels should be shown in line grapth
+testing
+keep pie % in data grid itself
+in data btn section of pending amt, allow user to click the row so that it takes to line graph again
+qty of items chart
+sales chart
+settlement days chart

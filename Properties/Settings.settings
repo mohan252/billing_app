@@ -1,0 +1,180 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="BillingApplication.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DDEntryPaymentMode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Local Clearing,Outward Clearing,Outward Cash Deposit</Value>
+    </Setting>
+    <Setting Name="LRno" Type="System.String" Scope="User">
+      <Value Profile="(Default)">42, 221</Value>
+    </Setting>
+    <Setting Name="LRDate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">64, 221</Value>
+    </Setting>
+    <Setting Name="Agent" Type="System.String" Scope="User">
+      <Value Profile="(Default)">45, 238</Value>
+    </Setting>
+    <Setting Name="Address" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0, 35</Value>
+    </Setting>
+    <Setting Name="PartyName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0, 178</Value>
+    </Setting>
+    <Setting Name="Pin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0, 350</Value>
+    </Setting>
+    <Setting Name="Item" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0, 371</Value>
+    </Setting>
+    <Setting Name="Qty" Type="System.String" Scope="User">
+      <Value Profile="(Default)">58, 26.5</Value>
+    </Setting>
+    <Setting Name="Cd" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0, 723</Value>
+    </Setting>
+    <Setting Name="Rupees" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2, 785</Value>
+    </Setting>
+    <Setting Name="For" Type="System.String" Scope="User">
+      <Value Profile="(Default)">50, 900</Value>
+    </Setting>
+    <Setting Name="Custom" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2, 880.2287</Value>
+    </Setting>
+    <Setting Name="KumudamMin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">628</Value>
+    </Setting>
+    <Setting Name="VikasMin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">360</Value>
+    </Setting>
+    <Setting Name="MKMin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">315</Value>
+    </Setting>
+    <Setting Name="Font" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Arial</Value>
+    </Setting>
+    <Setting Name="PLFont" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Arial</Value>
+    </Setting>
+    <Setting Name="PLFontSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">13</Value>
+    </Setting>
+    <Setting Name="PLPlaceColumnWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">17.5</Value>
+    </Setting>
+    <Setting Name="PLTopMargin" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.15</Value>
+    </Setting>
+    <Setting Name="PLBottonMargin" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.25</Value>
+    </Setting>
+    <Setting Name="PLLeftMargin" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.15</Value>
+    </Setting>
+    <Setting Name="PLRightMargin" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.25</Value>
+    </Setting>
+    <Setting Name="PLDefaultFileLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\PENDINGLISTS</Value>
+    </Setting>
+    <Setting Name="Discount1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Diwali Sweet</Value>
+    </Setting>
+    <Setting Name="PLPartyColumnWidth" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">49</Value>
+    </Setting>
+    <Setting Name="CSColumnName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">TOTALWOCD</Value>
+    </Setting>
+    <Setting Name="CSCommissionPercent" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="CSCDPercent" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="CompanyConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30</Value>
+    </Setting>
+    <Setting Name="TinNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2, 0</Value>
+    </Setting>
+    <Setting Name="DocTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">63,253</Value>
+    </Setting>
+    <Setting Name="Invoice" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5, 135</Value>
+    </Setting>
+    <Setting Name="BaleNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">47, 135</Value>
+    </Setting>
+    <Setting Name="BillDate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">65, 135</Value>
+    </Setting>
+    <Setting Name="OrderNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">43, 167</Value>
+    </Setting>
+    <Setting Name="OrderDate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">64, 167</Value>
+    </Setting>
+    <Setting Name="FwdBy" Type="System.String" Scope="User">
+      <Value Profile="(Default)">45, 198</Value>
+    </Setting>
+    <Setting Name="FwdTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">63, 198</Value>
+    </Setting>
+    <Setting Name="Rate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">41, 26.5</Value>
+    </Setting>
+    <Setting Name="Meters" Type="System.String" Scope="User">
+      <Value Profile="(Default)">48, 284.7799</Value>
+    </Setting>
+    <Setting Name="Amount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">68, 26.5</Value>
+    </Setting>
+    <Setting Name="BOB" Type="System.String" Scope="User">
+      <Value Profile="(Default)">29,757</Value>
+    </Setting>
+    <Setting Name="PrintFontSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">18</Value>
+    </Setting>
+    <Setting Name="PrintItemFontSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">18</Value>
+    </Setting>
+    <Setting Name="PrintInvoiceRightFontSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">14</Value>
+    </Setting>
+    <Setting Name="CoverFontSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="CoverFont" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Arial</Value>
+    </Setting>
+    <Setting Name="CoverPrintX" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">175</Value>
+    </Setting>
+    <Setting Name="CoverPrintY" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">125</Value>
+    </Setting>
+    <Setting Name="companyConn1" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30</Value>
+    </Setting>
+    <Setting Name="companyConn" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

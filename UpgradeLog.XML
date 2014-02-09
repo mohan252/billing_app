@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="BillingApplication">
+</Property><Property Name="Solution File" Value="D:\OfficeHelp\OfficeHelp\billing application s\BillingApplication.sln">
+</Property><Property Name="User Options File" Value="D:\OfficeHelp\OfficeHelp\billing application s\BillingApplication.suo">
+</Property><Property Name="Date" Value="Tuesday, September 25, 2012">
+</Property><Property Name="Time" Value="7:52 AM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="BillingApplication.sln" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\BillingApplication.sln">
+</Event><Event ErrorLevel="0" Project="" Source="BillingApplication.suo" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\BillingApplication.suo">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="BillingApplication.csproj" Description="Project file successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\BillingApplication.csproj">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="BillingApplication.csproj.user" Description="Project user file successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\BillingApplication.csproj.user">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="AddEntities.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\AddEntities.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="AddEntities.Designer.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\AddEntities.Designer.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="BillForm.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\BillForm.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="BillForm.Designer.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\BillForm.Designer.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Common.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Common.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="CompanyDS.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\CompanyDS.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="CompanyDS.Designer.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\CompanyDS.Designer.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="DAL.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\DAL.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="PieCollectedDataHelper.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\PieCollectedDataHelper.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="PrintBill.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\PrintBill.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="DataGridViewDateTimePickerColumn.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\DataGridViewDateTimePickerColumn.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="DataGridViewRadioButtonElements.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\DataGridViewRadioButtonElements.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="DDEntry.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\DDEntry.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="DDEntry.Designer.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\DDEntry.Designer.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="ItemPopUp.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\ItemPopUp.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="ItemPopUp.Designer.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\ItemPopUp.Designer.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="MetersPopUp.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\MetersPopUp.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="MetersPopUp.Designer.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\MetersPopUp.Designer.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="NewPArty.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\NewPArty.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="NewPArty.Designer.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\NewPArty.Designer.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="NumberToEnglish.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\NumberToEnglish.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Parent.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Parent.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Parent.Designer.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Parent.Designer.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="PendingList.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\PendingList.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="PendingList.Designer.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\PendingList.Designer.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Program.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Program.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Properties\Resources.Designer.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Properties\Settings.Designer.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="ReportConfigurationHelper.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\ReportConfigurationHelper.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Reports.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Reports.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Reports.Designer.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Reports.Designer.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="ReportsConfig.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\ReportsConfig.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Settings.cs" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Settings.cs">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="app.config" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\app.config">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="CompanyDS.xsc" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\CompanyDS.xsc">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="CompanyDS.xsd" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\CompanyDS.xsd">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="CompanyDS.xss" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\CompanyDS.xss">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Properties\Settings.settings" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="AddEntities.resx" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\AddEntities.resx">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="BillForm.resx" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\BillForm.resx">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="DDEntry.resx" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\DDEntry.resx">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="ItemPopUp.resx" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\ItemPopUp.resx">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="MetersPopUp.resx" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\MetersPopUp.resx">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="NewPArty.resx" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\NewPArty.resx">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Parent.resx" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Parent.resx">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="PendingList.resx" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\PendingList.resx">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Properties\licenses.licx" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Properties\licenses.licx">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Properties\Resources.resx" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Properties\Resources.resx">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="Reports.resx" Description="File successfully backed up as D:\OfficeHelp\OfficeHelp\billing application s\Backup\Reports.resx">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="BillingApplication.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="BillingApplication" Source="BillingApplication.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="BillingApplication.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="BillingApplication.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="BillingApplication" Source="BillingApplication.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
