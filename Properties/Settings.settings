@@ -72,7 +72,7 @@
       <Value Profile="(Default)">0.15</Value>
     </Setting>
     <Setting Name="PLRightMargin" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">0.25</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="PLDefaultFileLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\PENDINGLISTS</Value>
