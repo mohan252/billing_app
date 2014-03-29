@@ -336,7 +336,7 @@ namespace BillingApplication
         {
             XmlSerializer mySerializer = new XmlSerializer(typeof(ReportConfiguration));
             // To read the file, create a FileStream.
-            FileStream myFileStream = new FileStream("../../ReportsConfig.xml", FileMode.Open);
+            FileStream myFileStream = new FileStream("ReportsConfig.xml", FileMode.Open);
             // Call the Deserialize method and cast to the object type.
             ReportConfiguration configObj = (ReportConfiguration)mySerializer.Deserialize(myFileStream);
             if (configObj != null)
