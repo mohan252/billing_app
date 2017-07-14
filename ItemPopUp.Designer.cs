@@ -48,6 +48,8 @@ namespace BillingApplication
             this.iTEMTYPESTableAdapter = new BillingApplication.CompanyDSTableAdapters.ITEMTYPESTableAdapter();
             this.cALCTYPESTableAdapter = new BillingApplication.CompanyDSTableAdapters.CALCTYPESTableAdapter();
             this.itemsTableAdapter = new BillingApplication.CompanyDSTableAdapters.ITEMSTableAdapter();
+            this.txtHsn = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -61,7 +63,7 @@ namespace BillingApplication
             this.panel1.Controls.Add(this.bCancel);
             this.panel1.Controls.Add(this.bOk);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 330);
+            this.panel1.Location = new System.Drawing.Point(0, 405);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(382, 42);
             this.panel1.TabIndex = 0;
@@ -72,7 +74,7 @@ namespace BillingApplication
             this.bCancel.Location = new System.Drawing.Point(171, 13);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(75, 23);
-            this.bCancel.TabIndex = 3;
+            this.bCancel.TabIndex = 7;
             this.bCancel.Text = "Cancel";
             this.bCancel.UseVisualStyleBackColor = true;
             // 
@@ -82,7 +84,7 @@ namespace BillingApplication
             this.bOk.Location = new System.Drawing.Point(62, 13);
             this.bOk.Name = "bOk";
             this.bOk.Size = new System.Drawing.Size(75, 23);
-            this.bOk.TabIndex = 2;
+            this.bOk.TabIndex = 6;
             this.bOk.Text = "Ok";
             this.bOk.UseVisualStyleBackColor = true;
             this.bOk.Click += new System.EventHandler(this.bOk_Click);
@@ -102,13 +104,15 @@ namespace BillingApplication
             this.lItems.FormattingEnabled = true;
             this.lItems.Location = new System.Drawing.Point(0, 0);
             this.lItems.Name = "lItems";
-            this.lItems.Size = new System.Drawing.Size(382, 225);
+            this.lItems.Size = new System.Drawing.Size(382, 234);
             this.lItems.TabIndex = 1;
             this.lItems.SelectedIndexChanged += new System.EventHandler(this.lItems_SelectedIndexChanged);
             this.lItems.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lItems_KeyPress);
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Controls.Add(this.txtHsn);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.cbCalcType);
             this.panel3.Controls.Add(this.label3);
@@ -119,7 +123,7 @@ namespace BillingApplication
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 234);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(382, 96);
+            this.panel3.Size = new System.Drawing.Size(382, 171);
             this.panel3.TabIndex = 2;
             // 
             // label1
@@ -136,10 +140,10 @@ namespace BillingApplication
             this.cbCalcType.DataSource = this.cALCTYPESBindingSource;
             this.cbCalcType.DisplayMember = "CALCTYPE";
             this.cbCalcType.FormattingEnabled = true;
-            this.cbCalcType.Location = new System.Drawing.Point(99, 66);
+            this.cbCalcType.Location = new System.Drawing.Point(99, 94);
             this.cbCalcType.Name = "cbCalcType";
             this.cbCalcType.Size = new System.Drawing.Size(83, 21);
-            this.cbCalcType.TabIndex = 7;
+            this.cbCalcType.TabIndex = 5;
             this.cbCalcType.ValueMember = "CALCTYPE";
             // 
             // cALCTYPESBindingSource
@@ -156,7 +160,7 @@ namespace BillingApplication
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(63, 40);
+            this.label3.Location = new System.Drawing.Point(63, 68);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 5;
@@ -167,10 +171,10 @@ namespace BillingApplication
             this.cbType.DataSource = this.iTEMTYPESBindingSource;
             this.cbType.DisplayMember = "TYPE";
             this.cbType.FormattingEnabled = true;
-            this.cbType.Location = new System.Drawing.Point(99, 37);
+            this.cbType.Location = new System.Drawing.Point(99, 65);
             this.cbType.Name = "cbType";
             this.cbType.Size = new System.Drawing.Size(272, 21);
-            this.cbType.TabIndex = 6;
+            this.cbType.TabIndex = 4;
             this.cbType.ValueMember = "TYPE";
             // 
             // iTEMTYPESBindingSource
@@ -181,7 +185,7 @@ namespace BillingApplication
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 71);
+            this.label2.Location = new System.Drawing.Point(13, 99);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 3;
@@ -192,7 +196,7 @@ namespace BillingApplication
             this.txtName.Location = new System.Drawing.Point(98, 9);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(274, 20);
-            this.txtName.TabIndex = 5;
+            this.txtName.TabIndex = 2;
             // 
             // ckNew
             // 
@@ -200,7 +204,7 @@ namespace BillingApplication
             this.ckNew.Location = new System.Drawing.Point(12, 8);
             this.ckNew.Name = "ckNew";
             this.ckNew.Size = new System.Drawing.Size(48, 17);
-            this.ckNew.TabIndex = 4;
+            this.ckNew.TabIndex = 1;
             this.ckNew.Text = "New";
             this.ckNew.UseVisualStyleBackColor = true;
             this.ckNew.CheckedChanged += new System.EventHandler(this.ckNew_CheckedChanged);
@@ -217,12 +221,28 @@ namespace BillingApplication
             // 
             this.itemsTableAdapter.ClearBeforeFill = true;
             // 
+            // txtHsn
+            // 
+            this.txtHsn.Location = new System.Drawing.Point(99, 39);
+            this.txtHsn.Name = "txtHsn";
+            this.txtHsn.Size = new System.Drawing.Size(274, 20);
+            this.txtHsn.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 42);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "HSN/ACS Code";
+            // 
             // ItemPopUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.bCancel;
-            this.ClientSize = new System.Drawing.Size(382, 372);
+            this.ClientSize = new System.Drawing.Size(382, 447);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -263,5 +283,7 @@ namespace BillingApplication
         private System.Windows.Forms.BindingSource cALCTYPESBindingSource;
         private BillingApplication.CompanyDSTableAdapters.CALCTYPESTableAdapter cALCTYPESTableAdapter;
         private BillingApplication.CompanyDSTableAdapters.ITEMSTableAdapter itemsTableAdapter;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtHsn;
     }
 }

@@ -1197,7 +1197,14 @@ namespace BillingApplication
             cbAccYear.SelectedIndex = cbAccYear.FindString(currAccYear);
             this.cbAccYear.SelectedIndexChanged += new System.EventHandler(this.cbAccYear_SelectedIndexChanged);
             lblBale.Text = cbCoy.Text;
-            dtpBillDt.Value = DateTime.Now;
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday)
+            {
+                dtpBillDt.Value = DateTime.Now.AddDays(2);
+            }
+            else
+            {
+                dtpBillDt.Value = DateTime.Now.AddDays(1);
+            }
             txtPartyAddr1.Text = "";
             txtPartyAddr2.Text = "";
             txtPartyCity.Text = "";

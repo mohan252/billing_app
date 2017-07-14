@@ -43,6 +43,7 @@ namespace BillingApplication
             if (!ckNew.Checked)
             {
                 txtName.Enabled = false;
+                txtHsn.Enabled = false;
                 cbCalcType.Enabled = false;
                 cbType.Enabled = false;
                 lItems.Select();
@@ -58,7 +59,7 @@ namespace BillingApplication
                 if (txtName.Text != "")
                 {
                     selValue = txtName.Text.ToUpper().Trim();
-                    int i = itemsTableAdapter.Insert(selValue, cbType.Text, cbCalcType.Text);
+                    int i = itemsTableAdapter.Insert(selValue, cbType.Text, cbCalcType.Text,txtHsn.Text);
                     if (i > 0)
                         IsNewItem = true;
                 }
@@ -89,6 +90,7 @@ namespace BillingApplication
                 // TODO: This line of code loads data into the 'companyDS.ITEMTYPES' table. You can move, or remove it, as needed.
                 this.iTEMTYPESTableAdapter.Fill(this.companyDS.ITEMTYPES);
                 txtName.Enabled = true;
+                txtHsn.Enabled = true;
                 cbCalcType.Enabled = true;
                 cbType.Enabled = true;
             }

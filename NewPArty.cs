@@ -11,6 +11,7 @@ namespace BillingApplication
     public partial class NewPArty : Form
     {
         public string partyName = "";
+        public string partyGst = "";
         public string partyAddr1 = "";
         public string partyAddr2 = "";
         public string partyAddr3 = "";
@@ -58,12 +59,14 @@ namespace BillingApplication
         }
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (ValidateName() && ValidatePin())
+            if (ValidateName() && ValidateGst() && ValidatePin())
             {
                 BillingApplication.CompanyDS.PARTIESDataTable dt = new CompanyDS.PARTIESDataTable();
                 BillingApplication.CompanyDS.PARTIESRow pr = dt.NewPARTIESRow();
                 pr.NAME = txtName.Text.Trim().ToUpper();
+                pr.GST = txtGst.Text.Trim();
                 partyName = pr.NAME;
+                partyGst = pr.GST;
                 if (txtAddr1.Text.Trim() != "")
                 {
                     pr.ADDR1 = txtAddr1.Text.Trim().ToUpper();
@@ -104,6 +107,18 @@ namespace BillingApplication
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+        }
+
+        private bool ValidateGst()
+        {
+            string gst = txtGst.Text.Trim();
+            if (gst == "")
+            {
+                MessageBox.Show("Gst cannot be empty");
+                txtGst.Focus();
+                return false;
+            }
+            return true;
         }
         private bool ValidateName()
         {
