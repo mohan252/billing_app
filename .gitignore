@@ -1,3 +1,8 @@
 bin/
 obj/
-Data/
+Data/*
+*.user
+*.suo
+*.orig
+Data/Company_log.ldf
+Data/Company_log.ldf
