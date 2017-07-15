@@ -72,7 +72,7 @@ namespace BillingApplication
             if (drs != null && drs.Length > 0)
                 dt.Rows.Remove(drs[0]);
             //Disable combo select change event - This will disable the SetNewbill call again
-            this.cbAccYear.SelectedIndexChanged -= new System.EventHandler(this.cbAccYear_SelectedIndexChanged); 
+            this.cbAccYear.SelectedIndexChanged -= new System.EventHandler(this.cbAccYear_SelectedIndexChanged);
             cbAccYear.DataSource = dt;
             cbAccYear.ValueMember = "ACCOUNTINGYEAR";
             cbAccYear.DisplayMember = "ACCOUNTINGYEAR";
@@ -455,7 +455,7 @@ namespace BillingApplication
                 tAmt = rate * qty;
             else if (calTyp == 1)
                 tAmt = rate * mts;
-            return System.Math.Round(tAmt, 2,MidpointRounding.AwayFromZero);
+            return System.Math.Round(tAmt, 2, MidpointRounding.AwayFromZero);
         }
         private void UpdateRow(int r)
         {
@@ -471,7 +471,7 @@ namespace BillingApplication
                 if (ckItemPin.Checked && Convert.ToString(grdItem.Rows[r].Cells["PINNINGLESS"].Value) != "")
                 {
                     decimal pl = Convert.ToDecimal(grdItem.Rows[r].Cells["PINNINGLESS"].Value);
-                    tAmt -= System.Math.Round(((pl / 100) * tAmt), 2,MidpointRounding.AwayFromZero);
+                    tAmt -= System.Math.Round(((pl / 100) * tAmt), 2, MidpointRounding.AwayFromZero);
                 }
                 this.grdItem.AfterCellUpdate -= new Infragistics.Win.UltraWinGrid.CellEventHandler(this.grdItem_AfterCellUpdate);
                 grdItem.Rows[r].Cells["AMT"].Value = PadDigits(tAmt);
@@ -608,7 +608,7 @@ namespace BillingApplication
                 decimal lessRate = Convert.ToDecimal(btmGrid[1, 3].Value);
                 decimal tQty = Convert.ToDecimal(txtNetqty.Text);
                 decimal lessAmt = tQty * lessRate;
-                lessAmt = System.Math.Round(lessAmt, 2,MidpointRounding.AwayFromZero);
+                lessAmt = System.Math.Round(lessAmt, 2, MidpointRounding.AwayFromZero);
                 btmGrid[2, 3].Value = PadDigits(lessAmt);
                 return lessAmt;
             }
@@ -672,9 +672,40 @@ namespace BillingApplication
             decimal roundOff = whole - total;
             btmGrid[2, 9].Value = PadDigits(whole);
             btmGrid[2, 8].Value = PadDigits(roundOff);
+            for (int i = 10; i <= 12; i++)
+            {
+                UpdateTotalAfterTax(i);
+            }
             //Enable grid cell value change event
             EnableBottomGridEvents(true);
         }
+
+        private decimal getBotomRowValue(int rowIndex, int colIndex)
+        {
+            if (btmGrid[colIndex, rowIndex].Value != null && Convert.ToString(btmGrid[colIndex, rowIndex].Value).Trim() != "")
+            {
+                return Convert.ToDecimal(btmGrid[colIndex, rowIndex].Value);
+            }
+            return 0;
+        }
+
+        private void UpdateTotalAfterTax(int rowIndex)
+        {
+            decimal totalBeforeTax = Convert.ToDecimal(btmGrid[2, 9].Value);
+            decimal taxAmount = 0;
+            decimal percent = getBotomRowValue(rowIndex,1);
+            if(percent > 0){
+                taxAmount = totalBeforeTax * percent / 100;
+                btmGrid[2, rowIndex].Value = taxAmount;                    
+            }
+            decimal totalAfterTax = totalBeforeTax;
+            for (int i = 10; i <= 12; i++)
+            {
+                totalAfterTax += getBotomRowValue(i, 2);
+            }
+            btmGrid[2, 13].Value = totalAfterTax;
+        }
+
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveBill(false);
@@ -949,7 +980,7 @@ namespace BillingApplication
                 billRow.CDTXT = Convert.ToDouble(txtCd.Text);
             else if (state == BillState.Old)
                 billRow.CDTXT = 0;
-            
+
             if (state == BillState.New)
                 billDt.Rows.Add(billRow);
             billsTA.Update(billDt);
@@ -1013,6 +1044,11 @@ namespace BillingApplication
                 btmGrid.Rows[rowIndex].Cells.IndexOf(btmGrid.SelectedCells[0]) == 2)
             {
                 UpdateBalance();
+            }
+            //if sgst, cgst, igst
+            else if (rowIndex == 10 || rowIndex == 11 || rowIndex == 12)
+            {
+                UpdateTotalAfterTax(rowIndex);
             }
         }
         private void txtPin_TextChanged(object sender, EventArgs e)
@@ -1160,6 +1196,12 @@ namespace BillingApplication
             catch { btmGrid[2, 7].Value = ""; }
             try { btmGrid[1, 6].Value = Convert.ToString(row.CDPERCENT); }
             catch { btmGrid[1, 6].Value = ""; }
+            try { btmGrid[1, 10].Value = Convert.ToString(row.SGST); }
+            catch { btmGrid[1, 10].Value = ""; }
+            try { btmGrid[1, 11].Value = Convert.ToString(row.CGST); }
+            catch { btmGrid[1, 11].Value = ""; }
+            try { btmGrid[1, 12].Value = Convert.ToString(row.IGST); }
+            catch { btmGrid[1, 12].Value = ""; }
             if (currAccYear.Equals(runningYear))
                 bDist = billdiscountsTA.GetData(row.BILLNO, row.ADDRESS, "");
             else
@@ -1325,7 +1367,7 @@ namespace BillingApplication
         {
             this.Cursor = Cursors.WaitCursor;
             //if (preDialog.ShowDialog() == DialogResult.OK)
-                pDoc.Print();
+            pDoc.Print();
             this.Cursor = Cursors.Default;
         }
 
@@ -1339,7 +1381,7 @@ namespace BillingApplication
             if (e.KeyChar == '\r')
             {
                 //if (rowIndex == 6 && btmGrid[1, 6].Value != null)
-                  //  txtCd.Text = Convert.ToString(btmGrid[1, 6].Value);
+                //  txtCd.Text = Convert.ToString(btmGrid[1, 6].Value);
                 UpdateBottomGridValues(rowIndex);
             }
         }
@@ -1419,7 +1461,7 @@ namespace BillingApplication
 
         private void grdItem_InitializeLayout(object sender, Infragistics.Win.UltraWinGrid.InitializeLayoutEventArgs e)
         {
-            if(!grdItem.DisplayLayout.Bands[0].Columns.Exists("ITEMNAME"))
+            if (!grdItem.DisplayLayout.Bands[0].Columns.Exists("ITEMNAME"))
                 grdItem.DisplayLayout.Bands[0].Columns.Insert(0, "ITEMNAME");
             if (!grdItem.DisplayLayout.Bands[0].Columns.Exists("METRS"))
                 grdItem.DisplayLayout.Bands[0].Columns.Insert(3, "METRS");
@@ -1723,18 +1765,18 @@ namespace BillingApplication
             }
         }
 
-        
 
-        
 
-        
 
-        
 
-        
 
-        
 
-        
+
+
+
+
+
+
+
     }
 }
