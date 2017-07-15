@@ -23,6 +23,7 @@ namespace BillingApplication
         float itemY = 0;
         Font itemFont;
         Font printFont;
+        Font gstFont;
         Font printInvRightFont;
         Font coverFont;
         private float X(string setting)
@@ -207,6 +208,7 @@ namespace BillingApplication
                        itemY + (lineY++ * itemLineHeight));
             PrintBillDiscounts(gdiPage);
         }
+        
         private void PrintBillDiscounts(Graphics gdiPage)
         {
 
@@ -308,6 +310,30 @@ namespace BillingApplication
             }
             gdiPage.DrawString("----------------", itemFont, Brushes.Black,
                        X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
+
+            Dictionary<string, int> nameIndex = new Dictionary<string, int>
+            {
+                {"SGST",10},{"CGST",11},{"IGST",12}
+            };
+            foreach (var item in nameIndex)
+            {
+                decimal val = getBotomRowValue(item.Value, 1);
+                if (val > 0)
+                {
+                    gdiPage.DrawString(item.Key + " @" + val + "%", itemFont, Brushes.Black,
+                               itemX, itemY + (lineY * itemLineHeight));
+                    gdiPage.DrawString(getBotomRowValue(item.Value, 2) + "", itemFont, Brushes.Black,
+                               X("Amount"), itemY + (lineY++ * itemLineHeight));
+                }
+            }
+            //amount after tax
+            int totalAfterTaxRowIndex = 13;
+            gdiPage.DrawString("Total", itemFont, Brushes.Black,
+                               itemX, itemY + (lineY * itemLineHeight));
+            gdiPage.DrawString(getBotomRowValue(totalAfterTaxRowIndex, 2) + "", itemFont, Brushes.Black,
+                       X("Amount"), itemY + (lineY++ * itemLineHeight));
+            
+
             if (btmGrid.Rows[6].Cells[1].Value != null && btmGrid.Rows[6].Cells[1].Value.ToString() != "")
             {
                 if (txtCd.Text != "" && txtCddays.Text != "")
@@ -450,6 +476,16 @@ namespace BillingApplication
                     }
                 }
                 catch { }
+                try
+                {
+                    if (pr.GST != "")
+                    {
+                        partyAddrLineNo++;
+                        gdiPage.DrawString("GSTIN: " + pr.GST, printInvRightFont, Brushes.Black,
+                            partyX, partyY + (partyAddrLineNo * lineHeight));
+                    }
+                }
+                catch { }
             }
         }
         private string GetRowValue(CompanyDS.PARTIESRow pr,string colName)
@@ -498,14 +534,17 @@ namespace BillingApplication
         private void PrintTopPart(Graphics gdiPage, System.Drawing.Printing.PrintPageEventArgs e)
         {
             string address = cbCoy.Text;
-            //Tin no
-            string tinNo = ((BillingApplication.CompanyDS.ADDRESSRow)
-                           coDs.ADDRESS.Select("NAME = '" + address + "'")[0]).TIN;
-            gdiPage.DrawString(tinNo, printFont, Brushes.Black, X("TinNo"), Y("TinNo"));
+            //Gst
+            string gst = ((BillingApplication.CompanyDS.ADDRESSRow)
+                           coDs.ADDRESS.Select("NAME = '" + address + "'")[0]).GST;
+            gdiPage.DrawString("GSTIN : " + gst, gstFont, Brushes.Black, X("TinNo"), Y("Address"));
             //Company Name
             Font companyFont = new Font("Arial", 20);
             float center = e.MarginBounds.Width / 2 - (charWidth * address.Length);
             gdiPage.DrawString(address, companyFont, Brushes.Black, center, Y("Address"));
+            //state code
+            gdiPage.DrawString("STATE CODE : " + gst.Substring(0,2), gstFont, Brushes.Black, X("StateCode"), Y("StateCode"));
+
             //Invoice Details
             gdiPage.DrawString(txtInvno.Text, printFont, Brushes.Black, X("Invoice"), Y("Invoice"));
             gdiPage.DrawString(txtBaleno.Text, printFont, Brushes.Black, X("BaleNo"), Y("BaleNo"));
@@ -572,6 +611,7 @@ namespace BillingApplication
             int printInvoiceRightFtSize = global::BillingApplication.Properties.Settings.Default.PrintInvoiceRightFontSize;
             itemFont = new Font(itemFt, itemFtSize, GraphicsUnit.Pixel);
             printFont = new Font(itemFt, printFtSize, GraphicsUnit.Pixel);
+            gstFont = new Font(itemFt, printFtSize + 1, GraphicsUnit.Pixel);
             printInvRightFont = new Font(itemFt, printInvoiceRightFtSize, GraphicsUnit.Pixel);
         }
         private void pDoc_EndPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
