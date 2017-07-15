@@ -1595,6 +1595,14 @@ namespace BillingApplication {
             
             private global::System.Data.DataColumn columnACCOUNTINGYEAR;
             
+            private global::System.Data.DataColumn columnSGST;
+            
+            private global::System.Data.DataColumn columnCGST;
+            
+            private global::System.Data.DataColumn columnIGST;
+            
+            private global::System.Data.DataColumn columnTOTALAFTERTAX;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public BILLSDataTable() {
@@ -1822,6 +1830,38 @@ namespace BillingApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SGSTColumn {
+                get {
+                    return this.columnSGST;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CGSTColumn {
+                get {
+                    return this.columnCGST;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IGSTColumn {
+                get {
+                    return this.columnIGST;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TOTALAFTERTAXColumn {
+                get {
+                    return this.columnTOTALAFTERTAX;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1881,7 +1921,11 @@ namespace BillingApplication {
                         string BALENO, 
                         double PIN, 
                         bool ITEMPIN, 
-                        string ACCOUNTINGYEAR) {
+                        string ACCOUNTINGYEAR, 
+                        double SGST, 
+                        double CGST, 
+                        double IGST, 
+                        double TOTALAFTERTAX) {
                 BILLSRow rowBILLSRow = ((BILLSRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         CDTXT,
@@ -1907,7 +1951,11 @@ namespace BillingApplication {
                         BALENO,
                         PIN,
                         ITEMPIN,
-                        ACCOUNTINGYEAR};
+                        ACCOUNTINGYEAR,
+                        SGST,
+                        CGST,
+                        IGST,
+                        TOTALAFTERTAX};
                 if ((parentADDRESSRowByFK_BILLS_ADDRESS != null)) {
                     columnValuesArray[2] = parentADDRESSRowByFK_BILLS_ADDRESS[0];
                 }
@@ -1971,6 +2019,10 @@ namespace BillingApplication {
                 this.columnPIN = base.Columns["PIN"];
                 this.columnITEMPIN = base.Columns["ITEMPIN"];
                 this.columnACCOUNTINGYEAR = base.Columns["ACCOUNTINGYEAR"];
+                this.columnSGST = base.Columns["SGST"];
+                this.columnCGST = base.Columns["CGST"];
+                this.columnIGST = base.Columns["IGST"];
+                this.columnTOTALAFTERTAX = base.Columns["TOTALAFTERTAX"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2024,6 +2076,14 @@ namespace BillingApplication {
                 base.Columns.Add(this.columnITEMPIN);
                 this.columnACCOUNTINGYEAR = new global::System.Data.DataColumn("ACCOUNTINGYEAR", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnACCOUNTINGYEAR);
+                this.columnSGST = new global::System.Data.DataColumn("SGST", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSGST);
+                this.columnCGST = new global::System.Data.DataColumn("CGST", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCGST);
+                this.columnIGST = new global::System.Data.DataColumn("IGST", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIGST);
+                this.columnTOTALAFTERTAX = new global::System.Data.DataColumn("TOTALAFTERTAX", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTOTALAFTERTAX);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnBILLNO,
                                 this.columnADDRESS}, true));
@@ -4945,6 +5005,70 @@ namespace BillingApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double SGST {
+                get {
+                    try {
+                        return ((double)(this[this.tableBILLS.SGSTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SGST\' in table \'BILLS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBILLS.SGSTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double CGST {
+                get {
+                    try {
+                        return ((double)(this[this.tableBILLS.CGSTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CGST\' in table \'BILLS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBILLS.CGSTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double IGST {
+                get {
+                    try {
+                        return ((double)(this[this.tableBILLS.IGSTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IGST\' in table \'BILLS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBILLS.IGSTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double TOTALAFTERTAX {
+                get {
+                    try {
+                        return ((double)(this[this.tableBILLS.TOTALAFTERTAXColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TOTALAFTERTAX\' in table \'BILLS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBILLS.TOTALAFTERTAXColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ADDRESSRow ADDRESSRow {
                 get {
                     return ((ADDRESSRow)(this.GetParentRow(this.Table.ParentRelations["FK_BILLS_ADDRESS"])));
@@ -5154,6 +5278,54 @@ namespace BillingApplication {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetACCOUNTINGYEARNull() {
                 this[this.tableBILLS.ACCOUNTINGYEARColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSGSTNull() {
+                return this.IsNull(this.tableBILLS.SGSTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSGSTNull() {
+                this[this.tableBILLS.SGSTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCGSTNull() {
+                return this.IsNull(this.tableBILLS.CGSTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCGSTNull() {
+                this[this.tableBILLS.CGSTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIGSTNull() {
+                return this.IsNull(this.tableBILLS.IGSTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIGSTNull() {
+                this[this.tableBILLS.IGSTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTOTALAFTERTAXNull() {
+                return this.IsNull(this.tableBILLS.TOTALAFTERTAXColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTOTALAFTERTAXNull() {
+                this[this.tableBILLS.TOTALAFTERTAXColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7428,7 +7600,7 @@ namespace BillingApplication.CompanyDSTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BillingApplication.Properties.Settings.Default.companyConn;
+            this._connection.ConnectionString = global::BillingApplication.Properties.Settings.Default.CompanyConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7440,11 +7612,11 @@ namespace BillingApplication.CompanyDSTableAdapters {
             this._commandCollection[0].CommandText = "dbo.GET_BILLDATA";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BILLNO", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, "BILLNO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADDRESS", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ADDRESS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BILLNO", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADDRESS", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ACCOUNTINGYEAR", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].Connection = new global::System.Data.SqlClient.SqlConnection(global::BillingApplication.Properties.Settings.Default.companyConn);
             this._commandCollection[1].CommandText = "dbo.SP_GETBILLDATA";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));

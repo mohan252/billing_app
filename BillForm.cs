@@ -334,7 +334,28 @@ namespace BillingApplication
             btmGrid.Rows[8].Cells[0].ReadOnly = true;
             btmGrid.Rows[8].Cells[1].ReadOnly = true;
 
-            values = new string[2] { "Balance", "----" };
+            values = new string[2] { "Total Before Tax", "----" };
+            btmGrid.Rows.Add(values);
+
+            values = new string[2] { "SGST @ %", "" };
+            btmGrid.Rows.Add(values);
+            btmGrid.Rows[10].Cells[0].ReadOnly = true;
+            btmGrid.Rows[10].Cells[1].ValueType = Type.GetType("System.Double");
+            btmGrid.Rows[10].Cells[2].ValueType = Type.GetType("System.Double");
+
+            values = new string[2] { "CGST @ %", "" };
+            btmGrid.Rows.Add(values);
+            btmGrid.Rows[11].Cells[0].ReadOnly = true;
+            btmGrid.Rows[11].Cells[1].ValueType = Type.GetType("System.Double");
+            btmGrid.Rows[11].Cells[2].ValueType = Type.GetType("System.Double");
+
+            values = new string[2] { "IGST @ %", "" };
+            btmGrid.Rows.Add(values);
+            btmGrid.Rows[12].Cells[0].ReadOnly = true;
+            btmGrid.Rows[12].Cells[1].ValueType = Type.GetType("System.Double");
+            btmGrid.Rows[12].Cells[2].ValueType = Type.GetType("System.Double");
+
+            values = new string[2] { "Total After Tax", "----" };
             btmGrid.Rows.Add(values);
 
             DataGridViewRow row = new DataGridViewRow();
@@ -663,7 +684,11 @@ namespace BillingApplication
             //Change cursor
             Cursor original = this.Cursor;
             this.Cursor = Cursors.WaitCursor;
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i <= 7; i++)
+            {
+                UpdateBottomGridValues(i);
+            }
+            for (int i = 10; i <= 12; i++)
             {
                 UpdateBottomGridValues(i);
             }
@@ -900,6 +925,15 @@ namespace BillingApplication
             else if (state == BillState.Old)
                 billRow.FWDCHARGES = 0;
             billRow.BALANCE = Convert.ToDouble(btmGrid.Rows[9].Cells[2].Value);
+            if (btmGrid.Rows[10].Cells[1].Value != null && btmGrid.Rows[10].Cells[1].Value.ToString() != "")
+                billRow.SGST = Convert.ToDouble(btmGrid.Rows[10].Cells[1].Value);
+            if (btmGrid.Rows[11].Cells[1].Value != null && btmGrid.Rows[11].Cells[1].Value.ToString() != "")
+                billRow.CGST = Convert.ToDouble(btmGrid.Rows[11].Cells[1].Value);
+            if (btmGrid.Rows[12].Cells[1].Value != null && btmGrid.Rows[12].Cells[1].Value.ToString() != "")
+                billRow.IGST = Convert.ToDouble(btmGrid.Rows[12].Cells[1].Value);
+            if (btmGrid.Rows[13].Cells[2].Value != null && btmGrid.Rows[13].Cells[2].Value.ToString() != "")
+                billRow.TOTALAFTERTAX = Convert.ToDouble(btmGrid.Rows[13].Cells[2].Value);
+
             if (txtCddays.Text != "")
                 billRow.CDDAYS = Convert.ToInt32(txtCddays.Text);
             else if (state == BillState.Old)
@@ -915,6 +949,7 @@ namespace BillingApplication
                 billRow.CDTXT = Convert.ToDouble(txtCd.Text);
             else if (state == BillState.Old)
                 billRow.CDTXT = 0;
+            
             if (state == BillState.New)
                 billDt.Rows.Add(billRow);
             billsTA.Update(billDt);
