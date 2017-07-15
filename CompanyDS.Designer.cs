@@ -681,6 +681,8 @@ namespace BillingApplication {
             
             private global::System.Data.DataColumn columnTIN;
             
+            private global::System.Data.DataColumn columnGST;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ADDRESSDataTable() {
@@ -740,6 +742,14 @@ namespace BillingApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn GSTColumn {
+                get {
+                    return this.columnGST;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -775,12 +785,13 @@ namespace BillingApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ADDRESSRow AddADDRESSRow(string NAME, string CUSTOM_1, string TIN) {
+            public ADDRESSRow AddADDRESSRow(string NAME, string CUSTOM_1, string TIN, string GST) {
                 ADDRESSRow rowADDRESSRow = ((ADDRESSRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         NAME,
                         CUSTOM_1,
-                        TIN};
+                        TIN,
+                        GST};
                 rowADDRESSRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowADDRESSRow);
                 return rowADDRESSRow;
@@ -813,6 +824,7 @@ namespace BillingApplication {
                 this.columnNAME = base.Columns["NAME"];
                 this.columnCUSTOM_1 = base.Columns["CUSTOM_1"];
                 this.columnTIN = base.Columns["TIN"];
+                this.columnGST = base.Columns["GST"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -824,6 +836,8 @@ namespace BillingApplication {
                 base.Columns.Add(this.columnCUSTOM_1);
                 this.columnTIN = new global::System.Data.DataColumn("TIN", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTIN);
+                this.columnGST = new global::System.Data.DataColumn("GST", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGST);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnNAME}, true));
                 this.columnNAME.AllowDBNull = false;
@@ -4505,6 +4519,34 @@ namespace BillingApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string GST {
+                get {
+                    try {
+                        return ((string)(this[this.tableADDRESS.GSTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'GST\' in table \'ADDRESS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableADDRESS.GSTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsGSTNull() {
+                return this.IsNull(this.tableADDRESS.GSTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetGSTNull() {
+                this[this.tableADDRESS.GSTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public BILLSRow[] GetBILLSRows() {
                 if ((this.Table.ChildRelations["FK_BILLS_ADDRESS"] == null)) {
                     return new BILLSRow[0];
@@ -6654,42 +6696,50 @@ namespace BillingApplication.CompanyDSTableAdapters {
             tableMapping.ColumnMappings.Add("NAME", "NAME");
             tableMapping.ColumnMappings.Add("CUSTOM_1", "CUSTOM_1");
             tableMapping.ColumnMappings.Add("TIN", "TIN");
+            tableMapping.ColumnMappings.Add("GST", "GST");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [ADDRESS] WHERE (([NAME] = @Original_NAME) AND ([CUSTOM_1] = @Origina" +
-                "l_CUSTOM_1) AND ([TIN] = @Original_TIN))";
+                "l_CUSTOM_1) AND ([TIN] = @Original_TIN) AND ((@IsNull_GST = 1 AND [GST] IS NULL)" +
+                " OR ([GST] = @Original_GST)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NAME", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CUSTOM_1", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CUSTOM_1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TIN", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TIN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_GST", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GST", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GST", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GST", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [ADDRESS] ([NAME], [CUSTOM_1], [TIN]) VALUES (@NAME, @CUSTOM_1, @TIN)" +
-                ";\r\nSELECT NAME, CUSTOM_1, TIN FROM ADDRESS WHERE (NAME = @NAME)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [ADDRESS] ([NAME], [CUSTOM_1], [TIN], [GST]) VALUES (@NAME, @CUSTOM_1" +
+                ", @TIN, @GST);\r\nSELECT NAME, CUSTOM_1, TIN, GST FROM ADDRESS WHERE (NAME = @NAME" +
+                ")";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CUSTOM_1", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CUSTOM_1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TIN", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TIN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GST", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GST", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [ADDRESS] SET [NAME] = @NAME, [CUSTOM_1] = @CUSTOM_1, [TIN] = @TIN WHERE (" +
-                "([NAME] = @Original_NAME) AND ([CUSTOM_1] = @Original_CUSTOM_1) AND ([TIN] = @Or" +
-                "iginal_TIN));\r\nSELECT NAME, CUSTOM_1, TIN FROM ADDRESS WHERE (NAME = @NAME)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [ADDRESS] SET [NAME] = @NAME, [CUSTOM_1] = @CUSTOM_1, [TIN] = @TIN, [GST] = @GST WHERE (([NAME] = @Original_NAME) AND ([CUSTOM_1] = @Original_CUSTOM_1) AND ([TIN] = @Original_TIN) AND ((@IsNull_GST = 1 AND [GST] IS NULL) OR ([GST] = @Original_GST)));
+SELECT NAME, CUSTOM_1, TIN, GST FROM ADDRESS WHERE (NAME = @NAME)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CUSTOM_1", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CUSTOM_1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TIN", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TIN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GST", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GST", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NAME", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CUSTOM_1", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CUSTOM_1", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TIN", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TIN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_GST", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GST", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GST", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GST", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BillingApplication.Properties.Settings.Default.companyConn;
+            this._connection.ConnectionString = global::BillingApplication.Properties.Settings.Default.CompanyConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6698,7 +6748,7 @@ namespace BillingApplication.CompanyDSTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     NAME, CUSTOM_1, TIN\r\nFROM         ADDRESS";
+            this._commandCollection[0].CommandText = "SELECT     NAME, CUSTOM_1, TIN,GST\r\nFROM         ADDRESS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -6759,7 +6809,7 @@ namespace BillingApplication.CompanyDSTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(string Original_NAME, string Original_CUSTOM_1, string Original_TIN) {
+        public virtual int Delete(string Original_NAME, string Original_CUSTOM_1, string Original_TIN, string Original_GST) {
             if ((Original_NAME == null)) {
                 throw new global::System.ArgumentNullException("Original_NAME");
             }
@@ -6777,6 +6827,14 @@ namespace BillingApplication.CompanyDSTableAdapters {
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_TIN));
+            }
+            if ((Original_GST == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_GST));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -6798,7 +6856,7 @@ namespace BillingApplication.CompanyDSTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string NAME, string CUSTOM_1, string TIN) {
+        public virtual int Insert(string NAME, string CUSTOM_1, string TIN, string GST) {
             if ((NAME == null)) {
                 throw new global::System.ArgumentNullException("NAME");
             }
@@ -6816,6 +6874,12 @@ namespace BillingApplication.CompanyDSTableAdapters {
             }
             else {
                 this.Adapter.InsertCommand.Parameters[2].Value = ((string)(TIN));
+            }
+            if ((GST == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(GST));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -6837,7 +6901,7 @@ namespace BillingApplication.CompanyDSTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string NAME, string CUSTOM_1, string TIN, string Original_NAME, string Original_CUSTOM_1, string Original_TIN) {
+        public virtual int Update(string NAME, string CUSTOM_1, string TIN, string GST, string Original_NAME, string Original_CUSTOM_1, string Original_TIN, string Original_GST) {
             if ((NAME == null)) {
                 throw new global::System.ArgumentNullException("NAME");
             }
@@ -6856,23 +6920,37 @@ namespace BillingApplication.CompanyDSTableAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(TIN));
             }
+            if ((GST == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(GST));
+            }
             if ((Original_NAME == null)) {
                 throw new global::System.ArgumentNullException("Original_NAME");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Original_NAME));
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_NAME));
             }
             if ((Original_CUSTOM_1 == null)) {
                 throw new global::System.ArgumentNullException("Original_CUSTOM_1");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_CUSTOM_1));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_CUSTOM_1));
             }
             if ((Original_TIN == null)) {
                 throw new global::System.ArgumentNullException("Original_TIN");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_TIN));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_TIN));
+            }
+            if ((Original_GST == null)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_GST));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -6894,8 +6972,8 @@ namespace BillingApplication.CompanyDSTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string CUSTOM_1, string TIN, string Original_NAME, string Original_CUSTOM_1, string Original_TIN) {
-            return this.Update(Original_NAME, CUSTOM_1, TIN, Original_NAME, Original_CUSTOM_1, Original_TIN);
+        public virtual int Update(string CUSTOM_1, string TIN, string GST, string Original_NAME, string Original_CUSTOM_1, string Original_TIN, string Original_GST) {
+            return this.Update(Original_NAME, CUSTOM_1, TIN, GST, Original_NAME, Original_CUSTOM_1, Original_TIN, Original_GST);
         }
     }
     
