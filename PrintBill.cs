@@ -364,7 +364,7 @@ namespace BillingApplication
             //    gdiPage.DrawString("Net Rate", itemFont, Brushes.Black,
             //           X("Amount"), itemY + (lineY++ * itemLineHeight));
         }
-        private void PrintPartyAddress(Graphics gdiPage)
+        private void PrintPartyAddress1(Graphics gdiPage)
         {
             //To Details
             float partyX = X("PartyName");
@@ -488,6 +488,75 @@ namespace BillingApplication
                 catch { }
             }
         }
+        private void PrintPartyAddress(Graphics gdiPage)
+        {
+            //To Details
+            float partyX = X("PartyName");
+            float partyY = Y("PartyName");
+            gdiPage.DrawString(txtPartyName.Text, printInvRightFont, Brushes.Black,
+                        partyX, partyY);
+            BillingApplication.CompanyDS.PARTIESDataTable pDt = this.partiesTA.GetDataById(Convert.ToInt32(txtPartyName.Tag));
+            int partyAddrLineNo = 1;
+            if (pDt != null && pDt.Rows.Count > 0)
+            {
+                BillingApplication.CompanyDS.PARTIESRow pr = (BillingApplication.CompanyDS.PARTIESRow)pDt.Rows[0];
+                try
+                {
+                    if (pr.ADDR1 != "")
+                    {
+                        var txtToBePrinted = pr.ADDR1;
+                        if (pr.ADDR2 != "")
+                        {
+                            txtToBePrinted += ", " + pr.ADDR2;
+                        }
+                        gdiPage.DrawString(txtToBePrinted, printInvRightFont, Brushes.Black,
+                            partyX, partyY + (partyAddrLineNo++ * lineHeight));
+                    }
+                }
+                catch { }
+                try
+                {
+                    if (pr.ADDR3 != "")
+                    {
+                        gdiPage.DrawString(pr.ADDR3, printInvRightFont, Brushes.Black,
+                            partyX, partyY + (partyAddrLineNo++ * lineHeight));
+                    }
+                }
+                catch { }
+                try
+                {
+                    var cityToBePrinted = "";
+                    if (pr.CITY != "")
+                    {
+                        cityToBePrinted += pr.CITY;
+                    }
+                    if (pr.PIN + "" != "")
+                    {
+                        cityToBePrinted += " - " + pr.PIN;
+                    }
+                    if (pr.STATE != "")
+                    {
+                        cityToBePrinted += " (" + pr.STATE + ")";
+                    }
+
+                    gdiPage.DrawString(cityToBePrinted, printInvRightFont, Brushes.Black,
+                            partyX, partyY + (partyAddrLineNo++ * lineHeight));
+                }
+                catch { }
+                
+                try
+                {
+                    if (pr.GST != "")
+                    {
+                        var txtToBePrinted = "GSTIN: " + pr.GST + "      STATE CODE: " + pr.GST.Substring(0,2);
+                        //partyAddrLineNo++;
+                        gdiPage.DrawString(txtToBePrinted, printInvRightFont, Brushes.Black,
+                            partyX, partyY + (partyAddrLineNo * lineHeight));
+                    }
+                }
+                catch { }
+            }
+        }
         private string GetRowValue(CompanyDS.PARTIESRow pr,string colName)
         {
             if (pr[colName] != null)
@@ -537,7 +606,7 @@ namespace BillingApplication
             //Gst
             string gst = ((BillingApplication.CompanyDS.ADDRESSRow)
                            coDs.ADDRESS.Select("NAME = '" + address + "'")[0]).GST;
-            gdiPage.DrawString("GSTIN : " + gst, gstFont, Brushes.Black, X("TinNo"), Y("Address"));
+            gdiPage.DrawString("GSTIN : " + gst, gstFont, Brushes.Black, X("TinNo"), Y("Address") - 20);
             //Company Name
             Font companyFont = new Font("Arial", 20);
             float center = e.MarginBounds.Width / 2 - (charWidth * address.Length);

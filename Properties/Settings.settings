@@ -101,7 +101,7 @@
       <Value Profile="(Default)">Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30</Value>
     </Setting>
     <Setting Name="TinNo" Type="System.String" Scope="User">
-      <Value Profile="(Default)">2, 0</Value>
+      <Value Profile="(Default)">0, 0</Value>
     </Setting>
     <Setting Name="DocTo" Type="System.String" Scope="User">
       <Value Profile="(Default)">63,253</Value>
@@ -177,7 +177,7 @@
       <Value Profile="(Default)">Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30</Value>
     </Setting>
     <Setting Name="StateCode" Type="System.String" Scope="User">
-      <Value Profile="(Default)">57,100</Value>
+      <Value Profile="(Default)">55,90</Value>
     </Setting>
   </Settings>
 </SettingsFile>
