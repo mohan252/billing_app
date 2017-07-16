@@ -55,7 +55,7 @@
   <ItemGroup>
     <Reference Include="DundasWinChart, Version=6.1.0.1726, Culture=neutral, PublicKeyToken=a4c03dce5db22406, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\DundasWinChart.dll</HintPath>
+      <HintPath>lib\DundasWinChart.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus">
       <HintPath>lib\EPPlus.dll</HintPath>
