@@ -3798,6 +3798,8 @@ namespace BillingApplication {
             
             private global::System.Data.DataColumn columnITEMNO;
             
+            private global::System.Data.DataColumn columnHSN;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public BILLITEMSDataTable() {
@@ -3929,6 +3931,14 @@ namespace BillingApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn HSNColumn {
+                get {
+                    return this.columnHSN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3964,7 +3974,7 @@ namespace BillingApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public BILLITEMSRow AddBILLITEMSRow(ITEMSRow parentITEMSRowByFK_dbo_BILLITEMS_ITEMS, string STAMP, string MTRS, double RATE, int QTY, double PIN, double PINNINGLESS, double AMT, int BILLNO, string ADDRESS, string ACCOUNTINGYEAR, int ITEMNO) {
+            public BILLITEMSRow AddBILLITEMSRow(ITEMSRow parentITEMSRowByFK_dbo_BILLITEMS_ITEMS, string STAMP, string MTRS, double RATE, int QTY, double PIN, double PINNINGLESS, double AMT, int BILLNO, string ADDRESS, string ACCOUNTINGYEAR, int ITEMNO, string HSN) {
                 BILLITEMSRow rowBILLITEMSRow = ((BILLITEMSRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -3978,7 +3988,8 @@ namespace BillingApplication {
                         BILLNO,
                         ADDRESS,
                         ACCOUNTINGYEAR,
-                        ITEMNO};
+                        ITEMNO,
+                        HSN};
                 if ((parentITEMSRowByFK_dbo_BILLITEMS_ITEMS != null)) {
                     columnValuesArray[0] = parentITEMSRowByFK_dbo_BILLITEMS_ITEMS[0];
                 }
@@ -4026,6 +4037,7 @@ namespace BillingApplication {
                 this.columnADDRESS = base.Columns["ADDRESS"];
                 this.columnACCOUNTINGYEAR = base.Columns["ACCOUNTINGYEAR"];
                 this.columnITEMNO = base.Columns["ITEMNO"];
+                this.columnHSN = base.Columns["HSN"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4055,6 +4067,8 @@ namespace BillingApplication {
                 base.Columns.Add(this.columnACCOUNTINGYEAR);
                 this.columnITEMNO = new global::System.Data.DataColumn("ITEMNO", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnITEMNO);
+                this.columnHSN = new global::System.Data.DataColumn("HSN", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHSN);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnBILLNO,
                                 this.columnADDRESS,
@@ -6080,6 +6094,22 @@ namespace BillingApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string HSN {
+                get {
+                    try {
+                        return ((string)(this[this.tableBILLITEMS.HSNColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'HSN\' in table \'BILLITEMS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBILLITEMS.HSNColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public BILLSRow BILLSRowParent {
                 get {
                     return ((BILLSRow)(this.GetParentRow(this.Table.ParentRelations["FK_BILLITEMS_BILLS"])));
@@ -6182,6 +6212,18 @@ namespace BillingApplication {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetITEMNONull() {
                 this[this.tableBILLITEMS.ITEMNOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsHSNNull() {
+                return this.IsNull(this.tableBILLITEMS.HSNColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetHSNNull() {
+                this[this.tableBILLITEMS.HSNColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -9997,8 +10039,8 @@ SELECT BILLTABLE, BILLITEMSTABLE, BILLDISCOUNTSTABLE FROM OLDBILLTABLES WHERE (B
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BILLNO", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, "BILLNO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADDRESS", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ADDRESS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ITEMID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, "ITEMID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ACCOUNTINGYEAR", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ACCOUNTINGYEAR", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ITEMID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ITEMID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "dbo.SET_INSERTBILLITEMSDATA";
@@ -10032,7 +10074,7 @@ SELECT BILLTABLE, BILLITEMSTABLE, BILLDISCOUNTSTABLE FROM OLDBILLTABLES WHERE (B
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AMT", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 53, 0, "AMT", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PIN", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 53, 0, "PIN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PINNINGLESS", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 53, 0, "PINNINGLESS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORIGINAL_ITEMID", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ITEMID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORIGINAL_ITEMID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, "ITEMID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ITEMNO", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, "ITEMNO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORIGINAL_RATE", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 53, 0, "RATE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
@@ -10041,7 +10083,7 @@ SELECT BILLTABLE, BILLITEMSTABLE, BILLDISCOUNTSTABLE FROM OLDBILLTABLES WHERE (B
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BillingApplication.Properties.Settings.Default.companyConn;
+            this._connection.ConnectionString = global::BillingApplication.Properties.Settings.Default.CompanyConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10053,26 +10095,31 @@ SELECT BILLTABLE, BILLITEMSTABLE, BILLDISCOUNTSTABLE FROM OLDBILLTABLES WHERE (B
             this._commandCollection[0].CommandText = "dbo.GET_BILLITEMSDATA";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BILLNO", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, "BILLNO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADDRESS", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ADDRESS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ACCOUNTINGYEAR", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ACCOUNTINGYEAR", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BILLNO", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADDRESS", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ACCOUNTINGYEAR", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(CompanyDS.BILLITEMSDataTable dataTable, int BILLNO, string ADDRESS, string ACCOUNTINGYEAR) {
+        public virtual int Fill(CompanyDS.BILLITEMSDataTable dataTable, global::System.Nullable<int> BILLNO, string ADDRESS, string ACCOUNTINGYEAR) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            this.Adapter.SelectCommand.Parameters[1].Value = ((int)(BILLNO));
+            if ((BILLNO.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(BILLNO.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
             if ((ADDRESS == null)) {
-                throw new global::System.ArgumentNullException("ADDRESS");
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.SelectCommand.Parameters[2].Value = ((string)(ADDRESS));
             }
             if ((ACCOUNTINGYEAR == null)) {
-                throw new global::System.ArgumentNullException("ACCOUNTINGYEAR");
+                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.SelectCommand.Parameters[3].Value = ((string)(ACCOUNTINGYEAR));
@@ -10088,17 +10135,22 @@ SELECT BILLTABLE, BILLITEMSTABLE, BILLDISCOUNTSTABLE FROM OLDBILLTABLES WHERE (B
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual CompanyDS.BILLITEMSDataTable GetData(int BILLNO, string ADDRESS, string ACCOUNTINGYEAR) {
+        public virtual CompanyDS.BILLITEMSDataTable GetData(global::System.Nullable<int> BILLNO, string ADDRESS, string ACCOUNTINGYEAR) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            this.Adapter.SelectCommand.Parameters[1].Value = ((int)(BILLNO));
+            if ((BILLNO.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(BILLNO.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
             if ((ADDRESS == null)) {
-                throw new global::System.ArgumentNullException("ADDRESS");
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.SelectCommand.Parameters[2].Value = ((string)(ADDRESS));
             }
             if ((ACCOUNTINGYEAR == null)) {
-                throw new global::System.ArgumentNullException("ACCOUNTINGYEAR");
+                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.SelectCommand.Parameters[3].Value = ((string)(ACCOUNTINGYEAR));

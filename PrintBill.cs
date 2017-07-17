@@ -160,6 +160,12 @@ namespace BillingApplication
                         gdiPage.DrawString("Stamping : " + grdItem.Rows[r].Cells["STAMP"].Value.ToString(), itemFont, Brushes.Black,
                             //Increment line as nothing to be printed in the current line after stamp
                                 itemX, itemY + (lineY++ * itemLineHeight));
+                    //Item HSC Code
+                    var hsnCodeToBePrinted = "HSN/ASC Code : ";
+                    gdiPage.DrawString(hsnCodeToBePrinted, itemFont, Brushes.Black,
+                        //Increment line as nothing to be printed in the current line after gst
+                                itemX, itemY + (lineY++ * itemLineHeight));
+
                     //If itemwise pin, then print the pinning details in the next line
                     if (ckItemPin.Checked && grdItem.Rows[r].Cells["PINNINGLESS"] != null && grdItem.Rows[r].Cells["PINNINGLESS"].Value != null && !grdItem.Rows[r].Cells["PINNINGLESS"].Value.ToString().Equals(string.Empty))
                     {
@@ -380,20 +386,25 @@ namespace BillingApplication
                 {
                     if (pr.ADDR1 != "")
                     {
-                        gdiPage.DrawString(pr.ADDR1, printInvRightFont, Brushes.Black,
+                        var txtToBePrinted = pr.ADDR1;
+                        if (pr.ADDR2 != "")
+                        {
+                            txtToBePrinted += ", " + pr.ADDR2;
+                        }
+                        gdiPage.DrawString(txtToBePrinted, printInvRightFont, Brushes.Black,
                             partyX, partyY + (partyAddrLineNo++ * lineHeight));
                     }
                 }
                 catch { }
-                try
-                {
-                    if (pr.ADDR2 != "")
-                    {
-                        gdiPage.DrawString(pr.ADDR2, printInvRightFont, Brushes.Black,
-                            partyX, partyY + (partyAddrLineNo++ * lineHeight));
-                    }
-                }
-                catch { }
+                //try
+                //{
+                //    if (pr.ADDR2 != "")
+                //    {
+                //        gdiPage.DrawString(pr.ADDR2, printInvRightFont, Brushes.Black,
+                //            partyX, partyY + (partyAddrLineNo++ * lineHeight));
+                //    }
+                //}
+                //catch { }
                 try
                 {
                     if (pr.ADDR3 != "")
@@ -405,77 +416,94 @@ namespace BillingApplication
                 catch { }
                 try
                 {
+                    var cityToBePrinted = "";
                     if (pr.CITY != "")
                     {
-                        gdiPage.DrawString(pr.CITY, printInvRightFont, Brushes.Black,
-                            partyX, partyY + (partyAddrLineNo * lineHeight));
-                        try
-                        {
-                            gdiPage.DrawString(" - " + pr.PIN, printInvRightFont, Brushes.Black,
-                                partyX + (charWidth * pr.CITY.Length), partyY + (partyAddrLineNo++ * lineHeight));
-                            //If all five lines of address are completed here, 
-                            //then add the remaining lines in this line itself
-                            if (partyAddrLineNo == 5)
-                            {
-                                partyAddrLineNo--;
-                                string dt = GetRowValue(pr, "DISTRICT");
-                                string st = GetRowValue(pr, "STATE");
-                                float pinLen = partyX + (charWidth * pr.CITY.Length) + (charWidth * (Convert.ToString(pr.PIN).Length + 2));
-                                if (dt != "")
-                                {
-                                    gdiPage.DrawString(",DT : " + dt, printInvRightFont, Brushes.Black,
-                                     pinLen, partyY + (partyAddrLineNo * lineHeight));
-                                    if (st != "")
-                                    {
-                                        float dtLen = pinLen + (charWidth * (dt.Length + 6));
-                                        gdiPage.DrawString("," + st, printInvRightFont, Brushes.Black,
-                                            dtLen, partyY + (partyAddrLineNo * lineHeight));
-                                        return;
-                                    }
-                                }
-                                else if (st != "")
-                                {
-                                    float dtLen = pinLen + (charWidth * (dt.Length + 6));
-                                    gdiPage.DrawString("," + st, printInvRightFont, Brushes.Black,
-                                        pinLen, partyY + (partyAddrLineNo * lineHeight));
-                                    return;
-                                }
-                            }
-                        }
-                        catch { partyAddrLineNo++; }
+                        cityToBePrinted += pr.CITY;
                     }
-                }
-                catch { }
-                try
-                {
-                    if (pr.DISTRICT != "")
+                    if (pr.PIN + "" != "")
                     {
-                        gdiPage.DrawString("DISTRICT: " + pr.DISTRICT, printInvRightFont, Brushes.Black,
-                            partyX, partyY + (partyAddrLineNo++ * lineHeight));
-                        if (partyAddrLineNo == 5)
-                        {
-                            partyAddrLineNo--;
-                            string st = GetRowValue(pr, "STATE");
-                            float pinLen = partyX + (charWidth * (pr.DISTRICT.Length + 10));
-                            if (st != "")
-                            {
-                                gdiPage.DrawString("," + st, printInvRightFont, Brushes.Black,
-                                    pinLen, partyY + (partyAddrLineNo * lineHeight));
-                                return;
-                            }
-                        }
+                        cityToBePrinted += " - " + pr.PIN;
                     }
-                }
-                catch { }
-                try
-                {
                     if (pr.STATE != "")
                     {
-                        gdiPage.DrawString(pr.STATE, printInvRightFont, Brushes.Black,
-                            partyX, partyY + (partyAddrLineNo * lineHeight));
+                        cityToBePrinted += " (" + pr.STATE + ")";
                     }
+
+                    gdiPage.DrawString(cityToBePrinted, printInvRightFont, Brushes.Black,
+                            partyX, partyY + (partyAddrLineNo++ * lineHeight));
+
+                    //if (pr.CITY != "")
+                    //{
+                    //    gdiPage.DrawString(pr.CITY, printInvRightFont, Brushes.Black,
+                    //        partyX, partyY + (partyAddrLineNo * lineHeight));
+                    //    try
+                    //    {
+                    //        gdiPage.DrawString(" - " + pr.PIN, printInvRightFont, Brushes.Black,
+                    //            partyX + (charWidth * pr.CITY.Length), partyY + (partyAddrLineNo++ * lineHeight));
+                    //        //If all five lines of address are completed here, 
+                    //        //then add the remaining lines in this line itself
+                    //        if (partyAddrLineNo == 5)
+                    //        {
+                    //            partyAddrLineNo--;
+                    //            string dt = GetRowValue(pr, "DISTRICT");
+                    //            string st = GetRowValue(pr, "STATE");
+                    //            float pinLen = partyX + (charWidth * pr.CITY.Length) + (charWidth * (Convert.ToString(pr.PIN).Length + 2));
+                    //            if (dt != "")
+                    //            {
+                    //                gdiPage.DrawString(",DT : " + dt, printInvRightFont, Brushes.Black,
+                    //                 pinLen, partyY + (partyAddrLineNo * lineHeight));
+                    //                if (st != "")
+                    //                {
+                    //                    float dtLen = pinLen + (charWidth * (dt.Length + 6));
+                    //                    gdiPage.DrawString("," + st, printInvRightFont, Brushes.Black,
+                    //                        dtLen, partyY + (partyAddrLineNo * lineHeight));
+                    //                    return;
+                    //                }
+                    //            }
+                    //            else if (st != "")
+                    //            {
+                    //                float dtLen = pinLen + (charWidth * (dt.Length + 6));
+                    //                gdiPage.DrawString("," + st, printInvRightFont, Brushes.Black,
+                    //                    pinLen, partyY + (partyAddrLineNo * lineHeight));
+                    //                return;
+                    //            }
+                    //        }
+                    //    }
+                    //    catch { partyAddrLineNo++; }
+                    //}
                 }
                 catch { }
+                //try
+                //{
+                //    if (pr.DISTRICT != "")
+                //    {
+                //        gdiPage.DrawString("DISTRICT: " + pr.DISTRICT, printInvRightFont, Brushes.Black,
+                //            partyX, partyY + (partyAddrLineNo++ * lineHeight));
+                //        if (partyAddrLineNo == 5)
+                //        {
+                //            partyAddrLineNo--;
+                //            string st = GetRowValue(pr, "STATE");
+                //            float pinLen = partyX + (charWidth * (pr.DISTRICT.Length + 10));
+                //            if (st != "")
+                //            {
+                //                gdiPage.DrawString("," + st, printInvRightFont, Brushes.Black,
+                //                    pinLen, partyY + (partyAddrLineNo * lineHeight));
+                //                return;
+                //            }
+                //        }
+                //    }
+                //}
+                //catch { }
+                //try
+                //{
+                //    if (pr.STATE != "")
+                //    {
+                //        gdiPage.DrawString(pr.STATE, printInvRightFont, Brushes.Black,
+                //            partyX, partyY + (partyAddrLineNo * lineHeight));
+                //    }
+                //}
+                //catch { }
                 try
                 {
                     if (pr.GST != "")

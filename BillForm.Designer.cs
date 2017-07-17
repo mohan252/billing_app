@@ -42,8 +42,8 @@ namespace BillingApplication
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn8 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("AMT");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn9 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("BILLNO");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn10 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ADDRESS");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn11 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ACCOUNTINGYEAR");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn12 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ITEMNO", -1, null, 0, Infragistics.Win.UltraWinGrid.SortIndicator.Ascending, false);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn11 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ACCOUNTINGYEAR", -1, null, 0, Infragistics.Win.UltraWinGrid.SortIndicator.Ascending, false);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn12 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ITEMNO");
             Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance3 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
@@ -161,6 +161,7 @@ namespace BillingApplication
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -411,8 +412,8 @@ namespace BillingApplication
             this.txtPartyName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             resources.ApplyResources(this.txtPartyName, "txtPartyName");
             this.txtPartyName.Name = "txtPartyName";
-            this.txtPartyName.Leave += new System.EventHandler(this.txtPartyName_Leave);
             this.txtPartyName.TextChanged += new System.EventHandler(this.txtPartyName_TextChanged);
+            this.txtPartyName.Leave += new System.EventHandler(this.txtPartyName_Leave);
             // 
             // label5
             // 
@@ -666,13 +667,13 @@ namespace BillingApplication
             this.grdItem.DisplayLayout.ScrollStyle = Infragistics.Win.UltraWinGrid.ScrollStyle.Immediate;
             resources.ApplyResources(this.grdItem, "grdItem");
             this.grdItem.Name = "grdItem";
-            this.grdItem.Error += new Infragistics.Win.UltraWinGrid.ErrorEventHandler(this.grdItem_Error);
-            this.grdItem.InitializeLayout += new Infragistics.Win.UltraWinGrid.InitializeLayoutEventHandler(this.grdItem_InitializeLayout);
-            this.grdItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grdItem_KeyDown);
-            this.grdItem.AfterRowsDeleted += new System.EventHandler(this.grdItem_AfterRowsDeleted);
             this.grdItem.AfterCellUpdate += new Infragistics.Win.UltraWinGrid.CellEventHandler(this.grdItem_AfterCellUpdate);
-            this.grdItem.Enter += new System.EventHandler(this.grdItem_Enter);
+            this.grdItem.InitializeLayout += new Infragistics.Win.UltraWinGrid.InitializeLayoutEventHandler(this.grdItem_InitializeLayout);
+            this.grdItem.AfterRowsDeleted += new System.EventHandler(this.grdItem_AfterRowsDeleted);
             this.grdItem.BeforeRowDeactivate += new System.ComponentModel.CancelEventHandler(this.grdItem_BeforeRowDeactivate);
+            this.grdItem.Error += new Infragistics.Win.UltraWinGrid.ErrorEventHandler(this.grdItem_Error);
+            this.grdItem.Enter += new System.EventHandler(this.grdItem_Enter);
+            this.grdItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grdItem_KeyDown);
             // 
             // bILLITEMSBindingSource
             // 
@@ -858,10 +859,10 @@ namespace BillingApplication
             // 
             // pDoc
             // 
+            this.pDoc.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.pDoc_BeginPrint);
+            this.pDoc.EndPrint += new System.Drawing.Printing.PrintEventHandler(this.pDoc_EndPrint);
             this.pDoc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.pDoc_PrintPage);
             this.pDoc.QueryPageSettings += new System.Drawing.Printing.QueryPageSettingsEventHandler(this.pDoc_QueryPageSettings);
-            this.pDoc.EndPrint += new System.Drawing.Printing.PrintEventHandler(this.pDoc_EndPrint);
-            this.pDoc.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.pDoc_BeginPrint);
             // 
             // preDialog
             // 
@@ -941,9 +942,9 @@ namespace BillingApplication
             // 
             // pPartyAddr
             // 
-            this.pPartyAddr.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.pPartyAddr_PrintPage);
-            this.pPartyAddr.EndPrint += new System.Drawing.Printing.PrintEventHandler(this.pPartyAddr_EndPrint);
             this.pPartyAddr.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.pPartyAddr_BeginPrint);
+            this.pPartyAddr.EndPrint += new System.Drawing.Printing.PrintEventHandler(this.pPartyAddr_EndPrint);
+            this.pPartyAddr.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.pPartyAddr_PrintPage);
             // 
             // addressTA
             // 
@@ -999,6 +1000,7 @@ namespace BillingApplication
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdItem)).EndInit();
