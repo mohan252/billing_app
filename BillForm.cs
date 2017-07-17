@@ -1534,6 +1534,7 @@ namespace BillingApplication
                             grdItem.ActiveRow.Cells["ITEMID"].Value = drs[0]["ID"];
                             grdItem.ActiveRow.Cells["BILLNO"].Value = Convert.ToInt32(txtInvno.Text);
                             grdItem.ActiveRow.Cells["ADDRESS"].Value = cbCoy.Text;
+                            grdItem.ActiveRow.Cells["HSN"].Value = drs[0]["HSN"];
                             grdItem.ActiveCell.Value = popUp.selValue;
                         }
                     }
@@ -1550,6 +1551,7 @@ namespace BillingApplication
                             grdItem.ActiveRow.Cells["ITEMID"].Value = drs[0]["ID"];
                             grdItem.ActiveRow.Cells["BILLNO"].Value = Convert.ToInt32(txtInvno.Text);
                             grdItem.ActiveRow.Cells["ADDRESS"].Value = cbCoy.Text;
+                            grdItem.ActiveRow.Cells["HSN"].Value = drs[0]["HSN"];
                             grdItem.ActiveCell.Value = popUp.selValue;
                         }
                     }

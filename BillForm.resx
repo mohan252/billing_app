@@ -2237,6 +2237,9 @@
         wf+0BQAAgAUAAIAFAACAAQAAgAHB/4ABAACAAQAAgAEAALwBAAC8AQAAvAHB/4ABbP///5H/
 </value>
   </data>
+  <data name="preDialog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="preDialog.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -2324,6 +2327,9 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>883, 735</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>Manual</value>
   </data>
@@ -2353,18 +2359,6 @@
   </data>
   <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bILLITEMSBindingSource.Name" xml:space="preserve">
-    <value>bILLITEMSBindingSource</value>
-  </data>
-  <data name="&gt;&gt;bILLITEMSBindingSource.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;coDs.Name" xml:space="preserve">
-    <value>coDs</value>
-  </data>
-  <data name="&gt;&gt;coDs.Type" xml:space="preserve">
-    <value>BillingApplication.CompanyDS, CompanyDS.Designer.cs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Column1.Name" xml:space="preserve">
     <value>Column1</value>
@@ -2461,6 +2455,18 @@
   </data>
   <data name="&gt;&gt;pPartyAddr.Type" xml:space="preserve">
     <value>System.Drawing.Printing.PrintDocument, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;bILLITEMSBindingSource.Name" xml:space="preserve">
+    <value>bILLITEMSBindingSource</value>
+  </data>
+  <data name="&gt;&gt;bILLITEMSBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;coDs.Name" xml:space="preserve">
+    <value>coDs</value>
+  </data>
+  <data name="&gt;&gt;coDs.Type" xml:space="preserve">
+    <value>BillingApplication.CompanyDS, CompanyDS.Designer.cs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;addressTA.Name" xml:space="preserve">
     <value>addressTA</value>

@@ -8,15 +8,15 @@
   <Shapes>
     <Shape ID="DesignTable:ADDRESS" ZOrder="16" X="315" Y="556" Height="153" Width="200" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
     <Shape ID="DesignTable:AGENTS" ZOrder="17" X="315" Y="731" Height="88" Width="187" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="42" />
-    <Shape ID="DesignTable:BILLDISCOUNTS" ZOrder="5" X="315" Y="69" Height="156" Width="236" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="109" />
-    <Shape ID="DesignTable:BILLS" ZOrder="4" X="16" Y="72" Height="324" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:CALCTYPES" ZOrder="2" X="732" Y="537" Height="88" Width="207" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="42" />
+    <Shape ID="DesignTable:BILLDISCOUNTS" ZOrder="6" X="315" Y="69" Height="156" Width="236" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="109" />
+    <Shape ID="DesignTable:BILLS" ZOrder="5" X="16" Y="72" Height="324" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:CALCTYPES" ZOrder="3" X="732" Y="537" Height="88" Width="207" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="42" />
     <Shape ID="DesignTable:ITEMTYPES" ZOrder="15" X="633" Y="634" Height="88" Width="207" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="42" />
-    <Shape ID="DesignTable:ITEMS" ZOrder="1" X="742" Y="279" Height="191" Width="190" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
+    <Shape ID="DesignTable:ITEMS" ZOrder="2" X="742" Y="279" Height="191" Width="190" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
     <Shape ID="DesignTable:PARTIES" ZOrder="14" X="284" Y="891" Height="324" Width="193" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="216" />
     <Shape ID="DesignTable:OLDBILLTABLES" ZOrder="13" X="630" Y="89" Height="122" Width="234" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="75" />
-    <Shape ID="DesignTable:BILLITEMS" ZOrder="6" X="397" Y="269" Height="305" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:PAYMENTREMARKS" ZOrder="3" X="16" Y="417" Height="105" Width="253" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="58" />
+    <Shape ID="DesignTable:BILLITEMS" ZOrder="1" X="397" Y="269" Height="305" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:PAYMENTREMARKS" ZOrder="4" X="16" Y="417" Height="105" Width="253" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="58" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:FK_BILLDISCOUNTS_BILLS" ZOrder="12" LineWidth="11">

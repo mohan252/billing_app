@@ -44,6 +44,7 @@ namespace BillingApplication
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn10 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ADDRESS");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn11 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ACCOUNTINGYEAR", -1, null, 0, Infragistics.Win.UltraWinGrid.SortIndicator.Ascending, false);
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn12 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ITEMNO");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn13 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("HSN", 0);
             Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance3 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
@@ -112,8 +113,6 @@ namespace BillingApplication
             this.txtOrderNo = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.grdItem = new Infragistics.Win.UltraWinGrid.UltraGrid();
-            this.bILLITEMSBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.coDs = new BillingApplication.CompanyDS();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnPrintPartyAddr = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
@@ -150,6 +149,8 @@ namespace BillingApplication
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pPartyAddr = new System.Drawing.Printing.PrintDocument();
+            this.bILLITEMSBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.coDs = new BillingApplication.CompanyDS();
             this.addressTA = new BillingApplication.CompanyDSTableAdapters.ADDRESSTableAdapter();
             this.agentsTA = new BillingApplication.CompanyDSTableAdapters.AGENTSTableAdapter();
             this.billdiscountsTA = new BillingApplication.CompanyDSTableAdapters.BILLDISCOUNTSTableAdapter();
@@ -167,11 +168,11 @@ namespace BillingApplication
             this.splitContainer1.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdItem)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bILLITEMSBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.coDs)).BeginInit();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nddFind)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btmGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bILLITEMSBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coDs)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -596,6 +597,7 @@ namespace BillingApplication
             ultraGridColumn10.Hidden = true;
             ultraGridColumn11.Header.VisiblePosition = 10;
             ultraGridColumn12.Header.VisiblePosition = 11;
+            ultraGridColumn13.Header.VisiblePosition = 12;
             ultraGridBand1.Columns.AddRange(new object[] {
             ultraGridColumn1,
             ultraGridColumn2,
@@ -608,7 +610,8 @@ namespace BillingApplication
             ultraGridColumn9,
             ultraGridColumn10,
             ultraGridColumn11,
-            ultraGridColumn12});
+            ultraGridColumn12,
+            ultraGridColumn13});
             this.grdItem.DisplayLayout.BandsSerializer.Add(ultraGridBand1);
             this.grdItem.DisplayLayout.BorderStyle = Infragistics.Win.UIElementBorderStyle.Solid;
             this.grdItem.DisplayLayout.CaptionVisible = Infragistics.Win.DefaultableBoolean.False;
@@ -674,16 +677,6 @@ namespace BillingApplication
             this.grdItem.Error += new Infragistics.Win.UltraWinGrid.ErrorEventHandler(this.grdItem_Error);
             this.grdItem.Enter += new System.EventHandler(this.grdItem_Enter);
             this.grdItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grdItem_KeyDown);
-            // 
-            // bILLITEMSBindingSource
-            // 
-            this.bILLITEMSBindingSource.DataMember = "BILLITEMS";
-            this.bILLITEMSBindingSource.DataSource = this.coDs;
-            // 
-            // coDs
-            // 
-            this.coDs.DataSetName = "CompanyDS";
-            this.coDs.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // panel5
             // 
@@ -946,6 +939,16 @@ namespace BillingApplication
             this.pPartyAddr.EndPrint += new System.Drawing.Printing.PrintEventHandler(this.pPartyAddr_EndPrint);
             this.pPartyAddr.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.pPartyAddr_PrintPage);
             // 
+            // bILLITEMSBindingSource
+            // 
+            this.bILLITEMSBindingSource.DataMember = "BILLITEMS";
+            this.bILLITEMSBindingSource.DataSource = this.coDs;
+            // 
+            // coDs
+            // 
+            this.coDs.DataSetName = "CompanyDS";
+            this.coDs.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // addressTA
             // 
             this.addressTA.ClearBeforeFill = true;
@@ -1004,12 +1007,12 @@ namespace BillingApplication
             this.splitContainer1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdItem)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bILLITEMSBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.coDs)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nddFind)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btmGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bILLITEMSBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coDs)).EndInit();
             this.ResumeLayout(false);
 
         }

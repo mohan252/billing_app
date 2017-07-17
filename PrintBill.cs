@@ -161,11 +161,13 @@ namespace BillingApplication
                             //Increment line as nothing to be printed in the current line after stamp
                                 itemX, itemY + (lineY++ * itemLineHeight));
                     //Item HSC Code
-                    var hsnCodeToBePrinted = "HSN/ASC Code : ";
-                    gdiPage.DrawString(hsnCodeToBePrinted, itemFont, Brushes.Black,
-                        //Increment line as nothing to be printed in the current line after gst
+                    if (grdItem.Rows[r].Cells["HSN"] != null && grdItem.Rows[r].Cells["HSN"].Value != null && !grdItem.Rows[r].Cells["HSN"].Value.ToString().Equals(string.Empty))
+                    {
+                        var hsnCodeToBePrinted = "HSN/ASC Code : " + grdItem.Rows[r].Cells["HSN"].Value.ToString();
+                        gdiPage.DrawString(hsnCodeToBePrinted, itemFont, Brushes.Black,
+                            //Increment line as nothing to be printed in the current line after stamp
                                 itemX, itemY + (lineY++ * itemLineHeight));
-
+                    }
                     //If itemwise pin, then print the pinning details in the next line
                     if (ckItemPin.Checked && grdItem.Rows[r].Cells["PINNINGLESS"] != null && grdItem.Rows[r].Cells["PINNINGLESS"].Value != null && !grdItem.Rows[r].Cells["PINNINGLESS"].Value.ToString().Equals(string.Empty))
                     {
