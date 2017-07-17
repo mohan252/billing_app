@@ -42,9 +42,9 @@ namespace BillingApplication
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn8 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("AMT");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn9 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("BILLNO");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn10 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ADDRESS");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn11 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ACCOUNTINGYEAR", -1, null, 0, Infragistics.Win.UltraWinGrid.SortIndicator.Ascending, false);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn12 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ITEMNO");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn13 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("HSN", 0);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn11 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ACCOUNTINGYEAR");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn12 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ITEMNO", -1, null, 0, Infragistics.Win.UltraWinGrid.SortIndicator.Ascending, false);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn13 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("HSN");
             Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance3 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
@@ -581,23 +581,23 @@ namespace BillingApplication
             this.grdItem.DisplayLayout.AutoFitStyle = Infragistics.Win.UltraWinGrid.AutoFitStyle.ExtendLastColumn;
             ultraGridColumn1.Header.VisiblePosition = 0;
             ultraGridColumn1.Hidden = true;
-            ultraGridColumn2.Header.VisiblePosition = 1;
-            ultraGridColumn3.Header.VisiblePosition = 2;
+            ultraGridColumn2.Header.VisiblePosition = 2;
+            ultraGridColumn3.Header.VisiblePosition = 3;
             ultraGridColumn3.Hidden = true;
-            ultraGridColumn4.Header.VisiblePosition = 3;
-            ultraGridColumn5.Header.VisiblePosition = 4;
-            ultraGridColumn6.Header.VisiblePosition = 5;
+            ultraGridColumn4.Header.VisiblePosition = 4;
+            ultraGridColumn5.Header.VisiblePosition = 5;
+            ultraGridColumn6.Header.VisiblePosition = 6;
             ultraGridColumn6.Hidden = true;
-            ultraGridColumn7.Header.VisiblePosition = 6;
+            ultraGridColumn7.Header.VisiblePosition = 7;
             ultraGridColumn7.Hidden = true;
-            ultraGridColumn8.Header.VisiblePosition = 7;
-            ultraGridColumn9.Header.VisiblePosition = 8;
+            ultraGridColumn8.Header.VisiblePosition = 8;
+            ultraGridColumn9.Header.VisiblePosition = 9;
             ultraGridColumn9.Hidden = true;
-            ultraGridColumn10.Header.VisiblePosition = 9;
+            ultraGridColumn10.Header.VisiblePosition = 10;
             ultraGridColumn10.Hidden = true;
-            ultraGridColumn11.Header.VisiblePosition = 10;
-            ultraGridColumn12.Header.VisiblePosition = 11;
-            ultraGridColumn13.Header.VisiblePosition = 12;
+            ultraGridColumn11.Header.VisiblePosition = 11;
+            ultraGridColumn12.Header.VisiblePosition = 12;
+            ultraGridColumn13.Header.VisiblePosition = 1;
             ultraGridBand1.Columns.AddRange(new object[] {
             ultraGridColumn1,
             ultraGridColumn2,

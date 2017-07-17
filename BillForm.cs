@@ -1476,7 +1476,7 @@ namespace BillingApplication
             }
             else
             {
-                grdItem.DisplayLayout.Bands[0].Columns["ITEMNAME"].Width = 300;
+                grdItem.DisplayLayout.Bands[0].Columns["ITEMNAME"].Width = 400;
                 grdItem.DisplayLayout.Bands[0].Columns["STAMP"].Width = 300;
             }
             grdItem.DisplayLayout.Bands[0].Columns["ITEMNAME"].Header.Caption = "Item Name";
