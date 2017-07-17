@@ -693,10 +693,11 @@ namespace BillingApplication
         {
             decimal totalBeforeTax = Convert.ToDecimal(btmGrid[2, 9].Value);
             decimal taxAmount = 0;
-            decimal percent = getBotomRowValue(rowIndex,1);
-            if(percent > 0){
+            decimal percent = getBotomRowValue(rowIndex, 1);
+            if (percent > 0)
+            {
                 taxAmount = totalBeforeTax * percent / 100;
-                btmGrid[2, rowIndex].Value = taxAmount;                    
+                btmGrid[2, rowIndex].Value = taxAmount;
             }
             decimal totalAfterTax = totalBeforeTax;
             for (int i = 10; i <= 12; i++)
@@ -1760,25 +1761,11 @@ namespace BillingApplication
 
         private void cbAccYear_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbAccYear.Text.Length == 9)
+            if (cbAccYear.Text.Length <= 11)
             {
                 currAccYear = cbAccYear.Text;
                 SetNewBill(false);
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

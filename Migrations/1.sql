@@ -15,3 +15,7 @@ alter table BILLS add IGST float;
 alter table BILLS add TOTALAFTERTAX float;
 
 exec [dbo].[ADD_GST_COLUMNS];
+
+alter table OLDBILLTABLES alter column ACCOUNTINGYEAR nvarchar(50);
+
+exec [dbo].[SET_NEWACCOUNTINGYEARTABLES] '2017-2018.1';
