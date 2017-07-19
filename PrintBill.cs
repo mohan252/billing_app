@@ -645,7 +645,7 @@ namespace BillingApplication
             gdiPage.DrawString("STATE CODE : " + gst.Substring(0,2), gstFont, Brushes.Black, X("StateCode"), Y("StateCode"));
 
             //Invoice Details
-            gdiPage.DrawString(txtInvno.Text, printFont, Brushes.Black, X("Invoice"), Y("Invoice"));
+            gdiPage.DrawString("G-" + txtInvno.Text, printFont, Brushes.Black, X("Invoice"), Y("Invoice"));
             gdiPage.DrawString(txtBaleno.Text, printFont, Brushes.Black, X("BaleNo"), Y("BaleNo"));
             gdiPage.DrawString(GetDate(dtpBillDt.Value), printFont, Brushes.Black,
                         X("BillDate"), Y("BillDate"));
