@@ -42,15 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="M001_AddItemTypesTable.cs" />
-    <Compile Include="M002_AddItemTypeColumn.cs" />
+    <Compile Include="M001_ParticularColumn.cs" />
+    <Compile Include="M002_SP_BillData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\2.sql" />
+    <EmbeddedResource Include="Scripts\1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\2.Get_BillData.sql" />
+    <EmbeddedResource Include="Scripts\3.Set_InsertBillData.sql" />
+    <EmbeddedResource Include="Scripts\4.Set_UpdateBillData.sql" />
+    <EmbeddedResource Include="Scripts\5.SetNewAccountingYears.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

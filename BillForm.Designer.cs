@@ -45,6 +45,7 @@ namespace BillingApplication
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn11 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ACCOUNTINGYEAR");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn12 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ITEMNO", -1, null, 0, Infragistics.Win.UltraWinGrid.SortIndicator.Ascending, false);
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn13 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("HSN");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn14 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("PARTICULARS", 0);
             Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance3 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
@@ -56,10 +57,10 @@ namespace BillingApplication
             Infragistics.Win.Appearance appearance10 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance11 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance12 = new Infragistics.Win.Appearance();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
@@ -113,12 +114,16 @@ namespace BillingApplication
             this.txtOrderNo = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.grdItem = new Infragistics.Win.UltraWinGrid.UltraGrid();
+            this.bILLITEMSBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.coDs = new BillingApplication.CompanyDS();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txtParticulars = new System.Windows.Forms.TextBox();
             this.btnPrintPartyAddr = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnFind = new System.Windows.Forms.Button();
             this.nddFind = new System.Windows.Forms.NumericUpDown();
@@ -149,8 +154,6 @@ namespace BillingApplication
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pPartyAddr = new System.Drawing.Printing.PrintDocument();
-            this.bILLITEMSBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.coDs = new BillingApplication.CompanyDS();
             this.addressTA = new BillingApplication.CompanyDSTableAdapters.ADDRESSTableAdapter();
             this.agentsTA = new BillingApplication.CompanyDSTableAdapters.AGENTSTableAdapter();
             this.billdiscountsTA = new BillingApplication.CompanyDSTableAdapters.BILLDISCOUNTSTableAdapter();
@@ -168,11 +171,11 @@ namespace BillingApplication
             this.splitContainer1.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdItem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bILLITEMSBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coDs)).BeginInit();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nddFind)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btmGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bILLITEMSBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.coDs)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -598,6 +601,8 @@ namespace BillingApplication
             ultraGridColumn11.Header.VisiblePosition = 11;
             ultraGridColumn12.Header.VisiblePosition = 12;
             ultraGridColumn13.Header.VisiblePosition = 1;
+            ultraGridColumn14.Header.VisiblePosition = 13;
+            ultraGridColumn14.Hidden = true;
             ultraGridBand1.Columns.AddRange(new object[] {
             ultraGridColumn1,
             ultraGridColumn2,
@@ -611,7 +616,8 @@ namespace BillingApplication
             ultraGridColumn10,
             ultraGridColumn11,
             ultraGridColumn12,
-            ultraGridColumn13});
+            ultraGridColumn13,
+            ultraGridColumn14});
             this.grdItem.DisplayLayout.BandsSerializer.Add(ultraGridBand1);
             this.grdItem.DisplayLayout.BorderStyle = Infragistics.Win.UIElementBorderStyle.Solid;
             this.grdItem.DisplayLayout.CaptionVisible = Infragistics.Win.DefaultableBoolean.False;
@@ -678,13 +684,25 @@ namespace BillingApplication
             this.grdItem.Enter += new System.EventHandler(this.grdItem_Enter);
             this.grdItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grdItem_KeyDown);
             // 
+            // bILLITEMSBindingSource
+            // 
+            this.bILLITEMSBindingSource.DataMember = "BILLITEMS";
+            this.bILLITEMSBindingSource.DataSource = this.coDs;
+            // 
+            // coDs
+            // 
+            this.coDs.DataSetName = "CompanyDS";
+            this.coDs.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.label22);
+            this.panel5.Controls.Add(this.txtParticulars);
             this.panel5.Controls.Add(this.btnPrintPartyAddr);
             this.panel5.Controls.Add(this.btnCopy);
             this.panel5.Controls.Add(this.btnDelete);
             this.panel5.Controls.Add(this.btnNew);
-            this.panel5.Controls.Add(this.button1);
+            this.panel5.Controls.Add(this.btnSave);
             this.panel5.Controls.Add(this.btnPrint);
             this.panel5.Controls.Add(this.btnFind);
             this.panel5.Controls.Add(this.nddFind);
@@ -700,6 +718,18 @@ namespace BillingApplication
             this.panel5.Controls.Add(this.txtNetqty);
             resources.ApplyResources(this.panel5, "panel5");
             this.panel5.Name = "panel5";
+            // 
+            // label22
+            // 
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.Name = "label22";
+            // 
+            // txtParticulars
+            // 
+            this.txtParticulars.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            resources.ApplyResources(this.txtParticulars, "txtParticulars");
+            this.txtParticulars.Name = "txtParticulars";
+            this.txtParticulars.TabStop = false;
             // 
             // btnPrintPartyAddr
             // 
@@ -733,12 +763,12 @@ namespace BillingApplication
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // button1
+            // btnSave
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            resources.ApplyResources(this.btnSave, "btnSave");
+            this.btnSave.Name = "btnSave";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnPrint
             // 
@@ -791,8 +821,8 @@ namespace BillingApplication
             // 
             // Column3
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle9;
             resources.ApplyResources(this.Column3, "Column3");
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
@@ -911,24 +941,24 @@ namespace BillingApplication
             // 
             // dataGridViewTextBoxColumn9
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle10;
             resources.ApplyResources(this.dataGridViewTextBoxColumn9, "dataGridViewTextBoxColumn9");
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             this.dataGridViewTextBoxColumn9.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn10
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle11;
             resources.ApplyResources(this.dataGridViewTextBoxColumn10, "dataGridViewTextBoxColumn10");
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn11
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle12;
             resources.ApplyResources(this.dataGridViewTextBoxColumn11, "dataGridViewTextBoxColumn11");
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
@@ -938,16 +968,6 @@ namespace BillingApplication
             this.pPartyAddr.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.pPartyAddr_BeginPrint);
             this.pPartyAddr.EndPrint += new System.Drawing.Printing.PrintEventHandler(this.pPartyAddr_EndPrint);
             this.pPartyAddr.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.pPartyAddr_PrintPage);
-            // 
-            // bILLITEMSBindingSource
-            // 
-            this.bILLITEMSBindingSource.DataMember = "BILLITEMS";
-            this.bILLITEMSBindingSource.DataSource = this.coDs;
-            // 
-            // coDs
-            // 
-            this.coDs.DataSetName = "CompanyDS";
-            this.coDs.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // addressTA
             // 
@@ -1007,12 +1027,12 @@ namespace BillingApplication
             this.splitContainer1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdItem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bILLITEMSBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.coDs)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nddFind)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btmGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bILLITEMSBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.coDs)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1101,7 +1121,7 @@ namespace BillingApplication
         private System.Windows.Forms.CheckBox ckItemPin;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.Button btnNewParty;
         private System.Windows.Forms.Button btnNew;
@@ -1117,6 +1137,8 @@ namespace BillingApplication
         private System.Windows.Forms.ComboBox cbAccYear;
         private System.Windows.Forms.Button btnPrintPartyAddr;
         private System.Drawing.Printing.PrintDocument pPartyAddr;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox txtParticulars;
     }
 }
 

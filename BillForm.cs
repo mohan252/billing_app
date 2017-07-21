@@ -981,6 +981,8 @@ namespace BillingApplication
                 billRow.CDTXT = Convert.ToDouble(txtCd.Text);
             else if (state == BillState.Old)
                 billRow.CDTXT = 0;
+            if (txtParticulars.Text != "")
+                billRow.PARTICULARS = txtParticulars.Text;
 
             if (state == BillState.New)
                 billDt.Rows.Add(billRow);
@@ -1180,6 +1182,8 @@ namespace BillingApplication
             }
             try { txtCddays.Text = row.CDDAYS + ""; }
             catch { txtCddays.Text = ""; }
+            try { txtParticulars.Text = row.PARTICULARS + ""; }
+            catch { txtParticulars.Text = ""; }
             //Fill Items Grid
             BillingApplication.CompanyDS.BILLITEMSDataTable bItemDt = new CompanyDS.BILLITEMSDataTable();
             if (currAccYear.Equals(runningYear))
@@ -1303,6 +1307,7 @@ namespace BillingApplication
             txtOrderTo.Text = "";
             txtLR.Text = "";
             txtPin.Text = "";
+            txtParticulars.Text = "";
             ckItemPin.Checked = false;
             BillingApplication.CompanyDS.BILLITEMSDataTable dt = new CompanyDS.BILLITEMSDataTable();
             grdItem.DataSource = dt;
@@ -1372,7 +1377,7 @@ namespace BillingApplication
             this.Cursor = Cursors.Default;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             SaveBill(false);
         }
@@ -1536,6 +1541,8 @@ namespace BillingApplication
                             grdItem.ActiveRow.Cells["BILLNO"].Value = Convert.ToInt32(txtInvno.Text);
                             grdItem.ActiveRow.Cells["ADDRESS"].Value = cbCoy.Text;
                             grdItem.ActiveRow.Cells["HSN"].Value = drs[0]["HSN"];
+                            grdItem.ActiveRow.Cells["PARTICULARS"].Value = drs[0]["TYPE"];
+                            SetParticulars();
                             grdItem.ActiveCell.Value = popUp.selValue;
                         }
                     }
@@ -1553,6 +1560,8 @@ namespace BillingApplication
                             grdItem.ActiveRow.Cells["BILLNO"].Value = Convert.ToInt32(txtInvno.Text);
                             grdItem.ActiveRow.Cells["ADDRESS"].Value = cbCoy.Text;
                             grdItem.ActiveRow.Cells["HSN"].Value = drs[0]["HSN"];
+                            grdItem.ActiveRow.Cells["PARTICULARS"].Value = drs[0]["TYPE"];
+                            SetParticulars();
                             grdItem.ActiveCell.Value = popUp.selValue;
                         }
                     }
@@ -1617,6 +1626,11 @@ namespace BillingApplication
                 }
                 else if (grdItem.ActiveCell.CanEnterEditMode)
                     grdItem.PerformAction(UltraGridAction.EnterEditMode);
+        }
+
+        private void SetParticulars()
+        {
+            txtParticulars.Text = Convert.ToString(grdItem.Rows[0].Cells["PARTICULARS"].Value);
         }
         private bool IsRowValid(UltraGridRow row)
         {
@@ -1767,5 +1781,6 @@ namespace BillingApplication
                 SetNewBill(false);
             }
         }
+
     }
 }

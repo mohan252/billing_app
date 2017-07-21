@@ -110,8 +110,6 @@ namespace BillingApplication
             {
                 CompanyDS.ITEMSDataTable iDt = new CompanyDS.ITEMSDataTable();
                 itemsTableAdapter.Fill(iDt);
-                //iDt.CALCTYPColumn.ReadOnly = true;
-                //iDt.TYPEColumn.ReadOnly = true;
                 grdEntities.DataSource = iDt;
                 grdEntities.DataBind();
                 if (grdEntities.DisplayLayout.Bands[0].Columns.Count > 0)

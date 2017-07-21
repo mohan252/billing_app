@@ -7,12 +7,12 @@ using FluentMigrator;
 
 namespace DbMigrations
 {
-    [Migration(2)]
-    public class M002_ParticularColumn : Migration
+    [Migration(1)]
+    public class M001_ParticularColumn : Migration
     {
         public override void Up()
         {
-            Execute.EmbeddedScript("2.sql");
+            Execute.EmbeddedScript("1.sql");
             Execute.Sql("exec [dbo].[ADD_PARTICULAR_COLUMNS];");
         }
         public override void Down()
