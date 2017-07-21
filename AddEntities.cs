@@ -20,6 +20,10 @@ namespace BillingApplication
 
         private void AddEntities_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'companyDS.CALCTYPES' table. You can move, or remove it, as needed.
+            this.cALCTYPESTableAdapter.Fill(this.companyDS.CALCTYPES);
+            // TODO: This line of code loads data into the 'companyDS.ITEMTYPES' table. You can move, or remove it, as needed.
+            this.iTEMTYPESTableAdapter.Fill(this.companyDS.ITEMTYPES);
             this.Bounds = MdiParent.ClientRectangle;
             this.WindowState = FormWindowState.Maximized;
             tabEntities.SelectedTab = tabEntities.TabPages[0];
@@ -106,13 +110,15 @@ namespace BillingApplication
             {
                 CompanyDS.ITEMSDataTable iDt = new CompanyDS.ITEMSDataTable();
                 itemsTableAdapter.Fill(iDt);
-                iDt.CALCTYPColumn.ReadOnly = true;
-                iDt.TYPEColumn.ReadOnly = true;
+                //iDt.CALCTYPColumn.ReadOnly = true;
+                //iDt.TYPEColumn.ReadOnly = true;
                 grdEntities.DataSource = iDt;
                 grdEntities.DataBind();
                 if (grdEntities.DisplayLayout.Bands[0].Columns.Count > 0)
                 {
                     grdEntities.DisplayLayout.Bands[0].Columns["NAME"].Width = 300;
+                    grdEntities.DisplayLayout.Bands[0].Columns["TYPE"].ValueList = this.itemTypeDropdown;
+                    grdEntities.DisplayLayout.Bands[0].Columns["CALCTYP"].ValueList = this.calcTypDropDown;
                 }
             }
             //Payment Remarks
