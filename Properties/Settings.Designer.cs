@@ -670,7 +670,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10,2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("15,2")]
         public string DJurisdiction {
             get {
                 return ((string)(this["DJurisdiction"]));
@@ -725,6 +725,150 @@ namespace BillingApplication.Properties {
             }
             set {
                 this["DInvoice"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8,200")]
+        public string DParticulars {
+            get {
+                return ((string)(this["DParticulars"]));
+            }
+            set {
+                this["DParticulars"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("24,200")]
+        public string DTotalPairs {
+            get {
+                return ((string)(this["DTotalPairs"]));
+            }
+            set {
+                this["DTotalPairs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("34,200")]
+        public string DHsnCode {
+            get {
+                return ((string)(this["DHsnCode"]));
+            }
+            set {
+                this["DHsnCode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("44,200")]
+        public string DAmount {
+            get {
+                return ((string)(this["DAmount"]));
+            }
+            set {
+                this["DAmount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2, 225")]
+        public string DParticularsValue {
+            get {
+                return ((string)(this["DParticularsValue"]));
+            }
+            set {
+                this["DParticularsValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("27,225")]
+        public string DTotalPairsValue {
+            get {
+                return ((string)(this["DTotalPairsValue"]));
+            }
+            set {
+                this["DTotalPairsValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("35,225")]
+        public string DHsnCodeValue {
+            get {
+                return ((string)(this["DHsnCodeValue"]));
+            }
+            set {
+                this["DHsnCodeValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("45,225")]
+        public string DAmountValue {
+            get {
+                return ((string)(this["DAmountValue"]));
+            }
+            set {
+                this["DAmountValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("46,250")]
+        public string DIGST {
+            get {
+                return ((string)(this["DIGST"]));
+            }
+            set {
+                this["DIGST"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("45,260")]
+        public string DDash1 {
+            get {
+                return ((string)(this["DDash1"]));
+            }
+            set {
+                this["DDash1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("45,280")]
+        public string DTotalBillValue {
+            get {
+                return ((string)(this["DTotalBillValue"]));
+            }
+            set {
+                this["DTotalBillValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("45,300")]
+        public string DDash2 {
+            get {
+                return ((string)(this["DDash2"]));
+            }
+            set {
+                this["DDash2"] = value;
             }
         }
     }

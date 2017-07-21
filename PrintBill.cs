@@ -653,7 +653,7 @@ namespace BillingApplication
                     TotalPairs = txtTotalmtrs.Text,// + txtNetqty.Text
                     HSN = grdItem.Rows[0].Cells["HSN"].Value.ToString(),
                     TotalAmount = btmGrid[2, 9].Value.ToString(),
-                    Igst = btmGrid[2, 12].Value.ToString(),
+                    Igst = btmGrid[2, 12].Value != null ? btmGrid[2, 12].Value.ToString() : "",
                     TotalBillValue = btmGrid[2, 13].Value.ToString(),
                 }
             };
@@ -679,7 +679,30 @@ namespace BillingApplication
             };
             PrintSection(invoice, "DInvoice", e.Graphics);
             //Particulars
-            
+            gdiPage.DrawString("Particulars", coverFont, Brushes.Black,
+                        X("DParticulars"), Y("DParticulars"));
+            gdiPage.DrawString("Total Pairs", coverFont, Brushes.Black,
+                        X("DTotalPairs"), Y("DTotalPairs"));
+            gdiPage.DrawString("Hsn Code", coverFont, Brushes.Black,
+                        X("DHsnCode"), Y("DHsnCode"));
+            gdiPage.DrawString("Amount", coverFont, Brushes.Black,
+                        X("DAmount"), Y("DAmount"));
+            gdiPage.DrawString(data.Particulars.Description, coverFont, Brushes.Black,
+                        X("DParticularsValue"), Y("DParticularsValue"));
+            gdiPage.DrawString(data.Particulars.TotalPairs, coverFont, Brushes.Black,
+                        X("DTotalPairsValue"), Y("DTotalPairsValue"));
+            gdiPage.DrawString(data.Particulars.HSN, coverFont, Brushes.Black,
+                        X("DHsnCodeValue"), Y("DHsnCodeValue"));
+            gdiPage.DrawString(data.Particulars.TotalAmount, coverFont, Brushes.Black,
+                        X("DAmountValue"), Y("DAmountValue"));
+            gdiPage.DrawString(data.Particulars.Igst, coverFont, Brushes.Black,
+                       X("DIGST"), Y("DIGST"));
+            gdiPage.DrawString("--------------", coverFont, Brushes.Black,
+                       X("DDash1"), Y("DDash1"));
+            gdiPage.DrawString(data.Particulars.TotalBillValue, coverFont, Brushes.Black,
+                       X("DTotalBillValue"), Y("DTotalBillValue"));
+            gdiPage.DrawString("--------------", coverFont, Brushes.Black,
+                       X("DDash2"), Y("DDash2"));
         }
 
         private void PrintSection(List<string> data, string sectionName, Graphics graphics)
