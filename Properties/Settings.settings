@@ -179,5 +179,20 @@
     <Setting Name="StateCode" Type="System.String" Scope="User">
       <Value Profile="(Default)">55,90</Value>
     </Setting>
+    <Setting Name="DJurisdiction" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10,2</Value>
+    </Setting>
+    <Setting Name="DConsineeAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2,6</Value>
+    </Setting>
+    <Setting Name="DConsineeContact" Type="System.String" Scope="User">
+      <Value Profile="(Default)">40,6</Value>
+    </Setting>
+    <Setting Name="DReceiverAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2,75</Value>
+    </Setting>
+    <Setting Name="DInvoice" Type="System.String" Scope="User">
+      <Value Profile="(Default)">40,75</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

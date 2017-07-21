@@ -1377,6 +1377,13 @@ namespace BillingApplication
             this.Cursor = Cursors.Default;
         }
 
+        private void btnDelivery_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            pDocDelivery.Print();
+            this.Cursor = Cursors.Default;
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveBill(false);
@@ -1781,6 +1788,8 @@ namespace BillingApplication
                 SetNewBill(false);
             }
         }
+
+        
 
     }
 }

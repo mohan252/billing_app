@@ -117,6 +117,7 @@ namespace BillingApplication
             this.bILLITEMSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.coDs = new BillingApplication.CompanyDS();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnDelivery = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.txtParticulars = new System.Windows.Forms.TextBox();
             this.btnPrintPartyAddr = new System.Windows.Forms.Button();
@@ -161,6 +162,7 @@ namespace BillingApplication
             this.billsTA = new BillingApplication.CompanyDSTableAdapters.BILLSTableAdapter();
             this.itemsTA = new BillingApplication.CompanyDSTableAdapters.ITEMSTableAdapter();
             this.partiesTA = new BillingApplication.CompanyDSTableAdapters.PARTIESTableAdapter();
+            this.pDocDelivery = new System.Drawing.Printing.PrintDocument();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -696,6 +698,7 @@ namespace BillingApplication
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnDelivery);
             this.panel5.Controls.Add(this.label22);
             this.panel5.Controls.Add(this.txtParticulars);
             this.panel5.Controls.Add(this.btnPrintPartyAddr);
@@ -718,6 +721,14 @@ namespace BillingApplication
             this.panel5.Controls.Add(this.txtNetqty);
             resources.ApplyResources(this.panel5, "panel5");
             this.panel5.Name = "panel5";
+            // 
+            // btnDelivery
+            // 
+            resources.ApplyResources(this.btnDelivery, "btnDelivery");
+            this.btnDelivery.Name = "btnDelivery";
+            this.btnDelivery.TabStop = false;
+            this.btnDelivery.UseVisualStyleBackColor = true;
+            this.btnDelivery.Click += new System.EventHandler(this.btnDelivery_Click);
             // 
             // label22
             // 
@@ -997,6 +1008,12 @@ namespace BillingApplication
             // 
             this.partiesTA.ClearBeforeFill = true;
             // 
+            // pDocDelivery
+            // 
+            this.pDocDelivery.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.pDocDelivery_BeginPrint);
+            this.pDocDelivery.EndPrint += new System.Drawing.Printing.PrintEventHandler(this.pDocDelivery_EndPrint);
+            this.pDocDelivery.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.pDocDelivery_PrintPage);
+            // 
             // BillForm
             // 
             resources.ApplyResources(this, "$this");
@@ -1139,6 +1156,8 @@ namespace BillingApplication
         private System.Drawing.Printing.PrintDocument pPartyAddr;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox txtParticulars;
+        private System.Windows.Forms.Button btnDelivery;
+        private System.Drawing.Printing.PrintDocument pDocDelivery;
     }
 }
 

@@ -26,6 +26,7 @@ namespace BillingApplication
         Font gstFont;
         Font printInvRightFont;
         Font coverFont;
+        string invoicePrefix = "G-";
         private float X(string setting)
         {
             string p = (string)global::BillingApplication.Properties.Settings.Default[setting];
@@ -372,152 +373,6 @@ namespace BillingApplication
             //    gdiPage.DrawString("Net Rate", itemFont, Brushes.Black,
             //           X("Amount"), itemY + (lineY++ * itemLineHeight));
         }
-        private void PrintPartyAddress1(Graphics gdiPage)
-        {
-            //To Details
-            float partyX = X("PartyName");
-            float partyY = Y("PartyName");
-            gdiPage.DrawString(txtPartyName.Text, printInvRightFont, Brushes.Black,
-                        partyX, partyY);
-            BillingApplication.CompanyDS.PARTIESDataTable pDt = this.partiesTA.GetDataById(Convert.ToInt32(txtPartyName.Tag));
-            int partyAddrLineNo = 1;
-            if (pDt != null && pDt.Rows.Count > 0)
-            {
-                BillingApplication.CompanyDS.PARTIESRow pr = (BillingApplication.CompanyDS.PARTIESRow)pDt.Rows[0];
-                try
-                {
-                    if (pr.ADDR1 != "")
-                    {
-                        var txtToBePrinted = pr.ADDR1;
-                        if (pr.ADDR2 != "")
-                        {
-                            txtToBePrinted += ", " + pr.ADDR2;
-                        }
-                        gdiPage.DrawString(txtToBePrinted, printInvRightFont, Brushes.Black,
-                            partyX, partyY + (partyAddrLineNo++ * lineHeight));
-                    }
-                }
-                catch { }
-                //try
-                //{
-                //    if (pr.ADDR2 != "")
-                //    {
-                //        gdiPage.DrawString(pr.ADDR2, printInvRightFont, Brushes.Black,
-                //            partyX, partyY + (partyAddrLineNo++ * lineHeight));
-                //    }
-                //}
-                //catch { }
-                try
-                {
-                    if (pr.ADDR3 != "")
-                    {
-                        gdiPage.DrawString(pr.ADDR3, printInvRightFont, Brushes.Black,
-                            partyX, partyY + (partyAddrLineNo++ * lineHeight));
-                    }
-                }
-                catch { }
-                try
-                {
-                    var cityToBePrinted = "";
-                    if (pr.CITY != "")
-                    {
-                        cityToBePrinted += pr.CITY;
-                    }
-                    if (pr.PIN + "" != "")
-                    {
-                        cityToBePrinted += " - " + pr.PIN;
-                    }
-                    if (pr.STATE != "")
-                    {
-                        cityToBePrinted += " (" + pr.STATE + ")";
-                    }
-
-                    gdiPage.DrawString(cityToBePrinted, printInvRightFont, Brushes.Black,
-                            partyX, partyY + (partyAddrLineNo++ * lineHeight));
-
-                    //if (pr.CITY != "")
-                    //{
-                    //    gdiPage.DrawString(pr.CITY, printInvRightFont, Brushes.Black,
-                    //        partyX, partyY + (partyAddrLineNo * lineHeight));
-                    //    try
-                    //    {
-                    //        gdiPage.DrawString(" - " + pr.PIN, printInvRightFont, Brushes.Black,
-                    //            partyX + (charWidth * pr.CITY.Length), partyY + (partyAddrLineNo++ * lineHeight));
-                    //        //If all five lines of address are completed here, 
-                    //        //then add the remaining lines in this line itself
-                    //        if (partyAddrLineNo == 5)
-                    //        {
-                    //            partyAddrLineNo--;
-                    //            string dt = GetRowValue(pr, "DISTRICT");
-                    //            string st = GetRowValue(pr, "STATE");
-                    //            float pinLen = partyX + (charWidth * pr.CITY.Length) + (charWidth * (Convert.ToString(pr.PIN).Length + 2));
-                    //            if (dt != "")
-                    //            {
-                    //                gdiPage.DrawString(",DT : " + dt, printInvRightFont, Brushes.Black,
-                    //                 pinLen, partyY + (partyAddrLineNo * lineHeight));
-                    //                if (st != "")
-                    //                {
-                    //                    float dtLen = pinLen + (charWidth * (dt.Length + 6));
-                    //                    gdiPage.DrawString("," + st, printInvRightFont, Brushes.Black,
-                    //                        dtLen, partyY + (partyAddrLineNo * lineHeight));
-                    //                    return;
-                    //                }
-                    //            }
-                    //            else if (st != "")
-                    //            {
-                    //                float dtLen = pinLen + (charWidth * (dt.Length + 6));
-                    //                gdiPage.DrawString("," + st, printInvRightFont, Brushes.Black,
-                    //                    pinLen, partyY + (partyAddrLineNo * lineHeight));
-                    //                return;
-                    //            }
-                    //        }
-                    //    }
-                    //    catch { partyAddrLineNo++; }
-                    //}
-                }
-                catch { }
-                //try
-                //{
-                //    if (pr.DISTRICT != "")
-                //    {
-                //        gdiPage.DrawString("DISTRICT: " + pr.DISTRICT, printInvRightFont, Brushes.Black,
-                //            partyX, partyY + (partyAddrLineNo++ * lineHeight));
-                //        if (partyAddrLineNo == 5)
-                //        {
-                //            partyAddrLineNo--;
-                //            string st = GetRowValue(pr, "STATE");
-                //            float pinLen = partyX + (charWidth * (pr.DISTRICT.Length + 10));
-                //            if (st != "")
-                //            {
-                //                gdiPage.DrawString("," + st, printInvRightFont, Brushes.Black,
-                //                    pinLen, partyY + (partyAddrLineNo * lineHeight));
-                //                return;
-                //            }
-                //        }
-                //    }
-                //}
-                //catch { }
-                //try
-                //{
-                //    if (pr.STATE != "")
-                //    {
-                //        gdiPage.DrawString(pr.STATE, printInvRightFont, Brushes.Black,
-                //            partyX, partyY + (partyAddrLineNo * lineHeight));
-                //    }
-                //}
-                //catch { }
-                try
-                {
-                    if (pr.GST != "")
-                    {
-                        partyAddrLineNo++;
-                        gdiPage.DrawString("GSTIN: " + pr.GST, printInvRightFont, Brushes.Black,
-                            partyX, partyY + (partyAddrLineNo * lineHeight));
-                    }
-                }
-                catch { }
-            }
-        }
         private void PrintPartyAddress(Graphics gdiPage)
         {
             //To Details
@@ -645,7 +500,8 @@ namespace BillingApplication
             gdiPage.DrawString("STATE CODE : " + gst.Substring(0,2), gstFont, Brushes.Black, X("StateCode"), Y("StateCode"));
 
             //Invoice Details
-            gdiPage.DrawString("G-" + txtInvno.Text, printFont, Brushes.Black, X("Invoice"), Y("Invoice"));
+
+            gdiPage.DrawString(invoicePrefix + txtInvno.Text, printFont, Brushes.Black, X("Invoice"), Y("Invoice"));
             gdiPage.DrawString(txtBaleno.Text, printFont, Brushes.Black, X("BaleNo"), Y("BaleNo"));
             gdiPage.DrawString(GetDate(dtpBillDt.Value), printFont, Brushes.Black,
                         X("BillDate"), Y("BillDate"));
@@ -762,6 +618,94 @@ namespace BillingApplication
             int converFtSize = global::BillingApplication.Properties.Settings.Default.CoverFontSize;
             coverFont = new Font(coverFt, converFtSize, GraphicsUnit.Pixel);
         }
+
+        private void pDocDelivery_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Graphics gdiPage = e.Graphics;
+            string address = cbCoy.Text;
+            BillingApplication.CompanyDS.PARTIESDataTable pDt = this.partiesTA.GetDataById(Convert.ToInt32(txtPartyName.Tag));
+            var gst = ((BillingApplication.CompanyDS.PARTIESRow)pDt.Rows[0]).GST;
+            var data = new DeliveryEntity
+            {
+                MerchantName = address,
+                Gst = ((BillingApplication.CompanyDS.ADDRESSRow)
+                           coDs.ADDRESS.Select("NAME = '" + address + "'")[0]).GST,
+                BaleNo = txtBaleno.Text,
+                Lorry = txtFwdBy.Text,
+                Party = new Party
+                {
+                    Name = txtPartyName.Text,
+                    Addr1 = txtPartyAddr1.Text,
+                    Addr2 = txtPartyAddr2.Text,
+                    City = txtPartyCity.Text,
+                    State = txtPartyState.Text,
+                    Pin = txtPartyPin.Text,
+                    Gst = gst
+                },
+                Invoice = new Invoice
+                {
+                    Number = invoicePrefix + txtInvno.Text,
+                    Date = GetDate(dtpBillDt.Value)
+                },
+                Particulars = new Particulars
+                {
+                    Description = txtParticulars.Text,
+                    TotalPairs = txtTotalmtrs.Text,// + txtNetqty.Text
+                    HSN = grdItem.Rows[0].Cells["HSN"].Value.ToString(),
+                    TotalAmount = btmGrid[2, 9].Value.ToString(),
+                    Igst = btmGrid[2, 12].Value.ToString(),
+                    TotalBillValue = btmGrid[2, 13].Value.ToString(),
+                }
+            };
+            gdiPage.DrawString("Subject to Erode Jurisdiction", coverFont, Brushes.Black,
+                        X("DJurisdiction"), Y("DJurisdiction"));
+            var senderAddress = new List<string>{
+                data.MerchantName,"19 Kasianna Street, Erode","GSTIN : " + data.Gst
+            };
+            PrintSection(senderAddress, "DConsineeAddress", e.Graphics);
+            var senderContact = new List<string>
+            {
+                "0424-2259168", "99949 50150"
+            };
+            PrintSection(senderContact, "DConsineeContact", e.Graphics);
+            var receiverAddress = new List<string>
+            {
+                data.Party.Name, data.Party.Addr1, data.Party.Addr2,data.Party.City, "GSTIN : " + data.Party.Gst
+            };
+            PrintSection(receiverAddress, "DReceiverAddress", e.Graphics);
+            var invoice = new List<string>
+            {
+                data.Invoice.Number,data.Invoice.Date, data.BaleNo, data.Lorry
+            };
+            PrintSection(invoice, "DInvoice", e.Graphics);
+            //Particulars
+            
+        }
+
+        private void PrintSection(List<string> data, string sectionName, Graphics graphics)
+        {
+            float startXLocation = X(sectionName);
+            float startYLocation = Y(sectionName);
+            var lineHt = coverFont.GetHeight(graphics);
+            var currentConsineeLineNo = 1;
+            foreach (var item in data)
+            {
+                graphics.DrawString(item, coverFont, Brushes.Black,
+                        startXLocation, startYLocation + currentConsineeLineNo++ * lineHt);
+            }
+        }
+        private void pDocDelivery_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            string coverFt = global::BillingApplication.Properties.Settings.Default.CoverFont;
+            int converFtSize = global::BillingApplication.Properties.Settings.Default.CoverFontSize;
+            coverFont = new Font(coverFt, converFtSize, GraphicsUnit.Pixel);
+        }
+
+        private void pDocDelivery_EndPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            coverFont.Dispose();
+        }
+
         private void PrintCoverPartyAddress(Graphics gdiPage)
         {
             //To Details
