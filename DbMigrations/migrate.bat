@@ -1,0 +1,1 @@
+"../packages/FluentMigrator.1.6.2/tools/migrate.exe" -a bin/Release/DbMigrations.dll -db SqlServer2008 -conn "Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30"

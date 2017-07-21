@@ -46,12 +46,13 @@ namespace BillingApplication
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabEntities = new System.Windows.Forms.TabControl();
             this.tabParties = new System.Windows.Forms.TabPage();
+            this.tabremarks = new System.Windows.Forms.TabPage();
             this.tabItems = new System.Windows.Forms.TabPage();
             this.grdEntities = new Infragistics.Win.UltraWinGrid.UltraGrid();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.tabremarks = new System.Windows.Forms.TabPage();
             this.paymentremarksTableAdapter = new BillingApplication.CompanyDSTableAdapters.PAYMENTREMARKSTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -113,6 +114,15 @@ namespace BillingApplication
             this.tabParties.TabIndex = 0;
             this.tabParties.Text = "Parties";
             this.tabParties.UseVisualStyleBackColor = true;
+            // 
+            // tabremarks
+            // 
+            this.tabremarks.Location = new System.Drawing.Point(4, 22);
+            this.tabremarks.Name = "tabremarks";
+            this.tabremarks.Size = new System.Drawing.Size(633, 322);
+            this.tabremarks.TabIndex = 2;
+            this.tabremarks.Text = "Payment Remarks";
+            this.tabremarks.UseVisualStyleBackColor = true;
             // 
             // tabItems
             // 
@@ -190,8 +200,8 @@ namespace BillingApplication
             this.grdEntities.TabIndex = 0;
             this.grdEntities.Text = "ultraGrid1";
             this.grdEntities.Visible = false;
-            this.grdEntities.BeforeCellUpdate += new Infragistics.Win.UltraWinGrid.BeforeCellUpdateEventHandler(this.grdEntities_BeforeCellUpdate);
             this.grdEntities.InitializeLayout += new Infragistics.Win.UltraWinGrid.InitializeLayoutEventHandler(this.grdEntities_InitializeLayout);
+            this.grdEntities.BeforeCellUpdate += new Infragistics.Win.UltraWinGrid.BeforeCellUpdateEventHandler(this.grdEntities_BeforeCellUpdate);
             this.grdEntities.BeforeRowsDeleted += new Infragistics.Win.UltraWinGrid.BeforeRowsDeletedEventHandler(this.grdEntities_BeforeRowsDeleted);
             // 
             // btnCancel
@@ -214,15 +224,6 @@ namespace BillingApplication
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // tabremarks
-            // 
-            this.tabremarks.Location = new System.Drawing.Point(4, 22);
-            this.tabremarks.Name = "tabremarks";
-            this.tabremarks.Size = new System.Drawing.Size(633, 322);
-            this.tabremarks.TabIndex = 2;
-            this.tabremarks.Text = "Payment Remarks";
-            this.tabremarks.UseVisualStyleBackColor = true;
-            // 
             // paymentremarksTableAdapter
             // 
             this.paymentremarksTableAdapter.ClearBeforeFill = true;
@@ -238,6 +239,7 @@ namespace BillingApplication
             this.Load += new System.EventHandler(this.AddEntities_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabEntities.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdEntities)).EndInit();
