@@ -37,7 +37,8 @@ namespace BillingApplication
         public Party Party { get; set; }
         public Invoice Invoice { get; set; }
         public string BaleNo { get; set; }
-        public string Lorry { get; set; }
+        public string Transport { get; set; }
+        public string BookedTo { get; set; }
         public Particulars Particulars { get; set; }
     }
 }

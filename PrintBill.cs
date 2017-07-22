@@ -631,7 +631,8 @@ namespace BillingApplication
                 Gst = ((BillingApplication.CompanyDS.ADDRESSRow)
                            coDs.ADDRESS.Select("NAME = '" + address + "'")[0]).GST,
                 BaleNo = txtBaleno.Text,
-                Lorry = txtFwdBy.Text,
+                Transport = txtFwdBy.Text,
+                BookedTo = txtOrderTo.Text,
                 Party = new Party
                 {
                     Name = txtPartyName.Text,
@@ -676,34 +677,43 @@ namespace BillingApplication
             PrintSection(receiverAddress, "DReceiverAddress", e.Graphics);
             var invoice = new List<string>
             {
-                "Inoice No: " + data.Invoice.Number, "Invoice Date: " + data.Invoice.Date, "Bale No: " + data.BaleNo, "Lorry: " + data.Lorry
+                "Inoice No: " + data.Invoice.Number, "Invoice Date: " + data.Invoice.Date, "Bale No: " + data.BaleNo, "Transport: " + data.Transport, "Booked To: " + data.BookedTo
             };
             PrintSection(invoice, "DInvoice", e.Graphics);
             //Particulars
+            var startParticularsY = Y("DParticulars");
             gdiPage.DrawString("Particulars", coverFont, Brushes.Black,
-                        X("DParticulars"), Y("DParticulars"));
+                        X("DParticulars"), startParticularsY);
             gdiPage.DrawString("Total Pairs", coverFont, Brushes.Black,
-                        X("DTotalPairs"), Y("DTotalPairs"));
+                        X("DTotalPairs"), startParticularsY);
             gdiPage.DrawString("Hsn Code", coverFont, Brushes.Black,
-                        X("DHsnCode"), Y("DHsnCode"));
+                        X("DHsnCode"), startParticularsY);
             gdiPage.DrawString("Amount", coverFont, Brushes.Black,
-                        X("DAmount"), Y("DAmount"));
+                        X("DAmount"), startParticularsY);
+
+            var startParticularsValueY = startParticularsY + 35;
             gdiPage.DrawString(data.Particulars.Description, coverFont, Brushes.Black,
-                        X("DParticularsValue"), Y("DParticularsValue"));
+                        X("DParticularsValue"), startParticularsValueY);
             gdiPage.DrawString(data.Particulars.TotalPairs, coverFont, Brushes.Black,
-                        X("DTotalPairsValue"), Y("DTotalPairsValue"));
+                        X("DTotalPairsValue"), startParticularsValueY);
             gdiPage.DrawString(data.Particulars.HSN, coverFont, Brushes.Black,
-                        X("DHsnCodeValue"), Y("DHsnCodeValue"));
+                        X("DHsnCodeValue"), startParticularsValueY);
             gdiPage.DrawString(data.Particulars.TotalAmount, coverFont, Brushes.Black,
-                        X("DAmountValue"), Y("DAmountValue"));
+                        X("DAmountValue"), startParticularsValueY);
+            var lineIncrement = 25;
+            var lineIncrementDash = 15;
+            var igstY = startParticularsValueY + lineIncrement;
             gdiPage.DrawString("IGST " + data.Particulars.IgstPercent + "%  " + data.Particulars.IgstAmount , coverFont, Brushes.Black,
-                       X("DIGST"), Y("DIGST"));
+                       X("DIGST"), igstY);
+            var dash1Y = igstY + lineIncrementDash;
             gdiPage.DrawString("--------------", coverFont, Brushes.Black,
-                       X("DDash1"), Y("DDash1"));
+                       X("DDash1"), dash1Y);
+            var totalBillValueY = dash1Y + lineIncrementDash;
             gdiPage.DrawString("Total After Tax  " + data.Particulars.TotalBillValue, coverFont, Brushes.Black,
-                       X("DTotalBillValue"), Y("DTotalBillValue"));
+                       X("DTotalBillValue"), totalBillValueY);
+            var dash2Y = totalBillValueY + lineIncrementDash;
             gdiPage.DrawString("--------------", coverFont, Brushes.Black,
-                       X("DDash2"), Y("DDash2"));
+                       X("DDash2"), dash2Y);
         }
 
         private void PrintSection(List<string> data, string sectionName, Graphics graphics)
