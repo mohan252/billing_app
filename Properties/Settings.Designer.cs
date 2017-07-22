@@ -706,7 +706,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2,75")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2,90")]
         public string DReceiverAddress {
             get {
                 return ((string)(this["DReceiverAddress"]));
@@ -718,7 +718,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("40,75")]
+        [global::System.Configuration.DefaultSettingValueAttribute("40,90")]
         public string DInvoice {
             get {
                 return ((string)(this["DInvoice"]));
@@ -730,7 +730,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8,200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("8,220")]
         public string DParticulars {
             get {
                 return ((string)(this["DParticulars"]));
@@ -742,7 +742,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("24,200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("24,220")]
         public string DTotalPairs {
             get {
                 return ((string)(this["DTotalPairs"]));
@@ -754,7 +754,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("34,200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("34,220")]
         public string DHsnCode {
             get {
                 return ((string)(this["DHsnCode"]));
@@ -766,7 +766,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("44,200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("44,220")]
         public string DAmount {
             get {
                 return ((string)(this["DAmount"]));
@@ -778,7 +778,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2, 225")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2, 245")]
         public string DParticularsValue {
             get {
                 return ((string)(this["DParticularsValue"]));
@@ -790,7 +790,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("27,225")]
+        [global::System.Configuration.DefaultSettingValueAttribute("27,245")]
         public string DTotalPairsValue {
             get {
                 return ((string)(this["DTotalPairsValue"]));
@@ -802,7 +802,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("35,225")]
+        [global::System.Configuration.DefaultSettingValueAttribute("35,245")]
         public string DHsnCodeValue {
             get {
                 return ((string)(this["DHsnCodeValue"]));
@@ -814,7 +814,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("45,225")]
+        [global::System.Configuration.DefaultSettingValueAttribute("45,245")]
         public string DAmountValue {
             get {
                 return ((string)(this["DAmountValue"]));
@@ -826,7 +826,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("46,250")]
+        [global::System.Configuration.DefaultSettingValueAttribute("39.5,270")]
         public string DIGST {
             get {
                 return ((string)(this["DIGST"]));
@@ -838,7 +838,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("45,260")]
+        [global::System.Configuration.DefaultSettingValueAttribute("45,280")]
         public string DDash1 {
             get {
                 return ((string)(this["DDash1"]));
@@ -850,7 +850,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("45,280")]
+        [global::System.Configuration.DefaultSettingValueAttribute("45,305")]
         public string DTotalBillValue {
             get {
                 return ((string)(this["DTotalBillValue"]));
@@ -862,7 +862,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("45,300")]
+        [global::System.Configuration.DefaultSettingValueAttribute("45,320")]
         public string DDash2 {
             get {
                 return ((string)(this["DDash2"]));

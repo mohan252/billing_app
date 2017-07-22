@@ -26,7 +26,8 @@ namespace BillingApplication
         public string TotalPairs { get; set; }
         public string HSN { get; set; }
         public string TotalAmount { get; set; }
-        public string Igst { get; set; }
+        public string IgstPercent { get; set; }
+        public string IgstAmount { get; set; }
         public string TotalBillValue { get; set; }
     }
     public class DeliveryEntity

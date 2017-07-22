@@ -189,46 +189,46 @@
       <Value Profile="(Default)">40,6</Value>
     </Setting>
     <Setting Name="DReceiverAddress" Type="System.String" Scope="User">
-      <Value Profile="(Default)">2,75</Value>
+      <Value Profile="(Default)">2,90</Value>
     </Setting>
     <Setting Name="DInvoice" Type="System.String" Scope="User">
-      <Value Profile="(Default)">40,75</Value>
+      <Value Profile="(Default)">40,90</Value>
     </Setting>
     <Setting Name="DParticulars" Type="System.String" Scope="User">
-      <Value Profile="(Default)">8,200</Value>
+      <Value Profile="(Default)">8,220</Value>
     </Setting>
     <Setting Name="DTotalPairs" Type="System.String" Scope="User">
-      <Value Profile="(Default)">24,200</Value>
+      <Value Profile="(Default)">24,220</Value>
     </Setting>
     <Setting Name="DHsnCode" Type="System.String" Scope="User">
-      <Value Profile="(Default)">34,200</Value>
+      <Value Profile="(Default)">34,220</Value>
     </Setting>
     <Setting Name="DAmount" Type="System.String" Scope="User">
-      <Value Profile="(Default)">44,200</Value>
+      <Value Profile="(Default)">44,220</Value>
     </Setting>
     <Setting Name="DParticularsValue" Type="System.String" Scope="User">
-      <Value Profile="(Default)">2, 225</Value>
+      <Value Profile="(Default)">2, 245</Value>
     </Setting>
     <Setting Name="DTotalPairsValue" Type="System.String" Scope="User">
-      <Value Profile="(Default)">27,225</Value>
+      <Value Profile="(Default)">27,245</Value>
     </Setting>
     <Setting Name="DHsnCodeValue" Type="System.String" Scope="User">
-      <Value Profile="(Default)">35,225</Value>
+      <Value Profile="(Default)">35,245</Value>
     </Setting>
     <Setting Name="DAmountValue" Type="System.String" Scope="User">
-      <Value Profile="(Default)">45,225</Value>
+      <Value Profile="(Default)">45,245</Value>
     </Setting>
     <Setting Name="DIGST" Type="System.String" Scope="User">
-      <Value Profile="(Default)">46,250</Value>
+      <Value Profile="(Default)">39.5,270</Value>
     </Setting>
     <Setting Name="DDash1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">45,260</Value>
-    </Setting>
-    <Setting Name="DTotalBillValue" Type="System.String" Scope="User">
       <Value Profile="(Default)">45,280</Value>
     </Setting>
+    <Setting Name="DTotalBillValue" Type="System.String" Scope="User">
+      <Value Profile="(Default)">45,305</Value>
+    </Setting>
     <Setting Name="DDash2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">45,300</Value>
+      <Value Profile="(Default)">45,320</Value>
     </Setting>
   </Settings>
 </SettingsFile>

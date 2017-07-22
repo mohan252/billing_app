@@ -653,14 +653,15 @@ namespace BillingApplication
                     TotalPairs = txtTotalmtrs.Text,// + txtNetqty.Text
                     HSN = grdItem.Rows[0].Cells["HSN"].Value.ToString(),
                     TotalAmount = btmGrid[2, 9].Value.ToString(),
-                    Igst = btmGrid[2, 12].Value != null ? btmGrid[2, 12].Value.ToString() : "",
+                    IgstAmount = btmGrid[2, 12].Value != null ? btmGrid[2, 12].Value.ToString() : "",
+                    IgstPercent = btmGrid[1, 12].Value != null ? btmGrid[1, 12].Value.ToString() : "",
                     TotalBillValue = btmGrid[2, 13].Value.ToString(),
                 }
             };
             gdiPage.DrawString("Subject to Erode Jurisdiction", coverFont, Brushes.Black,
                         X("DJurisdiction"), Y("DJurisdiction"));
             var senderAddress = new List<string>{
-                data.MerchantName,"19 Kasianna Street, Erode","GSTIN : " + data.Gst
+                "Consiner", data.MerchantName,"19 Kasianna Street, Erode","GSTIN : " + data.Gst
             };
             PrintSection(senderAddress, "DConsineeAddress", e.Graphics);
             var senderContact = new List<string>
@@ -670,7 +671,7 @@ namespace BillingApplication
             PrintSection(senderContact, "DConsineeContact", e.Graphics);
             var receiverAddress = new List<string>
             {
-                data.Party.Name, data.Party.Addr1, data.Party.Addr2,data.Party.City, "GSTIN : " + data.Party.Gst
+                "Consinee", data.Party.Name, data.Party.Addr1, data.Party.Addr2,data.Party.City, "GSTIN : " + data.Party.Gst
             };
             PrintSection(receiverAddress, "DReceiverAddress", e.Graphics);
             var invoice = new List<string>
@@ -695,7 +696,7 @@ namespace BillingApplication
                         X("DHsnCodeValue"), Y("DHsnCodeValue"));
             gdiPage.DrawString(data.Particulars.TotalAmount, coverFont, Brushes.Black,
                         X("DAmountValue"), Y("DAmountValue"));
-            gdiPage.DrawString(data.Particulars.Igst, coverFont, Brushes.Black,
+            gdiPage.DrawString("IGST " + data.Particulars.IgstPercent + "%  " + data.Particulars.IgstAmount , coverFont, Brushes.Black,
                        X("DIGST"), Y("DIGST"));
             gdiPage.DrawString("--------------", coverFont, Brushes.Black,
                        X("DDash1"), Y("DDash1"));
