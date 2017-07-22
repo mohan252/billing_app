@@ -115,6 +115,7 @@ namespace BillingApplication
                 if (grdEntities.DisplayLayout.Bands[0].Columns.Count > 0)
                 {
                     grdEntities.DisplayLayout.Bands[0].Columns["NAME"].Width = 300;
+                    grdEntities.DisplayLayout.Bands[0].Columns["TYPE"].Width = 300;
                     grdEntities.DisplayLayout.Bands[0].Columns["TYPE"].ValueList = this.itemTypeDropdown;
                     grdEntities.DisplayLayout.Bands[0].Columns["CALCTYP"].ValueList = this.calcTypDropDown;
                 }
