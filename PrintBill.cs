@@ -623,6 +623,7 @@ namespace BillingApplication
         private void pDocDelivery_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             Graphics gdiPage = e.Graphics;
+            string dashHeader = "---------------------------------------------------------------------------------------------";
             string address = cbCoy.Text;
             BillingApplication.CompanyDS.PARTIESDataTable pDt = this.partiesTA.GetDataById(Convert.ToInt32(txtPartyName.Tag));
             var gst = ((BillingApplication.CompanyDS.PARTIESRow)pDt.Rows[0]).GST;
@@ -671,14 +672,17 @@ namespace BillingApplication
                 "0424-2259168", "99949 50150"
             };
             PrintSection(senderContact, "DConsineeContact", e.Graphics);
+            gdiPage.DrawString(dashHeader, coverFont, Brushes.Black,
+                        X("DParticularsValue"), 110);
             var receiverAddress = new List<string>
             {
                 "Consinee", data.Party.Name, data.Party.Addr1, data.Party.Addr2,data.Party.City, "GSTIN: " + data.Party.Gst + "  STATE CODE: " + data.Party.Gst.Substring(0,2)
             };
             PrintSection(receiverAddress, "DReceiverAddress", e.Graphics);
+            var pipe = "|  ";
             var invoice = new List<string>
             {
-                "Inoice No: " + data.Invoice.Number, "Invoice Date: " + data.Invoice.Date, "Bale No: " + data.BaleNo
+                "Invoice No: " + data.Invoice.Number, "Invoice Date: " + data.Invoice.Date, "Bale No: " + data.BaleNo
             };
             if (data.BaleNo.Contains("/"))
             {
@@ -687,9 +691,14 @@ namespace BillingApplication
             }
             invoice.Add("Transport: " + data.Transport);
             invoice.Add("Booked To: " + data.BookedTo);
+            invoice = invoice.Select(i => pipe + i).ToList();
             PrintSection(invoice, "DInvoice", e.Graphics);
             //Particulars
             var startParticularsY = Y("DParticulars");
+            gdiPage.DrawString(dashHeader, coverFont, Brushes.Black,
+                        X("DParticularsValue"), startParticularsY);
+            var lineIncrement = 25;
+            startParticularsY += 15;
             gdiPage.DrawString("Particulars", coverFont, Brushes.Black,
                         X("DParticulars"), startParticularsY);
             gdiPage.DrawString("Total Pairs", coverFont, Brushes.Black,
@@ -698,7 +707,9 @@ namespace BillingApplication
                         X("DHsnCode"), startParticularsY);
             gdiPage.DrawString("Amount", coverFont, Brushes.Black,
                         X("DAmount"), startParticularsY);
-
+            startParticularsY += 15;
+            gdiPage.DrawString(dashHeader, coverFont, Brushes.Black,
+                        X("DParticularsValue"), startParticularsY);
             var startParticularsValueY = startParticularsY + 35;
             gdiPage.DrawString(data.Particulars.Description, coverFont, Brushes.Black,
                         X("DParticularsValue"), startParticularsValueY);
@@ -708,7 +719,6 @@ namespace BillingApplication
                         X("DHsnCodeValue"), startParticularsValueY);
             gdiPage.DrawString(data.Particulars.TotalAmount, coverFont, Brushes.Black,
                         X("DAmountValue"), startParticularsValueY);
-            var lineIncrement = 25;
             var lineIncrementDash = 15;
             var igstY = startParticularsValueY + lineIncrement;
             gdiPage.DrawString("IGST " + data.Particulars.IgstPercent + "%  " + data.Particulars.IgstAmount , coverFont, Brushes.Black,

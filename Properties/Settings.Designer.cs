@@ -682,7 +682,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2,6")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2,10")]
         public string DConsineeAddress {
             get {
                 return ((string)(this["DConsineeAddress"]));
@@ -694,7 +694,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("32,6")]
+        [global::System.Configuration.DefaultSettingValueAttribute("32,10")]
         public string DConsineeContact {
             get {
                 return ((string)(this["DConsineeContact"]));
@@ -706,7 +706,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2,90")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2,110")]
         public string DReceiverAddress {
             get {
                 return ((string)(this["DReceiverAddress"]));
@@ -718,7 +718,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("32,90")]
+        [global::System.Configuration.DefaultSettingValueAttribute("32,110")]
         public string DInvoice {
             get {
                 return ((string)(this["DInvoice"]));
@@ -730,7 +730,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8,220")]
+        [global::System.Configuration.DefaultSettingValueAttribute("8,250")]
         public string DParticulars {
             get {
                 return ((string)(this["DParticulars"]));
