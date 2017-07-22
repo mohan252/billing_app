@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
 using Infragistics.Win.UltraWinGrid;
+using System.Linq;
 
 namespace BillingApplication
 {
@@ -677,8 +678,15 @@ namespace BillingApplication
             PrintSection(receiverAddress, "DReceiverAddress", e.Graphics);
             var invoice = new List<string>
             {
-                "Inoice No: " + data.Invoice.Number, "Invoice Date: " + data.Invoice.Date, "Bale No: " + data.BaleNo, "Transport: " + data.Transport, "Booked To: " + data.BookedTo
+                "Inoice No: " + data.Invoice.Number, "Invoice Date: " + data.Invoice.Date, "Bale No: " + data.BaleNo
             };
+            if (data.BaleNo.Contains("/"))
+            {
+                var noOfBales = data.BaleNo.Substring(data.BaleNo.LastIndexOf("/") + 1);
+                invoice.Add("No of Bales: " + noOfBales);
+            }
+            invoice.Add("Transport: " + data.Transport);
+            invoice.Add("Booked To: " + data.BookedTo);
             PrintSection(invoice, "DInvoice", e.Graphics);
             //Particulars
             var startParticularsY = Y("DParticulars");
@@ -709,7 +717,7 @@ namespace BillingApplication
             gdiPage.DrawString("--------------", coverFont, Brushes.Black,
                        X("DDash1"), dash1Y);
             var totalBillValueY = dash1Y + lineIncrementDash;
-            gdiPage.DrawString("Total After Tax  " + data.Particulars.TotalBillValue, coverFont, Brushes.Black,
+            gdiPage.DrawString("Total Amount After Tax  " + data.Particulars.TotalBillValue, coverFont, Brushes.Black,
                        X("DTotalBillValue"), totalBillValueY);
             var dash2Y = totalBillValueY + lineIncrementDash;
             gdiPage.DrawString("--------------", coverFont, Brushes.Black,

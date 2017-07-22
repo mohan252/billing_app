@@ -225,7 +225,7 @@
       <Value Profile="(Default)">44,280</Value>
     </Setting>
     <Setting Name="DTotalBillValue" Type="System.String" Scope="User">
-      <Value Profile="(Default)">34,305</Value>
+      <Value Profile="(Default)">28,305</Value>
     </Setting>
     <Setting Name="DDash2" Type="System.String" Scope="User">
       <Value Profile="(Default)">44,320</Value>

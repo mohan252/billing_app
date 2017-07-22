@@ -850,7 +850,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("34,305")]
+        [global::System.Configuration.DefaultSettingValueAttribute("28,305")]
         public string DTotalBillValue {
             get {
                 return ((string)(this["DTotalBillValue"]));
