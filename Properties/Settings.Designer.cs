@@ -694,7 +694,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("40,6")]
+        [global::System.Configuration.DefaultSettingValueAttribute("32,6")]
         public string DConsineeContact {
             get {
                 return ((string)(this["DConsineeContact"]));
@@ -718,7 +718,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("40,90")]
+        [global::System.Configuration.DefaultSettingValueAttribute("32,90")]
         public string DInvoice {
             get {
                 return ((string)(this["DInvoice"]));
@@ -838,7 +838,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("45,280")]
+        [global::System.Configuration.DefaultSettingValueAttribute("44,280")]
         public string DDash1 {
             get {
                 return ((string)(this["DDash1"]));
@@ -850,7 +850,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("45,305")]
+        [global::System.Configuration.DefaultSettingValueAttribute("34,305")]
         public string DTotalBillValue {
             get {
                 return ((string)(this["DTotalBillValue"]));
@@ -862,7 +862,7 @@ namespace BillingApplication.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("45,320")]
+        [global::System.Configuration.DefaultSettingValueAttribute("44,320")]
         public string DDash2 {
             get {
                 return ((string)(this["DDash2"]));

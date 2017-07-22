@@ -661,7 +661,7 @@ namespace BillingApplication
             gdiPage.DrawString("Subject to Erode Jurisdiction", coverFont, Brushes.Black,
                         X("DJurisdiction"), Y("DJurisdiction"));
             var senderAddress = new List<string>{
-                "Consiner", data.MerchantName,"19 Kasianna Street, Erode","GSTIN : " + data.Gst
+                "Consiner", data.MerchantName,"19 Kasianna Street, Erode","GSTIN: " + data.Gst + "  STATE CODE: " + data.Gst.Substring(0,2)
             };
             PrintSection(senderAddress, "DConsineeAddress", e.Graphics);
             var senderContact = new List<string>
@@ -671,12 +671,12 @@ namespace BillingApplication
             PrintSection(senderContact, "DConsineeContact", e.Graphics);
             var receiverAddress = new List<string>
             {
-                "Consinee", data.Party.Name, data.Party.Addr1, data.Party.Addr2,data.Party.City, "GSTIN : " + data.Party.Gst
+                "Consinee", data.Party.Name, data.Party.Addr1, data.Party.Addr2,data.Party.City, "GSTIN: " + data.Party.Gst + "  STATE CODE: " + data.Party.Gst.Substring(0,2)
             };
             PrintSection(receiverAddress, "DReceiverAddress", e.Graphics);
             var invoice = new List<string>
             {
-                data.Invoice.Number,data.Invoice.Date, data.BaleNo, data.Lorry
+                "Inoice No: " + data.Invoice.Number, "Invoice Date: " + data.Invoice.Date, "Bale No: " + data.BaleNo, "Lorry: " + data.Lorry
             };
             PrintSection(invoice, "DInvoice", e.Graphics);
             //Particulars
@@ -700,7 +700,7 @@ namespace BillingApplication
                        X("DIGST"), Y("DIGST"));
             gdiPage.DrawString("--------------", coverFont, Brushes.Black,
                        X("DDash1"), Y("DDash1"));
-            gdiPage.DrawString(data.Particulars.TotalBillValue, coverFont, Brushes.Black,
+            gdiPage.DrawString("Total After Tax  " + data.Particulars.TotalBillValue, coverFont, Brushes.Black,
                        X("DTotalBillValue"), Y("DTotalBillValue"));
             gdiPage.DrawString("--------------", coverFont, Brushes.Black,
                        X("DDash2"), Y("DDash2"));

@@ -186,13 +186,13 @@
       <Value Profile="(Default)">2,6</Value>
     </Setting>
     <Setting Name="DConsineeContact" Type="System.String" Scope="User">
-      <Value Profile="(Default)">40,6</Value>
+      <Value Profile="(Default)">32,6</Value>
     </Setting>
     <Setting Name="DReceiverAddress" Type="System.String" Scope="User">
       <Value Profile="(Default)">2,90</Value>
     </Setting>
     <Setting Name="DInvoice" Type="System.String" Scope="User">
-      <Value Profile="(Default)">40,90</Value>
+      <Value Profile="(Default)">32,90</Value>
     </Setting>
     <Setting Name="DParticulars" Type="System.String" Scope="User">
       <Value Profile="(Default)">8,220</Value>
@@ -222,13 +222,13 @@
       <Value Profile="(Default)">39.5,270</Value>
     </Setting>
     <Setting Name="DDash1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">45,280</Value>
+      <Value Profile="(Default)">44,280</Value>
     </Setting>
     <Setting Name="DTotalBillValue" Type="System.String" Scope="User">
-      <Value Profile="(Default)">45,305</Value>
+      <Value Profile="(Default)">34,305</Value>
     </Setting>
     <Setting Name="DDash2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">45,320</Value>
+      <Value Profile="(Default)">44,320</Value>
     </Setting>
   </Settings>
 </SettingsFile>
