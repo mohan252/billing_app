@@ -342,19 +342,22 @@ namespace BillingApplication
                                itemX, itemY + (lineY * itemLineHeight));
             gdiPage.DrawString(getBotomRowValue(totalAfterTaxRowIndex, 2) + "", itemFont, Brushes.Black,
                        X("Amount"), itemY + (lineY++ * itemLineHeight));
-            
 
-            if (btmGrid.Rows[6].Cells[1].Value != null && btmGrid.Rows[6].Cells[1].Value.ToString() != "")
-            {
-                if (txtCd.Text != "" && txtCddays.Text != "")
-                {
-                    gdiPage.DrawString("LESS " + txtCd.Text + "% CASH DISCOUNT WITHIN " + txtCddays.Text + " DAYS FROM BILL DATE",
+            var interestText = "Interest should be added 15% for payment after 30 days from Bill Date";
+            gdiPage.DrawString(interestText,
                     itemFont, Brushes.Black, X("Cd"), Y("Cd"));
-                }
-            }
-            else
-                gdiPage.DrawString("Net Rate", itemFont, Brushes.Black,
-                       X("Amount"), itemY + (lineY++ * itemLineHeight));
+
+            //if (btmGrid.Rows[6].Cells[1].Value != null && btmGrid.Rows[6].Cells[1].Value.ToString() != "")
+            //{
+            //    if (txtCd.Text != "" && txtCddays.Text != "")
+            //    {
+            //        gdiPage.DrawString("LESS " + txtCd.Text + "% CASH DISCOUNT WITHIN " + txtCddays.Text + " DAYS FROM BILL DATE",
+            //        itemFont, Brushes.Black, X("Cd"), Y("Cd"));
+            //    }
+            //}
+            //else
+            //    gdiPage.DrawString("Net Rate", itemFont, Brushes.Black,
+            //           X("Amount"), itemY + (lineY++ * itemLineHeight));
 
             //bool isCdEntered = false;
             ////Less cd
