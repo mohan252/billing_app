@@ -19,6 +19,7 @@ namespace BillingApplication
         float totalWidth = 0;
         int dashLineAdjt = 10;
         decimal printBalance = 0;
+        decimal totalAmountAfterTax = 0;
         int lineY = 0;
         float itemX = 0;
         float itemY = 0;
@@ -332,18 +333,21 @@ namespace BillingApplication
                 {
                     gdiPage.DrawString(item.Key + " @" + val + "%", itemFont, Brushes.Black,
                                itemX, itemY + (lineY * itemLineHeight));
-                    gdiPage.DrawString(getBotomRowValue(item.Value, 2) + "", itemFont, Brushes.Black,
-                               X("Amount"), itemY + (lineY++ * itemLineHeight));
+                    var textToBePrinted = getBotomRowValue(item.Value, 2) + "";
+                    gdiPage.DrawString(textToBePrinted, itemFont, Brushes.Black,
+                               totalWidth - GetWidth(textToBePrinted, itemFont), itemY + (lineY++ * itemLineHeight));
                 }
             }
             //amount after tax
             int totalAfterTaxRowIndex = 13;
-            gdiPage.DrawString("Total", itemFont, Brushes.Black,
+            totalAmountAfterTax = getBotomRowValue(totalAfterTaxRowIndex, 2);
+            gdiPage.DrawString("Total After Tax", itemFont, Brushes.Black,
                                itemX, itemY + (lineY * itemLineHeight));
-            gdiPage.DrawString(getBotomRowValue(totalAfterTaxRowIndex, 2) + "", itemFont, Brushes.Black,
-                       X("Amount"), itemY + (lineY++ * itemLineHeight));
+            var textTobePrinted = totalAmountAfterTax + "";
+            gdiPage.DrawString(textTobePrinted, itemFont, Brushes.Black,
+                       totalWidth - GetWidth(textTobePrinted, itemFont), itemY + (lineY++ * itemLineHeight));
 
-            var interestText = "Interest should be added 15% for payment after 30 days from Bill Date";
+            var interestText = "Interest should be added @15% for payment after 30 days from Bill Date";
             gdiPage.DrawString(interestText,
                     itemFont, Brushes.Black, X("Cd"), Y("Cd"));
 
@@ -527,7 +531,7 @@ namespace BillingApplication
             gdiPage.DrawString(customText[1], itemFont, Brushes.Black,
                         X("BOB"), Y("BOB"));
             //Rupees
-            string balance = Convert.ToString(printBalance);
+            string balance = Convert.ToString(totalAmountAfterTax);
             balance = num.changeNumericToWords(balance) + "Only";
             //Rupess in words
             gdiPage.DrawString(balance, itemFont, Brushes.Black,
