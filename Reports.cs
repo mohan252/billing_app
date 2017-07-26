@@ -96,15 +96,25 @@ namespace BillingApplication
 
         private void cbAccYear_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbAccYear.Text.Length == 9)
+            if (cbAccYear.Text.Length <= 11)
             {
                 currAccYear = cbAccYear.Text;
+                partyWiseStamp_YearChanged();
             }
         }
 
         private void bkButton_Click(object sender, EventArgs e)
         {
             GoBack();
+        }
+
+        private void partyWiseStamp_YearChanged()
+        {
+            Report report = (Report)tabReport.SelectedTab.Tag;
+            if (report.Name == "Partywise Item Stamp")
+            {
+                tabReport_SelectedIndexChanged(null, null);
+            }
         }
     }
 }
