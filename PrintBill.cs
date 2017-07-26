@@ -115,6 +115,7 @@ namespace BillingApplication
             int rowCount = grdItem.Rows.Count;
             //Get the width of the total to calculate right aligned position
             totalWidth = X("Amount") + GetWidth(btmGrid[2, 0].Value.ToString(), itemFont);
+
             for (r = 0; r < rowCount; r++)
             {
                 if (grdItem.Rows[r].Cells["ITEMNAME"] != null && !grdItem.Rows[r].Cells["ITEMNAME"].Value.ToString().Equals(string.Empty))
@@ -205,18 +206,22 @@ namespace BillingApplication
                     gdiPage.DrawString(amt, itemFont, Brushes.Black,
                                totalWidth - GetWidth(amt, itemFont), itemY + (lineY++ * itemLineHeight));
             }
-            gdiPage.DrawString("----------------------------------", itemFont, Brushes.Black,
+            //more than one item then only print item total
+            if (rowCount > 1)
+            {
+                gdiPage.DrawString("----------------------------------", itemFont, Brushes.Black,
                        X("Qty"), itemY + (lineY++ * itemLineHeight));
-            //Total qty
-            gdiPage.DrawString(txtNetqty.Text, itemFont, Brushes.Black,
-                       X("Qty"), itemY + (lineY * itemLineHeight));
-            //Total
-            gdiPage.DrawString("Total", itemFont, Brushes.Black,
+                //Total qty
+                gdiPage.DrawString(txtNetqty.Text, itemFont, Brushes.Black,
+                           X("Qty"), itemY + (lineY * itemLineHeight));
+                //Total
+                gdiPage.DrawString("Total", itemFont, Brushes.Black,
                        itemX, itemY + (lineY * itemLineHeight));
-            string amt1 = GetCurrencyFormat(Convert.ToDecimal(btmGrid[2, 0].Value));
-            gdiPage.DrawString(amt1, itemFont, Brushes.Black,
-                       totalWidth - GetWidth(amt1, itemFont),
-                       itemY + (lineY++ * itemLineHeight));
+                string amt1 = GetCurrencyFormat(Convert.ToDecimal(btmGrid[2, 0].Value));
+                gdiPage.DrawString(amt1, itemFont, Brushes.Black,
+                           totalWidth - GetWidth(amt1, itemFont),
+                           itemY + (lineY++ * itemLineHeight));
+            }
             PrintBillDiscounts(gdiPage);
         }
         
@@ -634,6 +639,7 @@ namespace BillingApplication
             string address = cbCoy.Text;
             BillingApplication.CompanyDS.PARTIESDataTable pDt = this.partiesTA.GetDataById(Convert.ToInt32(txtPartyName.Tag));
             var gst = ((BillingApplication.CompanyDS.PARTIESRow)pDt.Rows[0]).GST;
+            var noOfBales = "";
             var data = new DeliveryEntity
             {
                 MerchantName = address,
@@ -668,7 +674,7 @@ namespace BillingApplication
                     TotalBillValue = btmGrid[2, 13].Value.ToString(),
                 }
             };
-            gdiPage.DrawString("Subject to Erode Jurisdiction", coverFont, Brushes.Black,
+            gdiPage.DrawString("Invoice Copy to Transporter", coverFont, Brushes.Black,
                         X("DJurisdiction"), Y("DJurisdiction"));
             var senderAddress = new List<string>{
                 "Consiner", data.MerchantName,"19 Kasianna Street, Erode","GSTIN: " + data.Gst + "  STATE CODE: " + data.Gst.Substring(0,2)
@@ -693,7 +699,7 @@ namespace BillingApplication
             };
             if (data.BaleNo.Contains("/"))
             {
-                var noOfBales = data.BaleNo.Substring(data.BaleNo.LastIndexOf("/") + 1);
+                noOfBales = data.BaleNo.Substring(data.BaleNo.LastIndexOf("/") + 1);
                 invoice.Add("No of Bales: " + noOfBales);
             }
             invoice.Add("Transport: " + data.Transport);
@@ -739,6 +745,18 @@ namespace BillingApplication
             var dash2Y = totalBillValueY + lineIncrementDash;
             gdiPage.DrawString("--------------", coverFont, Brushes.Black,
                        X("DDash2"), dash2Y);
+            var balesOfClothY = dash2Y + lineIncrementDash;
+            var balesOfClothX = X("DConsineeAddress");
+            if (noOfBales != "")
+            {
+                gdiPage.DrawString(noOfBales + " Bales of Cotton Cloth", coverFont, Brushes.Black,
+                       balesOfClothX, balesOfClothY);
+            }
+            else
+            {
+                gdiPage.DrawString("One Bale of Cotton Cloth", coverFont, Brushes.Black,
+                       balesOfClothX, balesOfClothY);
+            }
         }
 
         private void PrintSection(List<string> data, string sectionName, Graphics graphics)
