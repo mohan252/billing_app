@@ -23,7 +23,8 @@ namespace BillingApplication
     public class Particulars
     {
         public string Description { get; set; }
-        public string TotalPairs { get; set; }
+        public string TotalPairsMtrsKey { get; set; }
+        public string TotalPairsMtrsValue { get; set; }
         public string HSN { get; set; }
         public string TotalAmount { get; set; }
         public string IgstPercent { get; set; }

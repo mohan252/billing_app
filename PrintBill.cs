@@ -336,9 +336,9 @@ namespace BillingApplication
                 decimal val = getBotomRowValue(item.Value, 1);
                 if (val > 0)
                 {
-                    gdiPage.DrawString(item.Key + " @" + val + "%", itemFont, Brushes.Black,
-                               itemX, itemY + (lineY * itemLineHeight));
-                    var textToBePrinted = getBotomRowValue(item.Value, 2) + "";
+                    //gdiPage.DrawString(item.Key + " @" + val + "%", itemFont, Brushes.Black,
+                    //           itemX, itemY + (lineY * itemLineHeight));
+                    var textToBePrinted = item.Key + " @" + val + "%  " + getBotomRowValue(item.Value, 2);
                     gdiPage.DrawString(textToBePrinted, itemFont, Brushes.Black,
                                totalWidth - GetWidth(textToBePrinted, itemFont), itemY + (lineY++ * itemLineHeight));
                 }
@@ -656,7 +656,7 @@ namespace BillingApplication
                     City = txtPartyCity.Text,
                     State = txtPartyState.Text,
                     Pin = txtPartyPin.Text,
-                    Gst = gst
+                    Gst = gst ?? ""
                 },
                 Invoice = new Invoice
                 {
@@ -666,7 +666,8 @@ namespace BillingApplication
                 Particulars = new Particulars
                 {
                     Description = txtParticulars.Text,
-                    TotalPairs = txtTotalmtrs.Text,// + txtNetqty.Text
+                    TotalPairsMtrsKey = txtTotalmtrs.Text != ""  && Convert.ToInt32(txtTotalmtrs.Text) > 0 ? "Total Meters" : "Total Pairs ",
+                    TotalPairsMtrsValue = txtTotalmtrs.Text != ""  && Convert.ToInt32(txtTotalmtrs.Text) > 0 ? txtTotalmtrs.Text : txtNetqty.Text,
                     HSN = grdItem.Rows[0].Cells["HSN"].Value.ToString(),
                     TotalAmount = btmGrid[2, 9].Value.ToString(),
                     IgstAmount = btmGrid[2, 12].Value != null ? btmGrid[2, 12].Value.ToString() : "",
@@ -689,8 +690,14 @@ namespace BillingApplication
                         X("DParticularsValue"), 110);
             var receiverAddress = new List<string>
             {
-                "Consinee", data.Party.Name, data.Party.Addr1, data.Party.Addr2,data.Party.City, "GSTIN: " + data.Party.Gst + "  STATE CODE: " + data.Party.Gst.Substring(0,2)
+                "Consinee", data.Party.Name, data.Party.Addr1, data.Party.Addr2,data.Party.City
             };
+            var partyGst = "";
+            if (data.Party.Gst != "")
+            {
+                partyGst = "GSTIN: " + data.Party.Gst + "  STATE CODE: " + data.Party.Gst.Substring(0, 2);
+                receiverAddress.Add(partyGst);
+            }
             PrintSection(receiverAddress, "DReceiverAddress", e.Graphics);
             var pipe = "|  ";
             var invoice = new List<string>
@@ -714,7 +721,7 @@ namespace BillingApplication
             startParticularsY += 15;
             gdiPage.DrawString("Particulars", coverFont, Brushes.Black,
                         X("DParticulars"), startParticularsY);
-            gdiPage.DrawString("Total Pairs", coverFont, Brushes.Black,
+            gdiPage.DrawString(data.Particulars.TotalPairsMtrsKey, coverFont, Brushes.Black,
                         X("DTotalPairs"), startParticularsY);
             gdiPage.DrawString("Hsn Code", coverFont, Brushes.Black,
                         X("DHsnCode"), startParticularsY);
@@ -726,7 +733,7 @@ namespace BillingApplication
             var startParticularsValueY = startParticularsY + 35;
             gdiPage.DrawString(data.Particulars.Description, coverFont, Brushes.Black,
                         X("DParticularsValue"), startParticularsValueY);
-            gdiPage.DrawString(data.Particulars.TotalPairs, coverFont, Brushes.Black,
+            gdiPage.DrawString(data.Particulars.TotalPairsMtrsValue, coverFont, Brushes.Black,
                         X("DTotalPairsValue"), startParticularsValueY);
             gdiPage.DrawString(data.Particulars.HSN, coverFont, Brushes.Black,
                         X("DHsnCodeValue"), startParticularsValueY);

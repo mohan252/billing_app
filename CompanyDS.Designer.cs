@@ -4550,11 +4550,11 @@ namespace BillingApplication {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string GST {
                 get {
-                    try {
-                        return ((string)(this[this.tableADDRESS.GSTColumn]));
+                    if (this.IsGSTNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'GST\' in table \'ADDRESS\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableADDRESS.GSTColumn]));
                     }
                 }
                 set {
@@ -5752,11 +5752,11 @@ namespace BillingApplication {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string GST {
                 get {
-                    try {
-                        return ((string)(this[this.tablePARTIES.GSTColumn]));
+                    if (this.IsGSTNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'GST\' in table \'PARTIES\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tablePARTIES.GSTColumn]));
                     }
                 }
                 set {
