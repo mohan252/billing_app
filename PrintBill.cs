@@ -346,11 +346,9 @@ namespace BillingApplication
             //amount after tax
             int totalAfterTaxRowIndex = 13;
             totalAmountAfterTax = getBotomRowValue(totalAfterTaxRowIndex, 2);
-            gdiPage.DrawString("Total After Tax", itemFont, Brushes.Black,
-                               itemX, itemY + (lineY * itemLineHeight));
-            var textTobePrinted = totalAmountAfterTax + "";
-            gdiPage.DrawString(textTobePrinted, itemFont, Brushes.Black,
-                       totalWidth - GetWidth(textTobePrinted, itemFont), itemY + (lineY++ * itemLineHeight));
+            var totalAfterTaxToBePrinted = "Total After Tax  " + totalAmountAfterTax;
+            gdiPage.DrawString(totalAfterTaxToBePrinted, itemFont, Brushes.Black,
+                       totalWidth - GetWidth(totalAfterTaxToBePrinted, itemFont), itemY + (lineY++ * itemLineHeight));
 
             var interestText = "Interest should be added @15% for payment after 30 days from Bill Date";
             gdiPage.DrawString(interestText,
@@ -666,8 +664,8 @@ namespace BillingApplication
                 Particulars = new Particulars
                 {
                     Description = txtParticulars.Text,
-                    TotalPairsMtrsKey = txtTotalmtrs.Text != ""  && Convert.ToInt32(txtTotalmtrs.Text) > 0 ? "Total Meters" : "Total Pairs ",
-                    TotalPairsMtrsValue = txtTotalmtrs.Text != ""  && Convert.ToInt32(txtTotalmtrs.Text) > 0 ? txtTotalmtrs.Text : txtNetqty.Text,
+                    TotalPairsMtrsKey = txtTotalmtrs.Text != ""  && Convert.ToDecimal(txtTotalmtrs.Text) > 0 ? "Total Meters" : "Total Pairs ",
+                    TotalPairsMtrsValue = txtTotalmtrs.Text != "" && Convert.ToDecimal(txtTotalmtrs.Text) > 0 ? txtTotalmtrs.Text : txtNetqty.Text,
                     HSN = grdItem.Rows[0].Cells["HSN"].Value.ToString(),
                     TotalAmount = btmGrid[2, 9].Value.ToString(),
                     IgstAmount = btmGrid[2, 12].Value != null ? btmGrid[2, 12].Value.ToString() : "",
@@ -764,6 +762,9 @@ namespace BillingApplication
                 gdiPage.DrawString("One Bale of Cotton Cloth", coverFont, Brushes.Black,
                        balesOfClothX, balesOfClothY);
             }
+            var forTextY = balesOfClothY + lineIncrementDash;
+            gdiPage.DrawString("For " + cbCoy.Text, coverFont, Brushes.Black,
+                        X("DTotalPairs"), forTextY);
         }
 
         private void PrintSection(List<string> data, string sectionName, Graphics graphics)
