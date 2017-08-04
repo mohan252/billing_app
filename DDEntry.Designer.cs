@@ -55,12 +55,12 @@ namespace BillingApplication
             this.dpFrom = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.aGENTSBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.companyDS = new BillingApplication.CompanyDS();
             this.label2 = new System.Windows.Forms.Label();
             this.cbAddress = new System.Windows.Forms.ComboBox();
             this.aDDRESSBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.companyDS = new BillingApplication.CompanyDS();
             this.label1 = new System.Windows.Forms.Label();
+            this.aGENTSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bILLSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bILLSTableAdapter = new BillingApplication.CompanyDSTableAdapters.BILLSTableAdapter();
             this.aDDRESSTableAdapter = new BillingApplication.CompanyDSTableAdapters.ADDRESSTableAdapter();
@@ -72,9 +72,9 @@ namespace BillingApplication
             ((System.ComponentModel.ISupportInitialize)(this.dgBills)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.modeOptionSet)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.aGENTSBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.companyDS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aDDRESSBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.companyDS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aGENTSBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bILLSBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -170,12 +170,12 @@ namespace BillingApplication
             this.dgBills.Size = new System.Drawing.Size(1284, 279);
             this.dgBills.TabIndex = 2;
             this.dgBills.Text = "dgBills";
-            this.dgBills.AfterRowExpanded += new Infragistics.Win.UltraWinGrid.RowEventHandler(this.dgBills_AfterRowExpanded);
-            this.dgBills.AfterSelectChange += new Infragistics.Win.UltraWinGrid.AfterSelectChangeEventHandler(this.dgBills_AfterSelectChange);
             this.dgBills.InitializeLayout += new Infragistics.Win.UltraWinGrid.InitializeLayoutEventHandler(this.dgBills_InitializeLayout);
-            this.dgBills.BeforeRowsDeleted += new Infragistics.Win.UltraWinGrid.BeforeRowsDeletedEventHandler(this.dgBills_BeforeRowsDeleted);
-            this.dgBills.BeforeRowExpanded += new Infragistics.Win.UltraWinGrid.CancelableRowEventHandler(this.dgBills_BeforeRowExpanded);
             this.dgBills.AfterRowsDeleted += new System.EventHandler(this.dgBills_AfterRowsDeleted);
+            this.dgBills.AfterRowExpanded += new Infragistics.Win.UltraWinGrid.RowEventHandler(this.dgBills_AfterRowExpanded);
+            this.dgBills.BeforeRowExpanded += new Infragistics.Win.UltraWinGrid.CancelableRowEventHandler(this.dgBills_BeforeRowExpanded);
+            this.dgBills.AfterSelectChange += new Infragistics.Win.UltraWinGrid.AfterSelectChangeEventHandler(this.dgBills_AfterSelectChange);
+            this.dgBills.BeforeRowsDeleted += new Infragistics.Win.UltraWinGrid.BeforeRowsDeletedEventHandler(this.dgBills_BeforeRowsDeleted);
             // 
             // modeOptionSet
             // 
@@ -288,16 +288,6 @@ namespace BillingApplication
             this.label3.Text = "From";
             this.label3.Visible = false;
             // 
-            // aGENTSBindingSource
-            // 
-            this.aGENTSBindingSource.DataMember = "AGENTS";
-            this.aGENTSBindingSource.DataSource = this.companyDS;
-            // 
-            // companyDS
-            // 
-            this.companyDS.DataSetName = "CompanyDS";
-            this.companyDS.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -326,6 +316,11 @@ namespace BillingApplication
             this.aDDRESSBindingSource.DataMember = "ADDRESS";
             this.aDDRESSBindingSource.DataSource = this.companyDS;
             // 
+            // companyDS
+            // 
+            this.companyDS.DataSetName = "CompanyDS";
+            this.companyDS.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -335,6 +330,11 @@ namespace BillingApplication
             this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Address";
+            // 
+            // aGENTSBindingSource
+            // 
+            this.aGENTSBindingSource.DataMember = "AGENTS";
+            this.aGENTSBindingSource.DataSource = this.companyDS;
             // 
             // bILLSBindingSource
             // 
@@ -376,9 +376,9 @@ namespace BillingApplication
             ((System.ComponentModel.ISupportInitialize)(this.modeOptionSet)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.aGENTSBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.companyDS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aDDRESSBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.companyDS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aGENTSBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bILLSBindingSource)).EndInit();
             this.ResumeLayout(false);
 

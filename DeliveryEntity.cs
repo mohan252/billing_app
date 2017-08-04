@@ -5,6 +5,10 @@ using System.Text;
 
 namespace BillingApplication
 {
+    public static class Delimiters
+    {
+        public static string DeliveryGrid = " :: ";
+    }
     public class Party
     {
         public string Name { get; set; }
@@ -14,11 +18,19 @@ namespace BillingApplication
         public string State  { get; set; }
         public string Pin { get; set; }
         public string Gst { get; set; }
+        public override string ToString()
+        {
+            return Name + Delimiters.DeliveryGrid + City + Delimiters.DeliveryGrid + Gst;
+        }
     }
     public class Invoice
     {
         public string Number { get; set; }
         public string Date { get; set; }
+        public override string ToString()
+        {
+            return Number + Delimiters.DeliveryGrid + Date;
+        }
     }
     public class Particulars
     {
@@ -30,6 +42,10 @@ namespace BillingApplication
         public string IgstPercent { get; set; }
         public string IgstAmount { get; set; }
         public string TotalBillValue { get; set; }
+        public override string ToString()
+        {
+            return Description + Delimiters.DeliveryGrid + HSN + Delimiters.DeliveryGrid + TotalBillValue;
+        }
     }
     public class DeliveryEntity
     {
