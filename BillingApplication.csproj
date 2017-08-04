@@ -105,6 +105,12 @@
       <DependentUpon>CompanyDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="DAL.cs" />
+    <Compile Include="Delivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Delivery.Designer.cs">
+      <DependentUpon>Delivery.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeliveryEntity.cs" />
     <Compile Include="PieCollectedDataHelper.cs" />
     <Compile Include="PrintBill.cs">

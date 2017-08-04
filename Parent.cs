@@ -67,5 +67,12 @@ namespace BillingApplication
             reForm.MdiParent = this;
             reForm.Show();
         }
+
+        private void deliveryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Delivery deliveryForm = new Delivery();
+            deliveryForm.MdiParent = this;
+            deliveryForm.Show();
+        }
     }
 }

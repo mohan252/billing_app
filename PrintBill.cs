@@ -632,6 +632,7 @@ namespace BillingApplication
 
         private void pDocDelivery_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
+            dalObj.GetDeliveryItems(null);
             Graphics gdiPage = e.Graphics;
             string dashHeader = "---------------------------------------------------------------------------------------------";
             string address = cbCoy.Text;

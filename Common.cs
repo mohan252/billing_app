@@ -83,6 +83,14 @@ namespace BillingApplication
             File.WriteAllBytes(file, bin);            
         }
 
+        public static DateTime NextBusinessDay()
+        {
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday)
+            {
+                return DateTime.Now.AddDays(2);
+            }
+            return DateTime.Now.AddDays(1);
+        }
         public static void SetExcelFileFormat(int rowNum)
         {
             oSheet.PrinterSettings.TopMargin = Convert.ToDecimal(settings.PLTopMargin);

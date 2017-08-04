@@ -39,6 +39,7 @@ namespace BillingApplication
             this.configureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ultraTabbedMdiManager1 = new Infragistics.Win.UltraWinTabbedMdi.UltraTabbedMdiManager(this.components);
+            this.deliveryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ultraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +60,7 @@ namespace BillingApplication
             // 
             this.toolStripMenuItem1.MergeAction = System.Windows.Forms.MergeAction.Replace;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(35, 20);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
             this.toolStripMenuItem1.Text = "&File";
             // 
             // fileToolStripMenuItem
@@ -68,10 +69,11 @@ namespace BillingApplication
             this.salesToolStripMenuItem,
             this.dDEntryToolStripMenuItem,
             this.pendingListToolStripMenuItem,
-            this.reportsToolStripMenuItem});
+            this.reportsToolStripMenuItem,
+            this.deliveryToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.fileToolStripMenuItem.Text = "Transactions";
             // 
             // salesToolStripMenuItem
@@ -111,19 +113,27 @@ namespace BillingApplication
             this.configureToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.entitiesToolStripMenuItem});
             this.configureToolStripMenuItem.Name = "configureToolStripMenuItem";
-            this.configureToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.configureToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.configureToolStripMenuItem.Text = "&Configure";
             // 
             // entitiesToolStripMenuItem
             // 
             this.entitiesToolStripMenuItem.Name = "entitiesToolStripMenuItem";
-            this.entitiesToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.entitiesToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.entitiesToolStripMenuItem.Text = "&Entities";
             this.entitiesToolStripMenuItem.Click += new System.EventHandler(this.entitiesToolStripMenuItem_Click);
             // 
             // ultraTabbedMdiManager1
             // 
             this.ultraTabbedMdiManager1.MdiParent = this;
+            // 
+            // deliveryToolStripMenuItem
+            // 
+            this.deliveryToolStripMenuItem.Name = "deliveryToolStripMenuItem";
+            this.deliveryToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.deliveryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deliveryToolStripMenuItem.Text = "Delivery";
+            this.deliveryToolStripMenuItem.Click += new System.EventHandler(this.deliveryToolStripMenuItem_Click);
             // 
             // Parent
             // 
@@ -157,6 +167,7 @@ namespace BillingApplication
         private System.Windows.Forms.ToolStripMenuItem configureToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem entitiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deliveryToolStripMenuItem;
 
     }
 }
