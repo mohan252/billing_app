@@ -22,6 +22,21 @@ namespace BillingApplication
     }
     public partial class BillForm : Form
     {
+        public class Grid
+        {
+            public static int Balance = 0;
+            public static int PinLess = 1;
+            public static int Discount1 = 2;
+            public static int Cd = 3;
+            public static int Fwd = 4;
+            public static int RoundOff = 5;
+            public static int TotalBeforeTax = 6;
+            public static int Sgst = 7;
+            public static int Cgst = 8;
+            public static int Igst = 9;
+            public static int TotalAfterTax = 10;
+        }
+        
         string currAccYear = "";
         string runningYear = "";
         int deletedRow = 0;
@@ -100,12 +115,6 @@ namespace BillingApplication
             FillData();
             BindDataSources();
             SetNewBill(false);
-            //Forwarding charges - not read only
-            btmGrid[2, 7].ReadOnly = false;
-            btmGrid[1, 1].ValueType = typeof(float);
-            btmGrid[1, 2].ValueType = typeof(float);
-            btmGrid[1, 3].ValueType = typeof(float);
-            btmGrid[1, 4].ValueType = typeof(float);
             //Set default doc sent to as party
             cbCourier.SelectedIndex = 0;
             txtBaleno.Focus();
@@ -290,70 +299,57 @@ namespace BillingApplication
             string[] values = new string[2] { "Total", "----" };
             btmGrid.Rows.Add(values);
 
-            btmGrid.Rows[0].Cells[0].ReadOnly = true;
-            btmGrid.Rows[0].Cells[1].ReadOnly = true;
-            btmGrid.Rows[0].Cells[2].ValueType = Type.GetType("System.Double");
+            btmGrid.Rows[Grid.Balance].Cells[0].ReadOnly = true;
+            btmGrid.Rows[Grid.Balance].Cells[1].ReadOnly = true;
+            btmGrid.Rows[Grid.Balance].Cells[2].ValueType = Type.GetType("System.Double");
 
             values = new string[1] { "Pinning Less" };
             btmGrid.Rows.Add(values);
-            btmGrid.Rows[1].Cells[0].ReadOnly = true;
-            btmGrid.Rows[1].Cells[2].ValueType = Type.GetType("System.Double");
-
-            values = new string[1] { "Less Rate/Mtr" };
-            btmGrid.Rows.Add(values);
-            btmGrid.Rows[2].Cells[0].ReadOnly = true;
-            btmGrid.Rows[2].Cells[2].ValueType = Type.GetType("System.Double");
-
-            values = new string[1] { "Less Rate/Pair" };
-            btmGrid.Rows.Add(values);
-            btmGrid.Rows[3].Cells[0].ReadOnly = true;
-            btmGrid.Rows[3].Cells[2].ValueType = Type.GetType("System.Double");
+            btmGrid.Rows[Grid.PinLess].Cells[0].ReadOnly = true;
+            btmGrid.Rows[Grid.PinLess].Cells[2].ValueType = Type.GetType("System.Double");
 
             values = new string[1] { global::BillingApplication.Properties.Settings.Default.Discount1 };
             btmGrid.Rows.Add(values);
-            btmGrid.Rows[4].Cells[2].ValueType = Type.GetType("System.Double");
-
-            values = new string[1] { "Discount2 %" };
-            btmGrid.Rows.Add(values);
-            btmGrid.Rows[5].Cells[2].ValueType = Type.GetType("System.Double");
-
+            btmGrid.Rows[Grid.Discount1].Cells[2].ValueType = Type.GetType("System.Double");
 
             values = new string[2] { "Cash Discount %", "4" };
             btmGrid.Rows.Add(values);
-            btmGrid.Rows[6].Cells[0].ReadOnly = true;
-            btmGrid.Rows[6].Cells[1].ValueType = Type.GetType("System.Double");
-            btmGrid.Rows[6].Cells[2].ValueType = Type.GetType("System.Double");
+            btmGrid.Rows[Grid.Cd].Cells[0].ReadOnly = true;
+            btmGrid.Rows[Grid.Cd].Cells[1].ValueType = Type.GetType("System.Double");
+            btmGrid.Rows[Grid.Cd].Cells[2].ValueType = Type.GetType("System.Double");
 
             values = new string[2] { "Forwarding Charges", "----" };
             btmGrid.Rows.Add(values);
-            btmGrid.Rows[7].Cells[0].ReadOnly = true;
-            btmGrid.Rows[7].Cells[1].ReadOnly = true;
+            btmGrid.Rows[Grid.Fwd].Cells[0].ReadOnly = true;
+            btmGrid.Rows[Grid.Fwd].Cells[1].ReadOnly = true;
+            btmGrid.Rows[Grid.Fwd].Cells[2].ReadOnly = false;
+            btmGrid.Rows[Grid.Fwd].Cells[2].ValueType = Type.GetType("System.Double");
 
             values = new string[2] { "Rounding off", "----" };
             btmGrid.Rows.Add(values);
-            btmGrid.Rows[8].Cells[0].ReadOnly = true;
-            btmGrid.Rows[8].Cells[1].ReadOnly = true;
+            btmGrid.Rows[Grid.RoundOff].Cells[0].ReadOnly = true;
+            btmGrid.Rows[Grid.RoundOff].Cells[1].ReadOnly = true;
 
             values = new string[2] { "Total Before Tax", "----" };
             btmGrid.Rows.Add(values);
 
-            values = new string[2] { "SGST @ %", "" };
+            values = new string[1] { "SGST @ %" };
             btmGrid.Rows.Add(values);
-            btmGrid.Rows[10].Cells[0].ReadOnly = true;
-            btmGrid.Rows[10].Cells[1].ValueType = Type.GetType("System.Double");
-            btmGrid.Rows[10].Cells[2].ValueType = Type.GetType("System.Double");
+            btmGrid.Rows[Grid.Sgst].Cells[0].ReadOnly = true;
+            btmGrid.Rows[Grid.Sgst].Cells[1].ValueType = Type.GetType("System.Double");
+            btmGrid.Rows[Grid.Sgst].Cells[2].ValueType = Type.GetType("System.Double");
 
-            values = new string[2] { "CGST @ %", "" };
+            values = new string[1] { "CGST @ %" };
             btmGrid.Rows.Add(values);
-            btmGrid.Rows[11].Cells[0].ReadOnly = true;
-            btmGrid.Rows[11].Cells[1].ValueType = Type.GetType("System.Double");
-            btmGrid.Rows[11].Cells[2].ValueType = Type.GetType("System.Double");
+            btmGrid.Rows[Grid.Cgst].Cells[0].ReadOnly = true;
+            btmGrid.Rows[Grid.Cgst].Cells[1].ValueType = Type.GetType("System.Double");
+            btmGrid.Rows[Grid.Cgst].Cells[2].ValueType = Type.GetType("System.Double");
 
-            values = new string[2] { "IGST @ %", "" };
+            values = new string[1] { "IGST @ %"};
             btmGrid.Rows.Add(values);
-            btmGrid.Rows[12].Cells[0].ReadOnly = true;
-            btmGrid.Rows[12].Cells[1].ValueType = Type.GetType("System.Double");
-            btmGrid.Rows[12].Cells[2].ValueType = Type.GetType("System.Double");
+            btmGrid.Rows[Grid.Igst].Cells[0].ReadOnly = true;
+            btmGrid.Rows[Grid.Igst].Cells[1].ValueType = Type.GetType("System.Double");
+            btmGrid.Rows[Grid.Igst].Cells[2].ValueType = Type.GetType("System.Double");
 
             values = new string[2] { "Total After Tax", "----" };
             btmGrid.Rows.Add(values);
@@ -363,9 +359,6 @@ namespace BillingApplication
             row.Cells.Add(cell);
             cell = new DataGridViewTextBoxCell();
             row.Cells.Add(cell);
-            //DataGridViewButtonCell btnCell = new DataGridViewButtonCell();
-            //btnCell.Value = "Save Bill";
-            //row.Cells.Add(btnCell);
             btmGrid.Rows.Add(row);
 
 
@@ -373,8 +366,6 @@ namespace BillingApplication
             style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             btmGrid.Columns[1].DefaultCellStyle = style;
 
-            btmGrid.Rows[9].Cells[0].ReadOnly = true;
-            btmGrid.Rows[9].Cells[1].ReadOnly = true;
             //Enable grid cell value change event
             EnableBottomGridEvents(true);
         }
@@ -533,7 +524,7 @@ namespace BillingApplication
             txtTotalmtrs.Text = totalMeters + "";
             txtNetqty.Text = totalQty + "";
             total = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
-            btmGrid[2, 0].Value = btmGrid[2, 9].Value = total.ToString();
+            btmGrid[2, Grid.Balance].Value = total.ToString();
         }
         private bool IsEmptyRow(UltraGridRow row)
         {
@@ -651,31 +642,25 @@ namespace BillingApplication
             //Disable grid cell value change event
             EnableBottomGridEvents(false);
             UpdateTotal();
-            decimal total = Convert.ToDecimal(btmGrid[2, 0].Value);
-            total -= LessRatePerMeter();
-            total -= LessRatePerPair();
-            total -= LessDiscount(1);//pinning less
-            total -= LessDiscount(4);//discount 1
-            total -= LessDiscount(5);//discount 4
+            decimal total = Convert.ToDecimal(btmGrid[2, Grid.Balance].Value);
+            total -= LessDiscount(Grid.PinLess);
+            total -= LessDiscount(Grid.Discount1);
+            total -= LessDiscount(Grid.Cd);
             //adding forward charges
-            if (Convert.ToString(btmGrid[2, 7].Value) != "")
-                total += Convert.ToDecimal(btmGrid[2, 7].Value);
+            if (Convert.ToString(btmGrid[2, Grid.Fwd].Value) != "")
+                total += Convert.ToDecimal(btmGrid[2, Grid.Fwd].Value);
             // for printing only
             decimal printTotal = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
             printBalance = System.Math.Round(printTotal, 0);
-            //printRountOff = printBalance - printTotal;
-
-            //Less cash discount for storing into db and display in the screen
-            total -= LessDiscount(6);
+            
             total = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
             decimal whole = System.Math.Round(total, 0, MidpointRounding.AwayFromZero);
             decimal roundOff = whole - total;
-            btmGrid[2, 9].Value = PadDigits(whole);
-            btmGrid[2, 8].Value = PadDigits(roundOff);
-            for (int i = 10; i <= 12; i++)
-            {
-                UpdateTotalAfterTax(i);
-            }
+            btmGrid[2, Grid.TotalBeforeTax].Value = PadDigits(whole);
+            btmGrid[2, Grid.RoundOff].Value = PadDigits(roundOff);
+            UpdateTotalAfterTax(Grid.Sgst);
+            UpdateTotalAfterTax(Grid.Cgst);
+            UpdateTotalAfterTax(Grid.Igst);
             //Enable grid cell value change event
             EnableBottomGridEvents(true);
         }
@@ -691,7 +676,7 @@ namespace BillingApplication
 
         private void UpdateTotalAfterTax(int rowIndex)
         {
-            decimal totalBeforeTax = Convert.ToDecimal(btmGrid[2, 9].Value);
+            decimal totalBeforeTax = Convert.ToDecimal(btmGrid[2, Grid.Balance].Value);
             decimal taxAmount = 0;
             decimal percent = getBotomRowValue(rowIndex, 1);
             if (percent > 0)
@@ -700,11 +685,10 @@ namespace BillingApplication
                 btmGrid[2, rowIndex].Value = taxAmount;
             }
             decimal totalAfterTax = totalBeforeTax;
-            for (int i = 10; i <= 12; i++)
-            {
-                totalAfterTax += getBotomRowValue(i, 2);
-            }
-            btmGrid[2, 13].Value = totalAfterTax;
+            totalAfterTax += getBotomRowValue(Grid.Cgst, 2);
+            totalAfterTax += getBotomRowValue(Grid.Sgst, 2);
+            totalAfterTax += getBotomRowValue(Grid.Igst, 2);
+            btmGrid[2, Grid.TotalAfterTax].Value = totalAfterTax;
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -716,13 +700,12 @@ namespace BillingApplication
             //Change cursor
             Cursor original = this.Cursor;
             this.Cursor = Cursors.WaitCursor;
-            for (int i = 0; i <= 7; i++)
+            for (int i = 0; i <= 9; i++)
             {
-                UpdateBottomGridValues(i);
-            }
-            for (int i = 10; i <= 12; i++)
-            {
-                UpdateBottomGridValues(i);
+                if (i != Grid.TotalBeforeTax)
+                {
+                    UpdateBottomGridValues(i);
+                }
             }
             int billNo = Convert.ToInt32(txtInvno.Text);
             string address = cbCoy.Text;
@@ -821,33 +804,21 @@ namespace BillingApplication
                 catch { }
             }
             //Pinning Less
-            if (btmGrid[1, 1].Value != null && Convert.ToString(btmGrid[1, 1].Value).Trim() != "")
+            if (btmGrid[1, Grid.PinLess].Value != null && Convert.ToString(btmGrid[1, Grid.PinLess].Value).Trim() != "")
             {
-                FillDiscountsData(billNo, address, Convert.ToString(btmGrid[0, 1].Value).Trim(), Convert.ToDouble(btmGrid[1, 1].Value));
-            }
-            //less rate / mtr
-            if (btmGrid[1, 2].Value != null && Convert.ToString(btmGrid[1, 2].Value).Trim() != "")
-            {
-                FillDiscountsData(billNo, address, Convert.ToString(btmGrid[0, 2].Value),
-                    Convert.ToDouble(btmGrid[1, 2].Value));
-            }
-            //less rate / pair
-            if (btmGrid[1, 3].Value != null && Convert.ToString(btmGrid[1, 3].Value).Trim() != "")
-            {
-                FillDiscountsData(billNo, address, Convert.ToString(btmGrid[0, 3].Value),
-                    Convert.ToDouble(btmGrid[1, 3].Value));
+                FillDiscountsData(billNo, address, Convert.ToString(btmGrid[0, Grid.PinLess].Value).Trim(), Convert.ToDouble(btmGrid[1, Grid.PinLess].Value));
             }
             //discount 1
-            if (btmGrid[1, 4].Value != null && Convert.ToString(btmGrid[1, 4].Value).Trim() != "")
+            if (btmGrid[1, Grid.Discount1].Value != null && Convert.ToString(btmGrid[1, Grid.Discount1].Value).Trim() != "")
             {
-                FillDiscountsData(billNo, address, Convert.ToString(btmGrid[0, 4].Value),
-                    Convert.ToDouble(btmGrid[1, 4].Value));
+                FillDiscountsData(billNo, address, Convert.ToString(btmGrid[0, Grid.Discount1].Value),
+                    Convert.ToDouble(btmGrid[1, Grid.Discount1].Value));
             }
-            //discount 2
-            if (btmGrid[1, 5].Value != null && Convert.ToString(btmGrid[1, 5].Value).Trim() != "")
+            //discount 2 / cd
+            if (btmGrid[1, Grid.Cd].Value != null && Convert.ToString(btmGrid[1, Grid.Cd].Value).Trim() != "")
             {
-                FillDiscountsData(billNo, address, Convert.ToString(btmGrid[0, 5].Value),
-                    Convert.ToDouble(btmGrid[1, 5].Value));
+                FillDiscountsData(billNo, address, Convert.ToString(btmGrid[0, Grid.Cd].Value),
+                    Convert.ToDouble(btmGrid[1, Grid.Cd].Value));
             }
             if (bDist != null && bDist.Rows != null && bDist.Rows.Count > 0)
                 billdiscountsTA.Update(bDist);
@@ -952,26 +923,26 @@ namespace BillingApplication
             else if (state == BillState.Old)
                 billRow.TOTALMTRS = 0;
             billRow.TOTALQTY = Convert.ToInt32(txtNetqty.Text);
-            if (btmGrid.Rows[7].Cells[2].Value != null && btmGrid.Rows[7].Cells[2].Value.ToString() != "")
-                billRow.FWDCHARGES = Convert.ToDouble(btmGrid.Rows[7].Cells[2].Value);
+            if (btmGrid.Rows[Grid.Fwd].Cells[2].Value != null && btmGrid.Rows[Grid.Fwd].Cells[2].Value.ToString() != "")
+                billRow.FWDCHARGES = Convert.ToDouble(btmGrid.Rows[Grid.Fwd].Cells[2].Value);
             else if (state == BillState.Old)
                 billRow.FWDCHARGES = 0;
-            billRow.BALANCE = Convert.ToDouble(btmGrid.Rows[9].Cells[2].Value);
-            if (btmGrid.Rows[10].Cells[1].Value != null && btmGrid.Rows[10].Cells[1].Value.ToString() != "")
-                billRow.SGST = Convert.ToDouble(btmGrid.Rows[10].Cells[1].Value);
-            if (btmGrid.Rows[11].Cells[1].Value != null && btmGrid.Rows[11].Cells[1].Value.ToString() != "")
-                billRow.CGST = Convert.ToDouble(btmGrid.Rows[11].Cells[1].Value);
-            if (btmGrid.Rows[12].Cells[1].Value != null && btmGrid.Rows[12].Cells[1].Value.ToString() != "")
-                billRow.IGST = Convert.ToDouble(btmGrid.Rows[12].Cells[1].Value);
-            if (btmGrid.Rows[13].Cells[2].Value != null && btmGrid.Rows[13].Cells[2].Value.ToString() != "")
-                billRow.TOTALAFTERTAX = Convert.ToDouble(btmGrid.Rows[13].Cells[2].Value);
+            billRow.BALANCE = Convert.ToDouble(btmGrid.Rows[Grid.Balance].Cells[2].Value);
+            if (btmGrid.Rows[Grid.Sgst].Cells[1].Value != null && btmGrid.Rows[Grid.Sgst].Cells[1].Value.ToString() != "")
+                billRow.SGST = Convert.ToDouble(btmGrid.Rows[Grid.Sgst].Cells[1].Value);
+            if (btmGrid.Rows[Grid.Cgst].Cells[1].Value != null && btmGrid.Rows[Grid.Cgst].Cells[1].Value.ToString() != "")
+                billRow.CGST = Convert.ToDouble(btmGrid.Rows[Grid.Cgst].Cells[1].Value);
+            if (btmGrid.Rows[Grid.Igst].Cells[1].Value != null && btmGrid.Rows[Grid.Igst].Cells[1].Value.ToString() != "")
+                billRow.IGST = Convert.ToDouble(btmGrid.Rows[Grid.Igst].Cells[1].Value);
+            if (btmGrid.Rows[Grid.TotalAfterTax].Cells[2].Value != null && btmGrid.Rows[Grid.TotalAfterTax].Cells[2].Value.ToString() != "")
+                billRow.TOTALAFTERTAX = Convert.ToDouble(btmGrid.Rows[Grid.TotalAfterTax].Cells[2].Value);
 
             if (txtCddays.Text != "")
                 billRow.CDDAYS = Convert.ToInt32(txtCddays.Text);
             else if (state == BillState.Old)
                 billRow.CDDAYS = 0;
             if (btmGrid.Rows[6].Cells[1].Value != null && btmGrid.Rows[6].Cells[1].Value.ToString() != "")
-                billRow.CDPERCENT = Convert.ToDouble(btmGrid.Rows[6].Cells[1].Value);
+                billRow.CDPERCENT = Convert.ToDouble(btmGrid.Rows[Grid.Cd].Cells[1].Value);
             else if (state == BillState.Old)
                 billRow.CDPERCENT = 0;
             if (txtPin.Text != "")
@@ -1031,25 +1002,17 @@ namespace BillingApplication
         //</Meters>
         private void UpdateBottomGridValues(int rowIndex)
         {
-            //Pinning less, discount 1, discount 2, cd
-            if ((rowIndex == 1 || rowIndex == 4 || rowIndex == 5 || rowIndex == 6))
-            //&& btmGrid.Rows[rowIndex].Cells.IndexOf(btmGrid.SelectedCells[0]) == 1)
+            if ((rowIndex == Grid.PinLess || rowIndex == Grid.Discount1 || rowIndex == Grid.Cd))
             {
                 LessDiscount(rowIndex);
                 UpdateBalance();
             }
-            else if (rowIndex == 2)
-                LessRatePerMeter();
-            else if (rowIndex == 3)
-                LessRatePerPair();
-            //fwd charges
-            else if (rowIndex == 7 &&
+            else if (rowIndex == Grid.Fwd &&
                 btmGrid.Rows[rowIndex].Cells.IndexOf(btmGrid.SelectedCells[0]) == 2)
             {
                 UpdateBalance();
             }
-            //if sgst, cgst, igst
-            else if (rowIndex == 10 || rowIndex == 11 || rowIndex == 12)
+            else if (rowIndex == Grid.Sgst || rowIndex == Grid.Cgst || rowIndex == Grid.Igst)
             {
                 UpdateTotalAfterTax(rowIndex);
             }
@@ -1197,16 +1160,17 @@ namespace BillingApplication
             InitializeBottomGrid();
             //Disable grid cell value change event
             EnableBottomGridEvents(false);
-            try { btmGrid[2, 7].Value = Convert.ToString(row.FWDCHARGES); }
-            catch { btmGrid[2, 7].Value = ""; }
-            try { btmGrid[1, 6].Value = Convert.ToString(row.CDPERCENT); }
-            catch { btmGrid[1, 6].Value = ""; }
-            try { btmGrid[1, 10].Value = Convert.ToString(row.SGST); }
-            catch { btmGrid[1, 10].Value = ""; }
-            try { btmGrid[1, 11].Value = Convert.ToString(row.CGST); }
-            catch { btmGrid[1, 11].Value = ""; }
-            try { btmGrid[1, 12].Value = Convert.ToString(row.IGST); }
-            catch { btmGrid[1, 12].Value = ""; }
+            try { btmGrid[2, Grid.Fwd].Value = Convert.ToString(row.FWDCHARGES); }
+            catch { btmGrid[2, Grid.Fwd].Value = ""; }
+            try { btmGrid[1, Grid.Cd].Value = Convert.ToString(row.CDPERCENT); }
+            catch { btmGrid[1, Grid.Cd].Value = ""; }
+            try { btmGrid[1, Grid.Sgst].Value = Convert.ToString(row.SGST); }
+            catch { btmGrid[1, Grid.Sgst].Value = ""; }
+            try { btmGrid[1, Grid.Cgst].Value = Convert.ToString(row.CGST); }
+            catch { btmGrid[1, Grid.Cgst].Value = ""; }
+            try { btmGrid[1, Grid.Igst].Value = Convert.ToString(row.IGST); }
+            catch { btmGrid[1, Grid.Igst].Value = ""; }
+
             if (currAccYear.Equals(runningYear))
                 bDist = billdiscountsTA.GetData(row.BILLNO, row.ADDRESS, "");
             else
@@ -1217,20 +1181,17 @@ namespace BillingApplication
                 foreach (BillingApplication.CompanyDS.BILLDISCOUNTSRow bDiscountRow in
                     bDist.Rows)
                 {
-                    switch (bDiscountRow.NAME)
+                    switch (bDiscountRow.NAME.Trim().ToUpper())
                     {
-                        case "Pinning Less":
-                            btmGrid[1, 1].Value = Convert.ToString(bDiscountRow.VALUE);
+                        case "PINNING LESS":
+                            btmGrid[1, Grid.PinLess].Value = Convert.ToString(bDiscountRow.VALUE);
                             break;
-                        case "Less Rate/Mtr":
-                            btmGrid[1, 2].Value = Convert.ToString(bDiscountRow.VALUE);
-                            break;
-                        case "Less Rate/Pair":
-                            btmGrid[1, 3].Value = Convert.ToString(bDiscountRow.VALUE);
+                        case "CASH DISCOUNT":
+                            btmGrid[1, Grid.Cd].Value = Convert.ToString(bDiscountRow.VALUE);
                             break;
                         default:
-                            btmGrid[0, discountRowNum].Value = bDiscountRow.NAME;
-                            btmGrid[1, discountRowNum++].Value = Convert.ToString(bDiscountRow.VALUE);
+                            btmGrid[1, Grid.Discount1].Value = Convert.ToString(bDiscountRow.VALUE);
+                            break;
                             break;
                     }
                 }
@@ -1310,7 +1271,7 @@ namespace BillingApplication
             //cd default value
             //Disable grid cell value change event
             EnableBottomGridEvents(false);
-            btmGrid[1, 6].Value = "4";
+            btmGrid[1, Grid.Cd].Value = "4";
             //Enable grid cell value change event
             EnableBottomGridEvents(true);
             txtTotalmtrs.Text = "";

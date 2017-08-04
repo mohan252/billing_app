@@ -115,7 +115,7 @@ namespace BillingApplication
             decimal tAmt = 0;
             int rowCount = grdItem.Rows.Count;
             //Get the width of the total to calculate right aligned position
-            totalWidth = X("Amount") + GetWidth(btmGrid[2, 0].Value.ToString(), itemFont);
+            totalWidth = X("Amount") + GetWidth(btmGrid[2, Grid.Balance].Value.ToString(), itemFont);
 
             for (r = 0; r < rowCount; r++)
             {
@@ -218,7 +218,7 @@ namespace BillingApplication
                 //Total
                 gdiPage.DrawString("Total", itemFont, Brushes.Black,
                        itemX, itemY + (lineY * itemLineHeight));
-                string amt1 = GetCurrencyFormat(Convert.ToDecimal(btmGrid[2, 0].Value));
+                string amt1 = GetCurrencyFormat(Convert.ToDecimal(btmGrid[2, Grid.Balance].Value));
                 gdiPage.DrawString(amt1, itemFont, Brushes.Black,
                            totalWidth - GetWidth(amt1, itemFont),
                            itemY + (lineY++ * itemLineHeight));
@@ -229,10 +229,10 @@ namespace BillingApplication
         private void PrintBillDiscounts(Graphics gdiPage)
         {
 
-            decimal total = Convert.ToDecimal(btmGrid[2, 0].Value);
-            //pinning less, less rate/mtr, less rate/pair, discount 1, discount 2
+            decimal total = Convert.ToDecimal(btmGrid[2, Grid.Balance].Value);
+            //pinning less, discount 1, cd
             // cd shouldn't get printed in the bill
-            for (int rowIndex = 1; rowIndex < 6; rowIndex++)
+            for (int rowIndex = 1; rowIndex < 4; rowIndex++)
             {
                 if (btmGrid[1, rowIndex] != null && btmGrid[1, rowIndex].Value != null && !btmGrid[1, rowIndex].Value.ToString().Equals(string.Empty))
                 {
@@ -249,105 +249,42 @@ namespace BillingApplication
                                itemY + (lineY++ * itemLineHeight));
                     gdiPage.DrawString("----------------", itemFont, Brushes.Black,
                        X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
-                    if (rowIndex == 1)//Pinning less
-                    {
-                        total -= LessDiscount(1);//pinning less
-                        total = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
-                        string strTota1 = GetCurrencyFormat(total);
-                        gdiPage.DrawString(strTota1, itemFont, Brushes.Black,
-                            totalWidth - GetWidth(strTota1, itemFont),
-                            itemY + (lineY++ * itemLineHeight));
-                        // gdiPage.DrawString("-----------", printFont, Brushes.Black,
-                        //X("Amount"), itemY + (lineY++ * lineHeight));
-                    }
-                    if (rowIndex == 2)//LessRatePerMeter
-                    {
-                        total -= LessRatePerMeter();
-                        total = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
-                        string strTota1 = GetCurrencyFormat(total);
-                        gdiPage.DrawString(strTota1, itemFont, Brushes.Black,
-                            totalWidth - GetWidth(strTota1, itemFont),
-                            itemY + (lineY++ * itemLineHeight));
-                        //gdiPage.DrawString("-----------", printFont, Brushes.Black,
-                        //    X("Amount"), itemY + (lineY++ * lineHeight));
-                    }
-                    if (rowIndex == 3)//LessRatePerPair
-                    {
-                        total -= LessRatePerPair();
-                        total = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
-                        string strTota1 = GetCurrencyFormat(total);
-                        gdiPage.DrawString(strTota1, itemFont, Brushes.Black,
-                            totalWidth - GetWidth(strTota1, itemFont),
-                            itemY + (lineY++ * itemLineHeight));
-                        //gdiPage.DrawString("-----------", printFont, Brushes.Black,
-                        //    X("Amount"), itemY + (lineY++ * lineHeight));
-                    }
-                    if (rowIndex == 4 || rowIndex == 5)//discount 1 & 2
-                    {
-                        total -= LessDiscount(rowIndex);
-                        total = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
-                        string strTota1 = GetCurrencyFormat(total);
-                        gdiPage.DrawString(strTota1, itemFont, Brushes.Black,
-                            totalWidth - GetWidth(strTota1, itemFont),
-                            itemY + (lineY++ * itemLineHeight));
-                        //gdiPage.DrawString("-----------", printFont, Brushes.Black,
-                        //    X("Amount"), itemY + (lineY++ * lineHeight));
-                    }
+                    total -= LessDiscount(1);//pinning less
+                    total = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
+                    string strTota1 = GetCurrencyFormat(total);
+                    gdiPage.DrawString(strTota1, itemFont, Brushes.Black,
+                        totalWidth - GetWidth(strTota1, itemFont),
+                        itemY + (lineY++ * itemLineHeight));
                 }
             }
             //Fwd charges
-            if (btmGrid[2, 7] != null && btmGrid[2, 7].Value != null && !btmGrid[2, 7].Value.ToString().Equals(string.Empty) && Convert.ToDecimal(btmGrid[2, 7].Value) != 0)
+            if (btmGrid[2, Grid.Fwd] != null && btmGrid[2, Grid.Fwd].Value != null && !btmGrid[2, Grid.Fwd].Value.ToString().Equals(string.Empty) && Convert.ToDecimal(btmGrid[2, Grid.Fwd].Value) != 0)
             {
                 gdiPage.DrawString("Forwarding Charges", itemFont, Brushes.Black,
                                itemX, itemY + (lineY * itemLineHeight));
-                string amt = GetCurrencyFormat(Convert.ToDecimal(btmGrid[2, 7].Value));
+                string amt = GetCurrencyFormat(Convert.ToDecimal(btmGrid[2, Grid.Fwd].Value));
                 gdiPage.DrawString(amt, itemFont, Brushes.Black,
                                totalWidth - GetWidth(amt, itemFont),
                                itemY + (lineY++ * itemLineHeight));
-                total += Convert.ToDecimal(btmGrid[2, 7].Value.ToString());
+                total += Convert.ToDecimal(btmGrid[2, Grid.Fwd].Value.ToString());
             }
             printBalance = System.Math.Round(total, 0, MidpointRounding.AwayFromZero);
-            //remove round off printing
-            //decimal RoundOff = printBalance - total;
-            //if (RoundOff != 0)
-            //{
-                //print roundoff
-                //gdiPage.DrawString("Round Off", itemFont, Brushes.Black,
-                //           itemX, itemY + (lineY * itemLineHeight));
-                //string amt = GetCurrencyFormat(RoundOff);
-                //gdiPage.DrawString(amt, itemFont, Brushes.Black,
-                //                   totalWidth - GetWidth(amt, itemFont),
-                //                   itemY + (lineY++ * itemLineHeight));
-                //gdiPage.DrawString("----------------", itemFont, Brushes.Black,
-                //           X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
-                //Print final total
-                //amt = GetCurrencyFormat(printBalance);
-                //gdiPage.DrawString(amt, itemFont, Brushes.Black,
-                //                   totalWidth - GetWidth(amt, itemFont),
-                //                   itemY + (lineY++ * itemLineHeight));
-            //}
-            //gdiPage.DrawString("----------------", itemFont, Brushes.Black,
-            //           X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
-
+            
             Dictionary<string, int> nameIndex = new Dictionary<string, int>
             {
-                {"SGST",10},{"CGST",11},{"IGST",12}
+                {"SGST",Grid.Sgst},{"CGST",Grid.Cgst},{"IGST",Grid.Igst}
             };
             foreach (var item in nameIndex)
             {
                 decimal val = getBotomRowValue(item.Value, 1);
                 if (val > 0)
                 {
-                    //gdiPage.DrawString(item.Key + " @" + val + "%", itemFont, Brushes.Black,
-                    //           itemX, itemY + (lineY * itemLineHeight));
                     var textToBePrinted = item.Key + " @" + val + "%  " + getBotomRowValue(item.Value, 2);
                     gdiPage.DrawString(textToBePrinted, itemFont, Brushes.Black,
                                totalWidth - GetWidth(textToBePrinted, itemFont), itemY + (lineY++ * itemLineHeight));
                 }
             }
-            //amount after tax
-            int totalAfterTaxRowIndex = 13;
-            totalAmountAfterTax = getBotomRowValue(totalAfterTaxRowIndex, 2);
+            totalAmountAfterTax = getBotomRowValue(Grid.TotalAfterTax, 2);
             var totalAfterTaxToBePrinted = "Total After Tax  " + totalAmountAfterTax;
             gdiPage.DrawString(totalAfterTaxToBePrinted, itemFont, Brushes.Black,
                        totalWidth - GetWidth(totalAfterTaxToBePrinted, itemFont), itemY + (lineY++ * itemLineHeight));
@@ -357,36 +294,6 @@ namespace BillingApplication
             var interestText = "Interest should be added @15% for payment after 30 days from Bill Date";
             gdiPage.DrawString(interestText,
                     itemFont, Brushes.Black, X("Cd"), Y("Cd"));
-
-            //if (btmGrid.Rows[6].Cells[1].Value != null && btmGrid.Rows[6].Cells[1].Value.ToString() != "")
-            //{
-            //    if (txtCd.Text != "" && txtCddays.Text != "")
-            //    {
-            //        gdiPage.DrawString("LESS " + txtCd.Text + "% CASH DISCOUNT WITHIN " + txtCddays.Text + " DAYS FROM BILL DATE",
-            //        itemFont, Brushes.Black, X("Cd"), Y("Cd"));
-            //    }
-            //}
-            //else
-            //    gdiPage.DrawString("Net Rate", itemFont, Brushes.Black,
-            //           X("Amount"), itemY + (lineY++ * itemLineHeight));
-
-            //bool isCdEntered = false;
-            ////Less cd
-            //if (txtCd.Text != "" && txtCddays.Text != "")
-            //{
-            //    if (Convert.ToDouble(txtCd.Text) != 0 && Convert.ToInt32(txtCddays.Text) != 0)
-            //    {
-            //        if (btmGrid.Rows[6].Cells[1].Value != null && btmGrid.Rows[6].Cells[1].Value.ToString() != "")
-            //        {
-            //            gdiPage.DrawString("LESS " + txtCd.Text + "% CASH DISCOUNT WITHIN " + txtCddays.Text + " DAYS FROM BILL DATE",
-            //            itemFont, Brushes.Black, X("Cd"), Y("Cd"));
-            //            isCdEntered = true;
-            //        }
-            //    }
-            //}
-            //if (!isCdEntered)
-            //    gdiPage.DrawString("Net Rate", itemFont, Brushes.Black,
-            //           X("Amount"), itemY + (lineY++ * itemLineHeight));
         }
         private void PrintPartyAddress(Graphics gdiPage)
         {
@@ -636,7 +543,6 @@ namespace BillingApplication
 
         private void pDocDelivery_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            DeliveryItemsDataContext.GetDeliveryItems(null);
             Graphics gdiPage = e.Graphics;
             string address = cbCoy.Text;
             BillingApplication.CompanyDS.PARTIESDataTable pDt = this.partiesTA.GetDataById(Convert.ToInt32(txtPartyName.Tag));
@@ -670,10 +576,10 @@ namespace BillingApplication
                     TotalPairsMtrsKey = txtTotalmtrs.Text != ""  && Convert.ToDecimal(txtTotalmtrs.Text) > 0 ? "Total Meters" : "Total Pairs ",
                     TotalPairsMtrsValue = txtTotalmtrs.Text != "" && Convert.ToDecimal(txtTotalmtrs.Text) > 0 ? txtTotalmtrs.Text : txtNetqty.Text,
                     HSN = grdItem.Rows[0].Cells["HSN"].Value.ToString(),
-                    TotalAmount = btmGrid[2, 9].Value.ToString(),
-                    IgstAmount = btmGrid[2, 12].Value != null ? btmGrid[2, 12].Value.ToString() : "",
-                    IgstPercent = btmGrid[1, 12].Value != null ? btmGrid[1, 12].Value.ToString() : "",
-                    TotalBillValue = btmGrid[2, 13].Value.ToString(),
+                    TotalAmount = btmGrid[2, Grid.TotalBeforeTax].Value.ToString(),
+                    IgstAmount = btmGrid[2, Grid.Igst].Value != null ? btmGrid[2, Grid.Igst].Value.ToString() : "",
+                    IgstPercent = btmGrid[1, Grid.Igst].Value != null ? btmGrid[1, Grid.Igst].Value.ToString() : "",
+                    TotalBillValue = btmGrid[2, Grid.TotalAfterTax].Value.ToString(),
                 }
             };
 

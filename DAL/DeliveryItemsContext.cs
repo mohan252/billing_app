@@ -14,7 +14,7 @@ namespace BillingApplication
         static SqlDataAdapter myAdap = null;
         static SqlCommand myCmd = null;
 
-        private DeliveryItemsDataContext()
+        static DeliveryItemsDataContext()
         {
             myConn = System.Configuration.ConfigurationManager.ConnectionStrings["BillingApplication.Properties.Settings.companyConn"].ConnectionString;
             myAdap = new SqlDataAdapter();
