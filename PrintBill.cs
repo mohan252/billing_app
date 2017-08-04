@@ -634,11 +634,9 @@ namespace BillingApplication
         {
             dalObj.GetDeliveryItems(null);
             Graphics gdiPage = e.Graphics;
-            string dashHeader = "---------------------------------------------------------------------------------------------";
             string address = cbCoy.Text;
             BillingApplication.CompanyDS.PARTIESDataTable pDt = this.partiesTA.GetDataById(Convert.ToInt32(txtPartyName.Tag));
             var gst = ((BillingApplication.CompanyDS.PARTIESRow)pDt.Rows[0]).GST;
-            var noOfBales = "";
             var data = new DeliveryEntity
             {
                 MerchantName = address,
@@ -674,112 +672,14 @@ namespace BillingApplication
                     TotalBillValue = btmGrid[2, 13].Value.ToString(),
                 }
             };
-            gdiPage.DrawString("Invoice Copy to Transporter", coverFont, Brushes.Black,
-                        X("DJurisdiction"), Y("DJurisdiction"));
-            var senderAddress = new List<string>{
-                "Consiner", data.MerchantName,"19 Kasianna Street, Erode","GSTIN: " + data.Gst + "  STATE CODE: " + data.Gst.Substring(0,2)
-            };
-            PrintSection(senderAddress, "DConsineeAddress", e.Graphics);
-            var senderContact = new List<string>
-            {
-                "0424-2259168", "99949 50150"
-            };
-            PrintSection(senderContact, "DConsineeContact", e.Graphics);
-            gdiPage.DrawString(dashHeader, coverFont, Brushes.Black,
-                        X("DParticularsValue"), 110);
-            var receiverAddress = new List<string>
-            {
-                "Consinee", data.Party.Name, data.Party.Addr1, data.Party.Addr2,data.Party.City
-            };
-            var partyGst = "";
-            if (data.Party.Gst != "")
-            {
-                partyGst = "GSTIN: " + data.Party.Gst + "  STATE CODE: " + data.Party.Gst.Substring(0, 2);
-                receiverAddress.Add(partyGst);
-            }
-            PrintSection(receiverAddress, "DReceiverAddress", e.Graphics);
-            var pipe = "|  ";
-            var invoice = new List<string>
-            {
-                "Invoice No: " + data.Invoice.Number, "Invoice Date: " + data.Invoice.Date, "Bale No: " + data.BaleNo
-            };
-            if (data.BaleNo.Contains("/"))
-            {
-                noOfBales = data.BaleNo.Substring(data.BaleNo.LastIndexOf("/") + 1);
-                invoice.Add("No of Bales: " + noOfBales);
-            }
-            invoice.Add("Transport: " + data.Transport);
-            invoice.Add("Booked To: " + data.BookedTo);
-            invoice = invoice.Select(i => pipe + i).ToList();
-            PrintSection(invoice, "DInvoice", e.Graphics);
-            //Particulars
-            var startParticularsY = Y("DParticulars");
-            gdiPage.DrawString(dashHeader, coverFont, Brushes.Black,
-                        X("DParticularsValue"), startParticularsY);
-            var lineIncrement = 25;
-            startParticularsY += 15;
-            gdiPage.DrawString("Particulars", coverFont, Brushes.Black,
-                        X("DParticulars"), startParticularsY);
-            gdiPage.DrawString(data.Particulars.TotalPairsMtrsKey, coverFont, Brushes.Black,
-                        X("DTotalPairs"), startParticularsY);
-            gdiPage.DrawString("Hsn Code", coverFont, Brushes.Black,
-                        X("DHsnCode"), startParticularsY);
-            gdiPage.DrawString("Amount", coverFont, Brushes.Black,
-                        X("DAmount"), startParticularsY);
-            startParticularsY += 15;
-            gdiPage.DrawString(dashHeader, coverFont, Brushes.Black,
-                        X("DParticularsValue"), startParticularsY);
-            var startParticularsValueY = startParticularsY + 35;
-            gdiPage.DrawString(data.Particulars.Description, coverFont, Brushes.Black,
-                        X("DParticularsValue"), startParticularsValueY);
-            gdiPage.DrawString(data.Particulars.TotalPairsMtrsValue, coverFont, Brushes.Black,
-                        X("DTotalPairsValue"), startParticularsValueY);
-            gdiPage.DrawString(data.Particulars.HSN, coverFont, Brushes.Black,
-                        X("DHsnCodeValue"), startParticularsValueY);
-            gdiPage.DrawString(data.Particulars.TotalAmount, coverFont, Brushes.Black,
-                        X("DAmountValue"), startParticularsValueY);
-            var lineIncrementDash = 15;
-            var igstY = startParticularsValueY + lineIncrement;
-            gdiPage.DrawString("IGST " + data.Particulars.IgstPercent + "%  " + data.Particulars.IgstAmount , coverFont, Brushes.Black,
-                       X("DIGST"), igstY);
-            var dash1Y = igstY + lineIncrementDash;
-            gdiPage.DrawString("--------------", coverFont, Brushes.Black,
-                       X("DDash1"), dash1Y);
-            var totalBillValueY = dash1Y + lineIncrementDash;
-            gdiPage.DrawString("Total Amount After Tax  " + data.Particulars.TotalBillValue, coverFont, Brushes.Black,
-                       X("DTotalBillValue"), totalBillValueY);
-            var dash2Y = totalBillValueY + lineIncrementDash;
-            gdiPage.DrawString("--------------", coverFont, Brushes.Black,
-                       X("DDash2"), dash2Y);
-            var balesOfClothY = dash2Y + lineIncrementDash;
-            var balesOfClothX = X("DConsineeAddress");
-            if (noOfBales != "")
-            {
-                gdiPage.DrawString(noOfBales + " Bales of Cotton Cloth", coverFont, Brushes.Black,
-                       balesOfClothX, balesOfClothY);
-            }
-            else
-            {
-                gdiPage.DrawString("One Bale of Cotton Cloth", coverFont, Brushes.Black,
-                       balesOfClothX, balesOfClothY);
-            }
-            var forTextY = balesOfClothY + lineIncrementDash;
-            gdiPage.DrawString("For " + cbCoy.Text, coverFont, Brushes.Black,
-                        X("DTotalPairs"), forTextY);
+
+            Common.PrintDelivery(gdiPage, data);
+            
         }
 
-        private void PrintSection(List<string> data, string sectionName, Graphics graphics)
-        {
-            float startXLocation = X(sectionName);
-            float startYLocation = Y(sectionName);
-            var lineHt = coverFont.GetHeight(graphics);
-            var currentConsineeLineNo = 1;
-            foreach (var item in data)
-            {
-                graphics.DrawString(item, coverFont, Brushes.Black,
-                        startXLocation, startYLocation + currentConsineeLineNo++ * lineHt);
-            }
-        }
+        
+
+        
         private void pDocDelivery_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             string coverFt = global::BillingApplication.Properties.Settings.Default.CoverFont;

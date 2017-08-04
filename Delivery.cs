@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using Infragistics.Win.UltraWinGrid;
 using Infragistics.Win;
+using System.Drawing.Printing;
+using System.Collections;
 
 namespace BillingApplication
 {
@@ -33,7 +35,7 @@ namespace BillingApplication
             var checkColumn = gridDelivery.DisplayLayout.Bands[0].Columns["ISSELECTED"];
             checkColumn.CellActivation = Activation.AllowEdit;
             checkColumn.Header.VisiblePosition = 0;
-            
+
             gridDelivery.DisplayLayout.Bands[0].Columns["MERCHANTNAME"].Width = 200;
             gridDelivery.DisplayLayout.Bands[0].Columns["PARTY"].Width = 300;
             gridDelivery.DisplayLayout.Bands[0].Columns["INVOICE"].Width = 150;
@@ -227,11 +229,64 @@ namespace BillingApplication
                 }
             }
         }
-
+        List<DeliveryEntity> deliveryItemsToBePrinted = new List<DeliveryEntity>();
+        IEnumerator items;
         private void btnPrint_Click(object sender, EventArgs e)
         {
             var deliveryItemsToBePrinted = deliveryData.Where(d => d.IsSelected);
-            var i = 0;
+            PrintDocument pd = new PrintDocument();
+            pd.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
+            items = deliveryData.Where(d => d.IsSelected).GetEnumerator();
+            if (items.MoveNext())
+            {
+                pd.Print();
+            }
         }
+
+        private void pd_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            var item = items.Current;
+            Common.PrintDelivery(e.Graphics, item as DeliveryEntity);
+            e.HasMorePages = items.MoveNext();
+        }
+
+        /*
+            IEnumerator items;
+
+            public void StartPrint()
+            {
+               PrintDocument pd = new PrintDocument();
+               pd.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
+               items = GetEnumerator();
+               if (items.MoveNext())
+               {
+                   pd.Print();
+               }
+            }
+
+            private void pd_PrintPage(object sender, PrintPageEventArgs ev)
+            {
+                const int neededHeight = 200;
+                int line =0;
+                // this will be called multiple times, so keep track where you are...
+                // do your drawings, calculating how much space you have left on one page
+                bool more = true;
+                do
+                {
+                    // draw your bars for item, handle multilple columns if needed
+                    var item = items.Current;
+                    line++;
+                    // in the ev.MarginBouds the width and height of this page is available
+                    // you use that to see if a next row will fit
+                    if ((line * neededHeight) < ev.MarginBounds.Height )
+                    {
+                        break;
+                    }
+                    more = items.MoveNext();
+                } while (more)
+                // stop if there are no more items in your Iterator
+                ev.HasMorePages = more;
+            }
+         */
     }
 }
