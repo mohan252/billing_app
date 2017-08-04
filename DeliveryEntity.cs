@@ -57,5 +57,6 @@ namespace BillingApplication
         public string Transport { get; set; }
         public string BookedTo { get; set; }
         public Particulars Particulars { get; set; }
+        public bool IsSelected { get; set; }
     }
 }

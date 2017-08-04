@@ -399,6 +399,7 @@ namespace BillingApplication
                     }
                     var data = new DeliveryEntity
                     {
+                        IsSelected = true,
                         MerchantName = Convert.ToString(dr["ADDRESS"]),
                         Gst = Convert.ToString(dr["GST"]),
                         BaleNo = Convert.ToString(dr["BALENO"]),

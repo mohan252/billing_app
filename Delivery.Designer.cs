@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("Band 0", -1);
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn1 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Band 1");
-            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand2 = new Infragistics.Win.UltraWinGrid.UltraGridBand("Band 1", 0);
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand2 = new Infragistics.Win.UltraWinGrid.UltraGridBand("Band 1", -1);
             Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance3 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
@@ -44,16 +43,13 @@
             Infragistics.Win.Appearance appearance10 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance11 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance12 = new Infragistics.Win.Appearance();
-            Infragistics.Win.UltraWinDataSource.UltraDataBand ultraDataBand1 = new Infragistics.Win.UltraWinDataSource.UltraDataBand("Band 1");
             this.gridDelivery = new Infragistics.Win.UltraWinGrid.UltraGrid();
-            this.ultraDataSource1 = new Infragistics.Win.UltraWinDataSource.UltraDataSource(this.components);
+            this.btnPrint = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridDelivery)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ultraDataSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // gridDelivery
             // 
-            this.gridDelivery.DataSource = this.ultraDataSource1;
             appearance1.BackColor = System.Drawing.SystemColors.Window;
             appearance1.BorderColor = System.Drawing.SystemColors.InactiveCaption;
             this.gridDelivery.DisplayLayout.Appearance = appearance1;
@@ -113,29 +109,34 @@
             this.gridDelivery.DisplayLayout.ScrollBounds = Infragistics.Win.UltraWinGrid.ScrollBounds.ScrollToFill;
             this.gridDelivery.DisplayLayout.ScrollStyle = Infragistics.Win.UltraWinGrid.ScrollStyle.Immediate;
             this.gridDelivery.DisplayLayout.ViewStyleBand = Infragistics.Win.UltraWinGrid.ViewStyleBand.OutlookGroupBy;
-            this.gridDelivery.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridDelivery.Location = new System.Drawing.Point(0, 0);
+            this.gridDelivery.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.gridDelivery.Location = new System.Drawing.Point(0, 38);
             this.gridDelivery.Name = "gridDelivery";
-            this.gridDelivery.Size = new System.Drawing.Size(670, 529);
+            this.gridDelivery.Size = new System.Drawing.Size(670, 491);
             this.gridDelivery.TabIndex = 0;
             this.gridDelivery.Text = "ultraGrid1";
             // 
-            // ultraDataSource1
+            // btnPrint
             // 
-            this.ultraDataSource1.Band.ChildBands.AddRange(new object[] {
-            ultraDataBand1});
+            this.btnPrint.Location = new System.Drawing.Point(93, 9);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 23);
+            this.btnPrint.TabIndex = 1;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // Delivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(670, 529);
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.gridDelivery);
             this.Name = "Delivery";
             this.Text = "Delivery";
             this.Load += new System.EventHandler(this.Delivery_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridDelivery)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ultraDataSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -143,6 +144,6 @@
         #endregion
 
         private Infragistics.Win.UltraWinGrid.UltraGrid gridDelivery;
-        private Infragistics.Win.UltraWinDataSource.UltraDataSource ultraDataSource1;
+        private System.Windows.Forms.Button btnPrint;
     }
 }
