@@ -10,6 +10,7 @@ using Infragistics.Win.UltraWinGrid;
 using Infragistics.Win;
 using System.Drawing.Printing;
 using System.Collections;
+using BillingApplication.Models;
 
 namespace BillingApplication
 {
@@ -32,7 +33,7 @@ namespace BillingApplication
 
         private void LoadData(DateTime deliveryDate)
         {
-            deliveryData = dalObj.GetDeliveryItems(deliveryDate);
+            deliveryData = DeliveryItemsDataContext.GetDeliveryItems(deliveryDate);
             this.gridDelivery.DataSource = deliveryData;
             gridDelivery.DisplayLayout.Bands[0].Columns["MERCHANTNAME"].Tag = CheckState.Checked;
             this.gridDelivery.CreationFilter = aCheckBoxOnHeader_CreationFilter;

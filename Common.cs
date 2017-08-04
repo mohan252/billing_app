@@ -9,6 +9,7 @@ using OfficeOpenXml.Style;
 using System.IO;
 using System.Drawing;
 using System.Linq;
+using BillingApplication.Models;
 
 namespace BillingApplication
 {

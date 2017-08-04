@@ -105,14 +105,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CompanyDS.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DAL.cs" />
+    <Compile Include="DAL\DAL.cs" />
+    <Compile Include="DAL\DeliveryItemsContext.cs" />
     <Compile Include="Delivery.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Delivery.Designer.cs">
       <DependentUpon>Delivery.cs</DependentUpon>
     </Compile>
-    <Compile Include="DeliveryEntity.cs" />
+    <Compile Include="Models\Bill.cs" />
+    <Compile Include="Models\DeliveryEntity.cs" />
     <Compile Include="PieCollectedDataHelper.cs" />
     <Compile Include="PrintBill.cs">
       <SubType>Form</SubType>
@@ -275,6 +277,7 @@
   <ItemGroup>
     <Content Include="ReportsConfig.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(ProjectDir)ReportsConfig.xml" "$(TargetDir)\."

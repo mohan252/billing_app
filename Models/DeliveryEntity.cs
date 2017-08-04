@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BillingApplication
+namespace BillingApplication.Models
 {
     public static class Delimiters
     {

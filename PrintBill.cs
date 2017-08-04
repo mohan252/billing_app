@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Configuration;
 using Infragistics.Win.UltraWinGrid;
 using System.Linq;
+using BillingApplication.Models;
 
 namespace BillingApplication
 {
@@ -635,7 +636,7 @@ namespace BillingApplication
 
         private void pDocDelivery_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            dalObj.GetDeliveryItems(null);
+            DeliveryItemsDataContext.GetDeliveryItems(null);
             Graphics gdiPage = e.Graphics;
             string address = cbCoy.Text;
             BillingApplication.CompanyDS.PARTIESDataTable pDt = this.partiesTA.GetDataById(Convert.ToInt32(txtPartyName.Tag));
