@@ -45,6 +45,7 @@
             Infragistics.Win.Appearance appearance12 = new Infragistics.Win.Appearance();
             this.gridDelivery = new Infragistics.Win.UltraWinGrid.UltraGrid();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.billDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.gridDelivery)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,11 +127,20 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // billDate
+            // 
+            this.billDate.Location = new System.Drawing.Point(242, 12);
+            this.billDate.Name = "billDate";
+            this.billDate.Size = new System.Drawing.Size(200, 20);
+            this.billDate.TabIndex = 2;
+            this.billDate.ValueChanged += new System.EventHandler(this.billDate_ValueChanged);
+            // 
             // Delivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(670, 529);
+            this.Controls.Add(this.billDate);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.gridDelivery);
             this.Name = "Delivery";
@@ -145,5 +155,6 @@
 
         private Infragistics.Win.UltraWinGrid.UltraGrid gridDelivery;
         private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.DateTimePicker billDate;
     }
 }

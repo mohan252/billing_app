@@ -25,7 +25,14 @@ namespace BillingApplication
 
         private void Delivery_Load(object sender, EventArgs e)
         {
-            deliveryData = dalObj.GetDeliveryItems(null);
+            var deliveryDate = Common.NextBusinessDay();
+            billDate.Value = deliveryDate;
+            LoadData(deliveryDate);
+        }
+
+        private void LoadData(DateTime deliveryDate)
+        {
+            deliveryData = dalObj.GetDeliveryItems(deliveryDate);
             this.gridDelivery.DataSource = deliveryData;
             gridDelivery.DisplayLayout.Bands[0].Columns["MERCHANTNAME"].Tag = CheckState.Checked;
             this.gridDelivery.CreationFilter = aCheckBoxOnHeader_CreationFilter;
@@ -248,6 +255,11 @@ namespace BillingApplication
             var item = items.Current;
             Common.PrintDelivery(e.Graphics, item as DeliveryEntity);
             e.HasMorePages = items.MoveNext();
+        }
+
+        private void billDate_ValueChanged(object sender, EventArgs e)
+        {
+            LoadData(billDate.Value);
         }
 
         /*
