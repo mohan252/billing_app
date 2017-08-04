@@ -846,7 +846,8 @@ namespace BillingApplication
             // 
             // txtCd
             // 
-            this.txtCd.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.txtCd.BackColor = System.Drawing.SystemColors.Window;
+            this.txtCd.ForeColor = System.Drawing.SystemColors.WindowText;
             resources.ApplyResources(this.txtCd, "txtCd");
             this.txtCd.Name = "txtCd";
             // 

@@ -306,26 +306,27 @@ namespace BillingApplication
                 total += Convert.ToDecimal(btmGrid[2, 7].Value.ToString());
             }
             printBalance = System.Math.Round(total, 0, MidpointRounding.AwayFromZero);
-            decimal RoundOff = printBalance - total;
-            if (RoundOff != 0)
-            {
+            //remove round off printing
+            //decimal RoundOff = printBalance - total;
+            //if (RoundOff != 0)
+            //{
                 //print roundoff
-                gdiPage.DrawString("Round Off", itemFont, Brushes.Black,
-                           itemX, itemY + (lineY * itemLineHeight));
-                string amt = GetCurrencyFormat(RoundOff);
-                gdiPage.DrawString(amt, itemFont, Brushes.Black,
-                                   totalWidth - GetWidth(amt, itemFont),
-                                   itemY + (lineY++ * itemLineHeight));
-                gdiPage.DrawString("----------------", itemFont, Brushes.Black,
-                           X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
+                //gdiPage.DrawString("Round Off", itemFont, Brushes.Black,
+                //           itemX, itemY + (lineY * itemLineHeight));
+                //string amt = GetCurrencyFormat(RoundOff);
+                //gdiPage.DrawString(amt, itemFont, Brushes.Black,
+                //                   totalWidth - GetWidth(amt, itemFont),
+                //                   itemY + (lineY++ * itemLineHeight));
+                //gdiPage.DrawString("----------------", itemFont, Brushes.Black,
+                //           X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
                 //Print final total
-                amt = GetCurrencyFormat(printBalance);
-                gdiPage.DrawString(amt, itemFont, Brushes.Black,
-                                   totalWidth - GetWidth(amt, itemFont),
-                                   itemY + (lineY++ * itemLineHeight));
-            }
-            gdiPage.DrawString("----------------", itemFont, Brushes.Black,
-                       X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
+                //amt = GetCurrencyFormat(printBalance);
+                //gdiPage.DrawString(amt, itemFont, Brushes.Black,
+                //                   totalWidth - GetWidth(amt, itemFont),
+                //                   itemY + (lineY++ * itemLineHeight));
+            //}
+            //gdiPage.DrawString("----------------", itemFont, Brushes.Black,
+            //           X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
 
             Dictionary<string, int> nameIndex = new Dictionary<string, int>
             {
@@ -349,6 +350,8 @@ namespace BillingApplication
             var totalAfterTaxToBePrinted = "Total After Tax  " + totalAmountAfterTax;
             gdiPage.DrawString(totalAfterTaxToBePrinted, itemFont, Brushes.Black,
                        totalWidth - GetWidth(totalAfterTaxToBePrinted, itemFont), itemY + (lineY++ * itemLineHeight));
+            gdiPage.DrawString("----------------", itemFont, Brushes.Black,
+                       X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
 
             var interestText = "Interest should be added @15% for payment after 30 days from Bill Date";
             gdiPage.DrawString(interestText,
