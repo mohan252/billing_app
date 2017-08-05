@@ -505,7 +505,7 @@ namespace BillingApplication
                                     "Add the item to db by entering down arrow in the empty item name cell");
             }
         }
-        private void UpdateTotal()
+        private void UpdateBalanceInBottonGrid()
         {
             decimal total = 0;
             decimal totalMeters = 0;
@@ -641,7 +641,7 @@ namespace BillingApplication
         {
             //Disable grid cell value change event
             EnableBottomGridEvents(false);
-            UpdateTotal();
+            UpdateBalanceInBottonGrid();
             decimal total = Convert.ToDecimal(btmGrid[2, Grid.Balance].Value);
             total -= LessDiscount(Grid.PinLess);
             total -= LessDiscount(Grid.Discount1);
