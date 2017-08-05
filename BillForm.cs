@@ -345,7 +345,7 @@ namespace BillingApplication
             btmGrid.Rows[Grid.Cgst].Cells[1].ValueType = Type.GetType("System.Double");
             btmGrid.Rows[Grid.Cgst].Cells[2].ValueType = Type.GetType("System.Double");
 
-            values = new string[1] { "IGST @ %"};
+            values = new string[2] { "IGST @ %", "5"};
             btmGrid.Rows.Add(values);
             btmGrid.Rows[Grid.Igst].Cells[0].ReadOnly = true;
             btmGrid.Rows[Grid.Igst].Cells[1].ValueType = Type.GetType("System.Double");
@@ -941,7 +941,7 @@ namespace BillingApplication
                 billRow.CDDAYS = Convert.ToInt32(txtCddays.Text);
             else if (state == BillState.Old)
                 billRow.CDDAYS = 0;
-            if (btmGrid.Rows[6].Cells[1].Value != null && btmGrid.Rows[6].Cells[1].Value.ToString() != "")
+            if (btmGrid.Rows[Grid.Cd].Cells[1].Value != null && btmGrid.Rows[Grid.Cd].Cells[1].Value.ToString() != "")
                 billRow.CDPERCENT = Convert.ToDouble(btmGrid.Rows[Grid.Cd].Cells[1].Value);
             else if (state == BillState.Old)
                 billRow.CDPERCENT = 0;

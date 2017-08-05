@@ -236,12 +236,18 @@ namespace BillingApplication
             {
                 if (btmGrid[1, rowIndex] != null && btmGrid[1, rowIndex].Value != null && !btmGrid[1, rowIndex].Value.ToString().Equals(string.Empty))
                 {
-                    string text = btmGrid[0, rowIndex].Value.ToString() + " : " + btmGrid[1, rowIndex].Value.ToString();
-                    if (rowIndex == 2 || rowIndex == 3)
-                        text += " Rs";
+                    string discountName = btmGrid[0, rowIndex].Value.ToString();
+                    string discountValue = btmGrid[1, rowIndex].Value.ToString();
+                    var discountTextToBePrinted = "";
+                    if (discountName.Contains("%"))
+                    {
+                        discountTextToBePrinted = discountName + " : " + discountValue;
+                    }
                     else
-                        text += " %";
-                    gdiPage.DrawString(text, itemFont, Brushes.Black,
+                    {
+                        discountTextToBePrinted = discountName + " : " + discountValue + " %";
+                    }
+                    gdiPage.DrawString(discountTextToBePrinted, itemFont, Brushes.Black,
                                itemX, itemY + (lineY * itemLineHeight));
                     string amt = GetCurrencyFormat(Convert.ToDecimal(btmGrid[2, rowIndex].Value));
                     gdiPage.DrawString(amt, itemFont, Brushes.Black,
