@@ -94,7 +94,7 @@ namespace BillingApplication
             //}
             //else
             //    amt1 = amt1.Substring(1, amt1.Length - 1);
-            amt1 = PadDigits(amt1);
+            amt1 = Common.PadDigits(amt1);
             return amt1;
         }
         private void PrintBillItems(Graphics gdiPage)
@@ -189,7 +189,7 @@ namespace BillingApplication
                         gdiPage.DrawString("----------------", itemFont, Brushes.Black,
                             X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
                         amt = GetCurrencyFormat(Convert.ToDecimal(grdItem.Rows[r].Cells["AMT"].Value));
-                        gdiPage.DrawString(PadDigits(amt), itemFont, Brushes.Black,
+                        gdiPage.DrawString(Common.PadDigits(amt), itemFont, Brushes.Black,
                                 totalWidth - GetWidth(amt, itemFont),
                                     itemY + (lineY++ * itemLineHeight));
                         gdiPage.DrawString("----------------", itemFont, Brushes.Black,
@@ -496,6 +496,7 @@ namespace BillingApplication
             printFont = new Font(itemFt, printFtSize, GraphicsUnit.Pixel);
             gstFont = new Font(itemFt, printFtSize + 1, GraphicsUnit.Pixel);
             printInvRightFont = new Font(itemFt, printInvoiceRightFtSize, GraphicsUnit.Pixel);
+            //pDoc.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Custom", 600, 600);
         }
         private void pDoc_EndPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
@@ -601,6 +602,7 @@ namespace BillingApplication
             string coverFt = global::BillingApplication.Properties.Settings.Default.CoverFont;
             int converFtSize = global::BillingApplication.Properties.Settings.Default.CoverFontSize;
             coverFont = new Font(coverFt, converFtSize, GraphicsUnit.Pixel);
+            //pDocDelivery.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Custom", 600, 600);
         }
 
         private void pDocDelivery_EndPrint(object sender, System.Drawing.Printing.PrintEventArgs e)

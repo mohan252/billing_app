@@ -550,17 +550,7 @@ namespace BillingApplication
                 outp = outp + ".00";
             return outp;
         }
-        private string PadDigits(string outp)
-        {
-            if (outp.IndexOf(".") != -1)
-            {
-                if (outp.Length - outp.IndexOf(".") < 3)
-                    outp = outp + "0";
-            }
-            else
-                outp = outp + ".00";
-            return outp;
-        }
+        
         private decimal GetBalance(int rowIndex)
         {
             decimal bal = Convert.ToDecimal(btmGrid[2, 0].Value);
@@ -1186,7 +1176,7 @@ namespace BillingApplication
                         case "PINNING LESS":
                             btmGrid[1, Grid.PinLess].Value = Convert.ToString(bDiscountRow.VALUE);
                             break;
-                        case "CASH DISCOUNT":
+                        case "CASH DISCOUNT %":
                             btmGrid[1, Grid.Cd].Value = Convert.ToString(bDiscountRow.VALUE);
                             break;
                         default:

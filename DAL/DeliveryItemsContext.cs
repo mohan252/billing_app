@@ -34,7 +34,7 @@ namespace BillingApplication
                             )
                             SELECT B.BILLNO, B.ADDRESS, A.GST, B.BALENO, B.FWDBY, B.FWDTO, P.NAME AS PARTYNAME, P.ADDR1 AS PARTYADDR1, P.ADDR2 AS PARTYADDR2, P.CITY AS PARTYCITY,P.STATE AS PARTYSTATE,P.PIN AS PARTYPIN, P.GST AS PARTYGST,
                             B.BILLNO AS INVOICENUMBER, B.BILLDATE AS INVOICEDATE,
-                            B.PARTICULARS AS PARTICULARSDESCR, B.TOTALMTRS AS PARTICULARSTOTALMTRS , B.TOTALQTY AS PARTICULARSNETQTY,B.BALANCE AS TOTALAMOUNTBEFORETAX, B.IGST, (B.BALANCE * B.IGST) AS IGSTAMOUNT, B.TOTALAFTERTAX AS TOTALBILLVALUE,
+                            B.PARTICULARS AS PARTICULARSDESCR, B.TOTALMTRS AS PARTICULARSTOTALMTRS , B.TOTALQTY AS PARTICULARSNETQTY,B.BALANCE AS TOTALAMOUNTBEFORETAX, B.IGST, (B.BALANCE * (B.IGST/100)) AS IGSTAMOUNT, B.TOTALAFTERTAX AS TOTALBILLVALUE,
                             CTE.HSN AS HSN
                               FROM BILLS B
                             INNER JOIN ADDRESS A ON B.ADDRESS = A.NAME 
@@ -108,9 +108,9 @@ namespace BillingApplication
                             TotalPairsMtrsValue = totalMtrsPairsValue,
                             HSN = Convert.ToString(dr["HSN"]),
                             TotalAmount = Convert.ToString(dr["TOTALAMOUNTBEFORETAX"]),
-                            IgstAmount = Convert.ToString(dr["IGSTAMOUNT"]),
+                            IgstAmount = RoundOff(dr["IGSTAMOUNT"]),
                             IgstPercent = Convert.ToString(dr["IGST"]),
-                            TotalBillValue = Convert.ToString(dr["TOTALBILLVALUE"]),
+                            TotalBillValue = RoundOff(dr["TOTALBILLVALUE"]),
                         }
                     };
                     deliveryEntries.Add(data);
@@ -118,6 +118,13 @@ namespace BillingApplication
 
             }
             return deliveryEntries;
+        }
+
+        public static string RoundOff(object val)
+        {
+            var valDecimal = Convert.ToDecimal(val);
+            var roundedVal = Math.Round(valDecimal, 0, MidpointRounding.AwayFromZero);
+            return Convert.ToString(roundedVal);
         }
     }
 }
