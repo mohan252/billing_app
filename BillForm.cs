@@ -1181,7 +1181,7 @@ namespace BillingApplication
                             break;
                         default:
                             btmGrid[1, Grid.Discount1].Value = Convert.ToString(bDiscountRow.VALUE);
-                            break;
+                            btmGrid[0, Grid.Discount1].Value = Convert.ToString(bDiscountRow.NAME);
                             break;
                     }
                 }
