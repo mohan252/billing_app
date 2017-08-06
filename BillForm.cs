@@ -619,7 +619,7 @@ namespace BillingApplication
                     bal = Convert.ToDecimal(btmGrid[2, 0].Value);
                 else
                     bal = GetBalance(rowIndex);
-                decimal val = System.Math.Round(((discount / 100) * bal), 2, MidpointRounding.AwayFromZero);
+                decimal val = System.Math.Round(((discount / 100) * bal), 0, MidpointRounding.AwayFromZero);
                 //disable grid cell value change event
                 EnableBottomGridEvents(false);
                 btmGrid[2, rowIndex].Value = PadDigits(val);
@@ -650,17 +650,17 @@ namespace BillingApplication
             if (Convert.ToString(btmGrid[2, Grid.Fwd].Value) != "")
                 total += Convert.ToDecimal(btmGrid[2, Grid.Fwd].Value);
             // for printing only
-            decimal printTotal = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
-            printBalance = System.Math.Round(printTotal, 0);
+            //decimal printTotal = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
+            //printBalance = System.Math.Round(printTotal, 0);
             
-            total = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
-            decimal whole = System.Math.Round(total, 0, MidpointRounding.AwayFromZero);
-            decimal roundOff = whole - total;
+            var totalRoundedOffToTwoDecimal = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
+            decimal whole = System.Math.Round(totalRoundedOffToTwoDecimal, 0, MidpointRounding.AwayFromZero);
+            decimal roundOff = whole - totalRoundedOffToTwoDecimal;
             btmGrid[2, Grid.TotalBeforeTax].Value = PadDigits(whole);
             btmGrid[2, Grid.RoundOff].Value = PadDigits(roundOff);
-            UpdateTotalAfterTax(Grid.Sgst);
-            UpdateTotalAfterTax(Grid.Cgst);
-            UpdateTotalAfterTax(Grid.Igst);
+            UpdateTotalAfterTax(Grid.Sgst, totalRoundedOffToTwoDecimal);
+            UpdateTotalAfterTax(Grid.Cgst, totalRoundedOffToTwoDecimal);
+            UpdateTotalAfterTax(Grid.Igst, totalRoundedOffToTwoDecimal);
             //Enable grid cell value change event
             EnableBottomGridEvents(true);
         }
@@ -674,21 +674,21 @@ namespace BillingApplication
             return 0;
         }
 
-        private void UpdateTotalAfterTax(int rowIndex)
+        private void UpdateTotalAfterTax(int rowIndex, decimal totalBeforeTaxRoundedOffToTwoDecimal)
         {
-            decimal totalBeforeTax = Convert.ToDecimal(btmGrid[2, Grid.Balance].Value);
-            decimal taxAmount = 0;
+            decimal taxAmountRoundedOffTwoDecimal = 0;
             decimal percent = getBotomRowValue(rowIndex, 1);
             if (percent > 0)
             {
-                taxAmount = totalBeforeTax * percent / 100;
-                btmGrid[2, rowIndex].Value = taxAmount;
+                taxAmountRoundedOffTwoDecimal = totalBeforeTaxRoundedOffToTwoDecimal * percent / 100;
+                btmGrid[2, rowIndex].Value = PadDigits(Math.Round(taxAmountRoundedOffTwoDecimal, 0, MidpointRounding.AwayFromZero));
             }
-            decimal totalAfterTax = totalBeforeTax;
+            decimal totalAfterTax = totalBeforeTaxRoundedOffToTwoDecimal;
             totalAfterTax += getBotomRowValue(Grid.Cgst, 2);
             totalAfterTax += getBotomRowValue(Grid.Sgst, 2);
             totalAfterTax += getBotomRowValue(Grid.Igst, 2);
-            btmGrid[2, Grid.TotalAfterTax].Value = totalAfterTax;
+            var totalAfterTaxRoundedOffToTwoDecimal = Math.Round(totalAfterTax, 0, MidpointRounding.AwayFromZero);
+            btmGrid[2, Grid.TotalAfterTax].Value = PadDigits(totalAfterTaxRoundedOffToTwoDecimal);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -700,13 +700,13 @@ namespace BillingApplication
             //Change cursor
             Cursor original = this.Cursor;
             this.Cursor = Cursors.WaitCursor;
-            for (int i = 0; i <= 9; i++)
-            {
-                if (i != Grid.TotalBeforeTax)
-                {
-                    UpdateBottomGridValues(i);
-                }
-            }
+            //for (int i = 0; i <= 9; i++)
+            //{
+            //    if (i != Grid.TotalBeforeTax)
+            //    {
+            //        UpdateBottomGridValues(i);
+            //    }
+            //}
             int billNo = Convert.ToInt32(txtInvno.Text);
             string address = cbCoy.Text;
             UpdateBalance();
@@ -1000,23 +1000,23 @@ namespace BillingApplication
         //<Meter>200</Meter>
         //<Total>300</Total>
         //</Meters>
-        private void UpdateBottomGridValues(int rowIndex)
-        {
-            if ((rowIndex == Grid.PinLess || rowIndex == Grid.Discount1 || rowIndex == Grid.Cd))
-            {
-                LessDiscount(rowIndex);
-                UpdateBalance();
-            }
-            else if (rowIndex == Grid.Fwd &&
-                btmGrid.Rows[rowIndex].Cells.IndexOf(btmGrid.SelectedCells[0]) == 2)
-            {
-                UpdateBalance();
-            }
-            else if (rowIndex == Grid.Sgst || rowIndex == Grid.Cgst || rowIndex == Grid.Igst)
-            {
-                UpdateTotalAfterTax(rowIndex);
-            }
-        }
+        //private void UpdateBottomGridValues(int rowIndex)
+        //{
+        //    if ((rowIndex == Grid.PinLess || rowIndex == Grid.Discount1 || rowIndex == Grid.Cd))
+        //    {
+        //        LessDiscount(rowIndex);
+        //        UpdateBalance();
+        //    }
+        //    else if (rowIndex == Grid.Fwd &&
+        //        btmGrid.Rows[rowIndex].Cells.IndexOf(btmGrid.SelectedCells[0]) == 2)
+        //    {
+        //        UpdateBalance();
+        //    }
+        //    else if (rowIndex == Grid.Sgst || rowIndex == Grid.Cgst || rowIndex == Grid.Igst)
+        //    {
+        //        UpdateTotalAfterTax(rowIndex);
+        //    }
+        //}
         private void txtPin_TextChanged(object sender, EventArgs e)
         {
             if (txtPin.Text != "")
@@ -1291,7 +1291,8 @@ namespace BillingApplication
 
         private void btmGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            UpdateBottomGridValues(e.RowIndex);
+            if(e.RowIndex > -1)
+                UpdateBalance();
         }
         private void EnableBottomGridEvents(bool val)
         {
@@ -1350,7 +1351,7 @@ namespace BillingApplication
             {
                 //if (rowIndex == 6 && btmGrid[1, 6].Value != null)
                 //  txtCd.Text = Convert.ToString(btmGrid[1, 6].Value);
-                UpdateBottomGridValues(rowIndex);
+                UpdateBalance();
             }
         }
 

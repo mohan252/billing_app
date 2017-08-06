@@ -231,7 +231,6 @@ namespace BillingApplication
 
             decimal total = Convert.ToDecimal(btmGrid[2, Grid.Balance].Value);
             //pinning less, discount 1, cd
-            // cd shouldn't get printed in the bill
             for (int rowIndex = 1; rowIndex < 4; rowIndex++)
             {
                 if (btmGrid[1, rowIndex] != null && btmGrid[1, rowIndex].Value != null && !btmGrid[1, rowIndex].Value.ToString().Equals(string.Empty))
