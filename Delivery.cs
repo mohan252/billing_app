@@ -51,12 +51,17 @@ namespace BillingApplication
             for (int i = 0; i < gridDelivery.DisplayLayout.Bands[0].Columns.Count; i++)
             {
                 var column = gridDelivery.DisplayLayout.Bands[0].Columns[i];
-                if (column.Header.Caption != "IsSelected")
-                    column.CellActivation = Activation.NoEdit;
-                else
+                if (column.Header.Caption == "IsSelected")
                 {
                     column.Header.Caption = "";
                 }
+                //if (column.Header.Caption != "IsSelected")
+                //    column.CellActivation = Activation.NoEdit;
+                //else
+                //{
+                //    column.CellActivation = Activation.AllowEdit;
+                //    column.Header.Caption = "";
+                //}
             }
         }
 
@@ -243,6 +248,7 @@ namespace BillingApplication
         {
             var deliveryItemsToBePrinted = deliveryData.Where(d => d.IsSelected);
             PrintDocument pd = new PrintDocument();
+            pd.DefaultPageSettings.PaperSize = new PaperSize("Custom",600, 600);
             pd.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
             items = deliveryData.Where(d => d.IsSelected).GetEnumerator();
             if (items.MoveNext())

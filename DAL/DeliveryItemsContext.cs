@@ -40,12 +40,13 @@ namespace BillingApplication
                             INNER JOIN ADDRESS A ON B.ADDRESS = A.NAME 
                             INNER JOIN PARTIES P ON P.ID = B.PARTYID
                             INNER JOIN CTE ON CTE.BILLNO = B.BILLNO AND CTE.RN = 1
-                            WHERE B.BILLDATE = @BILLDATE";
+                            WHERE CONVERT(VARCHAR(10), B.BILLDATE, 103) = CONVERT(VARCHAR(10), @BILLDATE, 103)
+                            ORDER BY b.ADDRESS, b.BILLNO";
             myCmd.CommandText = query;
             myCmd.CommandType = CommandType.Text;
             if (myCmd.Parameters != null)
                 myCmd.Parameters.Clear();
-            SqlParameter param = new SqlParameter("BILLDATE", SqlDbType.Date);
+            SqlParameter param = new SqlParameter("BILLDATE", SqlDbType.DateTime);
             param.Value = deliveryDate;
             myCmd.Parameters.Add(param);
             if (myCmd.Connection.State == ConnectionState.Closed)
@@ -60,7 +61,7 @@ namespace BillingApplication
                 foreach (DataRow dr in dt.Rows)
                 {
                     var totalMtrsPairsHeader = "";
-                    if (dr["PARTICULARSTOTALMTRS"] != null && Convert.ToDecimal(dr["PARTICULARSTOTALMTRS"]) > 0)
+                    if (dr["PARTICULARSTOTALMTRS"] != null && dr["PARTICULARSTOTALMTRS"].ToString().Trim() != "" && Convert.ToDecimal(dr["PARTICULARSTOTALMTRS"]) > 0)
                     {
                         totalMtrsPairsHeader = "Total Meters";
                     }
@@ -69,7 +70,7 @@ namespace BillingApplication
                         totalMtrsPairsHeader = "Total Pairs ";
                     }
                     var totalMtrsPairsValue = "";
-                    if (dr["PARTICULARSTOTALMTRS"] != null && Convert.ToDecimal(dr["PARTICULARSTOTALMTRS"]) > 0)
+                    if (dr["PARTICULARSTOTALMTRS"] != null && dr["PARTICULARSTOTALMTRS"].ToString().Trim() != "" && Convert.ToDecimal(dr["PARTICULARSTOTALMTRS"]) > 0)
                     {
                         totalMtrsPairsValue = Convert.ToString(dr["PARTICULARSNETQTY"]);
                     }
