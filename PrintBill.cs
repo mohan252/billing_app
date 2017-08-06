@@ -279,6 +279,7 @@ namespace BillingApplication
             {
                 {"SGST",Grid.Sgst},{"CGST",Grid.Cgst},{"IGST",Grid.Igst}
             };
+            var leftPaddingForSpace = 3;
             foreach (var item in nameIndex)
             {
                 decimal val = getBotomRowValue(item.Value, 1);
@@ -286,13 +287,13 @@ namespace BillingApplication
                 {
                     var textToBePrinted = item.Key + " @" + val + "%  " + getBotomRowValue(item.Value, 2);
                     gdiPage.DrawString(textToBePrinted, itemFont, Brushes.Black,
-                               totalWidth - GetWidth(textToBePrinted, itemFont), itemY + (lineY++ * itemLineHeight));
+                               totalWidth - GetWidth(textToBePrinted, itemFont) + leftPaddingForSpace, itemY + (lineY++ * itemLineHeight));
                 }
             }
             totalAmountAfterTax = getBotomRowValue(Grid.TotalAfterTax, 2);
             var totalAfterTaxToBePrinted = "Total After Tax  " + totalAmountAfterTax;
             gdiPage.DrawString(totalAfterTaxToBePrinted, itemFont, Brushes.Black,
-                       totalWidth - GetWidth(totalAfterTaxToBePrinted, itemFont), itemY + (lineY++ * itemLineHeight));
+                       totalWidth - GetWidth(totalAfterTaxToBePrinted, itemFont) + leftPaddingForSpace, itemY + (lineY++ * itemLineHeight));
             gdiPage.DrawString("----------------", itemFont, Brushes.Black,
                        X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
 
