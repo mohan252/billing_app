@@ -43,15 +43,6 @@ namespace BillingApplication
             //return lineHeight * float.Parse((ps[1]));
             return float.Parse((ps[1]));
         }
-        private int GetWidth(string value, Font fo)
-        {
-            //Font fo = new Font("Courier New", 12, GraphicsUnit.Pixel);
-            int iWidth = (int)fo.Size; // == 12;
-            Graphics g = this.CreateGraphics();
-            iWidth = (int)g.MeasureString(value, fo).Width; // == 11
-            g.Dispose();
-            return iWidth;
-        }
         private void PrintTestPage(Graphics gdiPage, System.Drawing.Printing.PrintPageEventArgs e)
         {
             float i = lineHeight;
@@ -80,7 +71,7 @@ namespace BillingApplication
                 if (Convert.ToString(row.Cells[gridColIndex].Value).Length > result.Length)
                     result = Convert.ToString(row.Cells[gridColIndex].Value);
             }
-            return GetWidth(result, ft);
+            return Common.GetWidth(result, ft, this.CreateGraphics());
         }
         private string GetCurrencyFormat(decimal amt)
         {
@@ -115,7 +106,7 @@ namespace BillingApplication
             decimal tAmt = 0;
             int rowCount = grdItem.Rows.Count;
             //Get the width of the total to calculate right aligned position
-            totalWidth = X("Amount") + GetWidth(btmGrid[2, Grid.Balance].Value.ToString(), itemFont);
+            totalWidth = X("Amount") + Common.GetWidth(btmGrid[2, Grid.Balance].Value.ToString(), itemFont, gdiPage);
 
             for (r = 0; r < rowCount; r++)
             {
@@ -126,12 +117,12 @@ namespace BillingApplication
                                 itemX, itemY + (lineY * itemLineHeight));
                     //Rate
                     gdiPage.DrawString(PadDigits(Convert.ToDecimal(grdItem.Rows[r].Cells["RATE"].Value)), itemFont, Brushes.Black,
-                                xRate - GetWidth(PadDigits(Convert.ToDecimal(grdItem.Rows[r].Cells["RATE"].Value)), itemFont),
+                                xRate - Common.GetWidth(PadDigits(Convert.ToDecimal(grdItem.Rows[r].Cells["RATE"].Value)), itemFont,gdiPage),
                                 itemY + (lineY * itemLineHeight));
                     //Meters
                     if (grdItem.Rows[r].Cells["METRS"] != null && grdItem.Rows[r].Cells["METRS"].Value != null && !grdItem.Rows[r].Cells["METRS"].Value.ToString().Equals(string.Empty))
                         gdiPage.DrawString(PadDigits(Convert.ToDecimal(grdItem.Rows[r].Cells["METRS"].Value)), itemFont, Brushes.Black,
-                                xMts - GetWidth(PadDigits(Convert.ToDecimal(grdItem.Rows[r].Cells["METRS"].Value)), itemFont),
+                                xMts - Common.GetWidth(PadDigits(Convert.ToDecimal(grdItem.Rows[r].Cells["METRS"].Value)), itemFont,gdiPage),
                                 itemY + (lineY * itemLineHeight));
                     //Quantity
                     if (grdItem.Rows[r].Cells["QTY"] != null && grdItem.Rows[r].Cells["QTY"].Value != null && !grdItem.Rows[r].Cells["QTY"].Value.ToString().Equals(string.Empty))
@@ -146,7 +137,7 @@ namespace BillingApplication
                         {
                             string amt = GetCurrencyFormat(Convert.ToDecimal(grdItem.Rows[r].Cells["AMT"].Value.ToString()));
                             gdiPage.DrawString(amt, itemFont, Brushes.Black,
-                                    totalWidth - GetWidth(amt, itemFont),
+                                    totalWidth - Common.GetWidth(amt, itemFont,gdiPage),
                                         itemY + (lineY++ * itemLineHeight));
                         }
                         else
@@ -154,7 +145,7 @@ namespace BillingApplication
                             tAmt = GetRowTotal(r);
                             string amt = GetCurrencyFormat(tAmt);
                             gdiPage.DrawString(amt, itemFont, Brushes.Black,
-                                totalWidth - GetWidth(amt, itemFont),
+                                totalWidth - Common.GetWidth(amt, itemFont,gdiPage),
                                     itemY + (lineY++ * itemLineHeight));
                             if (grdItem.Rows[r].Cells["PINNINGLESS"].Value == null || grdItem.Rows[r].Cells["PINNINGLESS"].Value.ToString().Trim() == "")
                                 amtColl.Add(PadDigits(tAmt));
@@ -187,13 +178,13 @@ namespace BillingApplication
                         decimal totalPl = System.Math.Round(((pl / 100) * tAmt), 2, MidpointRounding.AwayFromZero);
                         string amt = GetCurrencyFormat(totalPl);
                         gdiPage.DrawString(amt, itemFont, Brushes.Black,
-                                totalWidth - GetWidth(amt, itemFont),
+                                totalWidth - Common.GetWidth(amt, itemFont,gdiPage),
                                     itemY + (lineY++ * itemLineHeight));
                         gdiPage.DrawString("----------------", itemFont, Brushes.Black,
                             X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
                         amt = GetCurrencyFormat(Convert.ToDecimal(grdItem.Rows[r].Cells["AMT"].Value));
                         gdiPage.DrawString(Common.PadDigits(amt), itemFont, Brushes.Black,
-                                totalWidth - GetWidth(amt, itemFont),
+                                totalWidth - Common.GetWidth(amt, itemFont,gdiPage),
                                     itemY + (lineY++ * itemLineHeight));
                         gdiPage.DrawString("----------------", itemFont, Brushes.Black,
                             X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
@@ -208,7 +199,7 @@ namespace BillingApplication
             {
                 foreach (string amt in amtColl)
                     gdiPage.DrawString(amt, itemFont, Brushes.Black,
-                               totalWidth - GetWidth(amt, itemFont), itemY + (lineY++ * itemLineHeight));
+                               totalWidth - Common.GetWidth(amt, itemFont,gdiPage), itemY + (lineY++ * itemLineHeight));
             }
             //more than one item then only print item total
             if (rowCount > 1)
@@ -223,7 +214,7 @@ namespace BillingApplication
                        itemX, itemY + (lineY * itemLineHeight));
                 string amt1 = GetCurrencyFormat(Convert.ToDecimal(btmGrid[2, Grid.Balance].Value));
                 gdiPage.DrawString(amt1, itemFont, Brushes.Black,
-                           totalWidth - GetWidth(amt1, itemFont),
+                           totalWidth - Common.GetWidth(amt1, itemFont,gdiPage),
                            itemY + (lineY++ * itemLineHeight));
             }
             PrintBillDiscounts(gdiPage);
@@ -253,7 +244,7 @@ namespace BillingApplication
                                itemX, itemY + (lineY * itemLineHeight));
                     string amt = GetCurrencyFormat(Convert.ToDecimal(btmGrid[2, rowIndex].Value));
                     gdiPage.DrawString(amt, itemFont, Brushes.Black,
-                               totalWidth - GetWidth(amt, itemFont),
+                               totalWidth - Common.GetWidth(amt, itemFont,gdiPage),
                                itemY + (lineY++ * itemLineHeight));
                     gdiPage.DrawString("----------------", itemFont, Brushes.Black,
                        X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
@@ -261,7 +252,7 @@ namespace BillingApplication
                     total = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
                     string strTota1 = GetCurrencyFormat(total);
                     gdiPage.DrawString(strTota1, itemFont, Brushes.Black,
-                        totalWidth - GetWidth(strTota1, itemFont),
+                        totalWidth - Common.GetWidth(strTota1, itemFont,gdiPage),
                         itemY + (lineY++ * itemLineHeight));
                 }
             }
@@ -272,7 +263,7 @@ namespace BillingApplication
                                itemX, itemY + (lineY * itemLineHeight));
                 string amt = GetCurrencyFormat(Convert.ToDecimal(btmGrid[2, Grid.Fwd].Value));
                 gdiPage.DrawString(amt, itemFont, Brushes.Black,
-                               totalWidth - GetWidth(amt, itemFont),
+                               totalWidth - Common.GetWidth(amt, itemFont,gdiPage),
                                itemY + (lineY++ * itemLineHeight));
                 total += Convert.ToDecimal(btmGrid[2, Grid.Fwd].Value.ToString());
             }
@@ -290,13 +281,13 @@ namespace BillingApplication
                 {
                     var textToBePrinted = item.Key + " @" + val + "%  " + getBotomRowValue(item.Value, 2);
                     gdiPage.DrawString(textToBePrinted, itemFont, Brushes.Black,
-                               totalWidth - GetWidth(textToBePrinted, itemFont) + leftPaddingForSpace, itemY + (lineY++ * itemLineHeight));
+                               totalWidth - Common.GetWidth(textToBePrinted, itemFont,gdiPage) + leftPaddingForSpace, itemY + (lineY++ * itemLineHeight));
                 }
             }
             totalAmountAfterTax = getBotomRowValue(Grid.TotalAfterTax, 2);
             var totalAfterTaxToBePrinted = "Total After Tax  " + totalAmountAfterTax;
             gdiPage.DrawString(totalAfterTaxToBePrinted, itemFont, Brushes.Black,
-                       totalWidth - GetWidth(totalAfterTaxToBePrinted, itemFont) + leftPaddingForSpace, itemY + (lineY++ * itemLineHeight));
+                       totalWidth - Common.GetWidth(totalAfterTaxToBePrinted, itemFont,gdiPage) + leftPaddingForSpace, itemY + (lineY++ * itemLineHeight));
             gdiPage.DrawString("----------------", itemFont, Brushes.Black,
                        X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
 
@@ -388,13 +379,13 @@ namespace BillingApplication
             gdiPage.DrawString(txtOrderNo.Text, printInvRightFont, Brushes.Black,
                         X("OrderNo"), Y("OrderNo"));
             //OrderDt
-            gdiPage.DrawString(GetDate(dtpOrderDate.Value), printInvRightFont, Brushes.Black,
+            gdiPage.DrawString(Common.GetDate(dtpOrderDate.Value), printInvRightFont, Brushes.Black,
                         X("OrderDate"), Y("OrderDate"));
             //OrderFwd
             gdiPage.DrawString(txtFwdBy.Text, printInvRightFont, Brushes.Black,
                         X("FwdBy"), Y("FwdBy"));
             //OrderFwdTo
-            int fwdToWidth = GetWidth(txtOrderTo.Text, printInvRightFont);
+            int fwdToWidth = Common.GetWidth(txtOrderTo.Text, printInvRightFont,gdiPage);
             if (X("FwdTo") + fwdToWidth > 900)
             {
             }
@@ -407,7 +398,7 @@ namespace BillingApplication
             gdiPage.DrawString(txtLR.Text, printInvRightFont, Brushes.Black,
                         X("LRno"), Y("LRno"));
             //OrderLRDt
-            gdiPage.DrawString(GetDate(dtpLRDate.Value), printInvRightFont, Brushes.Black,
+            gdiPage.DrawString(Common.GetDate(dtpLRDate.Value), printInvRightFont, Brushes.Black,
                         X("LRDate"), Y("LRDate"));
             //OrderAgent
             gdiPage.DrawString(cbAgtName.Text, printInvRightFont, Brushes.Black,
@@ -434,14 +425,10 @@ namespace BillingApplication
 
             gdiPage.DrawString(invoicePrefix + txtInvno.Text, printFont, Brushes.Black, X("Invoice"), Y("Invoice"));
             gdiPage.DrawString(txtBaleno.Text, printFont, Brushes.Black, X("BaleNo"), Y("BaleNo"));
-            gdiPage.DrawString(GetDate(dtpBillDt.Value), printFont, Brushes.Black,
+            gdiPage.DrawString(Common.GetDate(dtpBillDt.Value), printFont, Brushes.Black,
                         X("BillDate"), Y("BillDate"));
         }
-        private string GetDate(DateTime val)
-        {
-            string date = val.Day + "/" + val.Month + "/" + val.Year;
-            return date;
-        }
+        
         private void PrintBottomPart(Graphics gdiPage)
         {
             string address = cbCoy.Text;
@@ -578,7 +565,7 @@ namespace BillingApplication
                 Invoice = new Invoice
                 {
                     Number = invoicePrefix + txtInvno.Text,
-                    Date = GetDate(dtpBillDt.Value)
+                    Date = Common.GetDate(dtpBillDt.Value)
                 },
                 Particulars = new Particulars
                 {

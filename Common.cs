@@ -124,12 +124,32 @@ namespace BillingApplication
                 outp = outp + ".00";
             return outp;
         }
+        
+        public static int GetWidth(string value, Font fo, Graphics g)
+        {
+            //Font fo = new Font("Courier New", 12, GraphicsUnit.Pixel);
+            int iWidth = (int)fo.Size; // == 12;
+            //Graphics g = this.CreateGraphics();
+            iWidth = (int)g.MeasureString(value, fo).Width; // == 11
+            //g.Dispose();
+            return iWidth;
+        }
+
+        public static string GetDate(DateTime val)
+        {
+            string date = val.Day + "/" + val.Month + "/" + val.Year;
+            return date;
+        }
+
         static Font coverFont;
-        public static void PrintDelivery(Graphics gdiPage, DeliveryEntity data, int amountPaddingLeft = 0)
+        public static void PrintDelivery(Graphics gdiPage, DeliveryEntity data)
         {
             string coverFt = global::BillingApplication.Properties.Settings.Default.CoverFont;
             int converFtSize = global::BillingApplication.Properties.Settings.Default.CoverFontSize;
             coverFont = new Font(coverFt, converFtSize, GraphicsUnit.Pixel);
+            //Get the width of the total to calculate right aligned position
+            var xEndOfAmountPrint = X("DAmountValue") + GetWidth(Common.PadDigits(data.Particulars.TotalAmount), coverFont, gdiPage);
+
 
             string dashHeader = "---------------------------------------------------------------------------------------------";
             var noOfBales = "";
@@ -199,17 +219,20 @@ namespace BillingApplication
                         X("DAmountValue"), startParticularsValueY);
             var lineIncrementDash = 15;
             var igstY = startParticularsValueY + lineIncrement;
-            gdiPage.DrawString("IGST " + data.Particulars.IgstPercent + "%  " + Common.PadDigits(data.Particulars.IgstAmount), coverFont, Brushes.Black,
-                       X("DIGST"), igstY);
+            var igstToBePrinted = "IGST " + data.Particulars.IgstPercent + "%  " + Common.PadDigits(data.Particulars.IgstAmount);
+            gdiPage.DrawString(igstToBePrinted , coverFont, Brushes.Black,
+                        xEndOfAmountPrint - Common.GetWidth(igstToBePrinted, coverFont, gdiPage), igstY);
             var dash1Y = igstY + lineIncrementDash;
-            gdiPage.DrawString("--------------", coverFont, Brushes.Black,
-                       X("DDash1") - amountPaddingLeft, dash1Y);
+            var dash = "--------------";
+            gdiPage.DrawString(dash, coverFont, Brushes.Black,
+                       xEndOfAmountPrint - Common.GetWidth(dash, coverFont, gdiPage), dash1Y);
             var totalBillValueY = dash1Y + lineIncrementDash;
-            gdiPage.DrawString("Total Amount After Tax  " + Common.PadDigits(data.Particulars.TotalBillValue), coverFont, Brushes.Black,
-                       X("DTotalBillValue") - amountPaddingLeft, totalBillValueY);
+            var billValueToBePrinted = "Total Amount After Tax  " + Common.PadDigits(data.Particulars.TotalBillValue);
+            gdiPage.DrawString(billValueToBePrinted, coverFont, Brushes.Black,
+                 xEndOfAmountPrint - Common.GetWidth(billValueToBePrinted, coverFont, gdiPage) + 3, totalBillValueY);
             var dash2Y = totalBillValueY + lineIncrementDash;
-            gdiPage.DrawString("--------------", coverFont, Brushes.Black,
-                       X("DDash2") - amountPaddingLeft, dash2Y);
+            gdiPage.DrawString(dash, coverFont, Brushes.Black,
+                       xEndOfAmountPrint - Common.GetWidth(dash, coverFont, gdiPage), dash2Y);
             var balesOfClothY = dash2Y + lineIncrementDash;
             var balesOfClothX = X("DConsineeAddress");
             if (noOfBales != "")
