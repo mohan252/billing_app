@@ -34,7 +34,7 @@ namespace BillingApplication
                             )
                             SELECT B.BILLNO, B.ADDRESS, A.GST, B.BALENO, B.FWDBY, B.FWDTO, P.NAME AS PARTYNAME, P.ADDR1 AS PARTYADDR1, P.ADDR2 AS PARTYADDR2, P.CITY AS PARTYCITY,P.STATE AS PARTYSTATE,P.PIN AS PARTYPIN, P.GST AS PARTYGST,
                             B.BILLNO AS INVOICENUMBER, B.BILLDATE AS INVOICEDATE,
-                            B.PARTICULARS AS PARTICULARSDESCR, B.TOTALMTRS AS PARTICULARSTOTALMTRS , B.TOTALQTY AS PARTICULARSNETQTY,B.BALANCE AS TOTALAMOUNTBEFORETAX, B.IGST, (B.BALANCE * (B.IGST/100)) AS IGSTAMOUNT, B.TOTALAFTERTAX AS TOTALBILLVALUE,
+                            B.PARTICULARS AS PARTICULARSDESCR, B.TOTALMTRS AS PARTICULARSTOTALMTRS , B.TOTALQTY AS PARTICULARSNETQTY,B.TOTALBEFORETAX AS TOTALAMOUNTBEFORETAX, B.IGST, (B.TOTALBEFORETAX * (B.IGST/100)) AS IGSTAMOUNT, B.TOTALAFTERTAX AS TOTALBILLVALUE,
                             CTE.HSN AS HSN
                               FROM BILLS B
                             INNER JOIN ADDRESS A ON B.ADDRESS = A.NAME 
@@ -122,6 +122,8 @@ namespace BillingApplication
 
         public static string RoundOff(object val)
         {
+            if (val.GetType() == typeof(DBNull))
+                return "0";
             var valDecimal = Convert.ToDecimal(val);
             var roundedVal = Math.Round(valDecimal, 0, MidpointRounding.AwayFromZero);
             return Convert.ToString(roundedVal);
