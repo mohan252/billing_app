@@ -1619,6 +1619,8 @@ namespace BillingApplication {
             
             private global::System.Data.DataColumn columnPARTICULARS;
             
+            private global::System.Data.DataColumn columnTOTALBEFORETAX;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public BILLSDataTable() {
@@ -1886,6 +1888,14 @@ namespace BillingApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TOTALBEFORETAXColumn {
+                get {
+                    return this.columnTOTALBEFORETAX;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1950,7 +1960,8 @@ namespace BillingApplication {
                         double CGST, 
                         double IGST, 
                         double TOTALAFTERTAX, 
-                        string PARTICULARS) {
+                        string PARTICULARS, 
+                        double TOTALBEFORETAX) {
                 BILLSRow rowBILLSRow = ((BILLSRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         CDTXT,
@@ -1981,7 +1992,8 @@ namespace BillingApplication {
                         CGST,
                         IGST,
                         TOTALAFTERTAX,
-                        PARTICULARS};
+                        PARTICULARS,
+                        TOTALBEFORETAX};
                 if ((parentADDRESSRowByFK_BILLS_ADDRESS != null)) {
                     columnValuesArray[2] = parentADDRESSRowByFK_BILLS_ADDRESS[0];
                 }
@@ -2050,6 +2062,7 @@ namespace BillingApplication {
                 this.columnIGST = base.Columns["IGST"];
                 this.columnTOTALAFTERTAX = base.Columns["TOTALAFTERTAX"];
                 this.columnPARTICULARS = base.Columns["PARTICULARS"];
+                this.columnTOTALBEFORETAX = base.Columns["TOTALBEFORETAX"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2113,6 +2126,8 @@ namespace BillingApplication {
                 base.Columns.Add(this.columnTOTALAFTERTAX);
                 this.columnPARTICULARS = new global::System.Data.DataColumn("PARTICULARS", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPARTICULARS);
+                this.columnTOTALBEFORETAX = new global::System.Data.DataColumn("TOTALBEFORETAX", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTOTALBEFORETAX);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnBILLNO,
                                 this.columnADDRESS}, true));
@@ -5156,6 +5171,22 @@ namespace BillingApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double TOTALBEFORETAX {
+                get {
+                    try {
+                        return ((double)(this[this.tableBILLS.TOTALBEFORETAXColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TOTALBEFORETAX\' in table \'BILLS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBILLS.TOTALBEFORETAXColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ADDRESSRow ADDRESSRow {
                 get {
                     return ((ADDRESSRow)(this.GetParentRow(this.Table.ParentRelations["FK_BILLS_ADDRESS"])));
@@ -5425,6 +5456,18 @@ namespace BillingApplication {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetPARTICULARSNull() {
                 this[this.tableBILLS.PARTICULARSColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTOTALBEFORETAXNull() {
+                return this.IsNull(this.tableBILLS.TOTALBEFORETAXColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTOTALBEFORETAXNull() {
+                this[this.tableBILLS.TOTALBEFORETAXColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7733,6 +7776,7 @@ SELECT NAME, CUSTOM_1, TIN, GST FROM ADDRESS WHERE (NAME = @NAME)";
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IGST", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 53, 0, "IGST", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TOTALAFTERTAX", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 53, 0, "TOTALAFTERTAX", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PARTICULARS", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PARTICULARS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TOTALBEFORETAX", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "TOTALBEFORETAX", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "dbo.SET_UPDATEBILLDATA";
@@ -7767,6 +7811,7 @@ SELECT NAME, CUSTOM_1, TIN, GST FROM ADDRESS WHERE (NAME = @NAME)";
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IGST", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 53, 0, "IGST", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TOTALAFTERTAX", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 53, 0, "TOTALAFTERTAX", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PARTICULARS", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PARTICULARS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TOTALBEFORETAX", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "TOTALBEFORETAX", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

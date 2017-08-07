@@ -690,13 +690,6 @@ namespace BillingApplication
             //Change cursor
             Cursor original = this.Cursor;
             this.Cursor = Cursors.WaitCursor;
-            //for (int i = 0; i <= 9; i++)
-            //{
-            //    if (i != Grid.TotalBeforeTax)
-            //    {
-            //        UpdateBottomGridValues(i);
-            //    }
-            //}
             int billNo = Convert.ToInt32(txtInvno.Text);
             string address = cbCoy.Text;
             UpdateBalance();
@@ -926,6 +919,8 @@ namespace BillingApplication
                 billRow.IGST = Convert.ToDouble(btmGrid.Rows[Grid.Igst].Cells[1].Value);
             if (btmGrid.Rows[Grid.TotalAfterTax].Cells[2].Value != null && btmGrid.Rows[Grid.TotalAfterTax].Cells[2].Value.ToString() != "")
                 billRow.TOTALAFTERTAX = Convert.ToDouble(btmGrid.Rows[Grid.TotalAfterTax].Cells[2].Value);
+            if (btmGrid.Rows[Grid.TotalBeforeTax].Cells[2].Value != null && btmGrid.Rows[Grid.TotalBeforeTax].Cells[2].Value.ToString() != "")
+                billRow.TOTALBEFORETAX = Convert.ToDouble(btmGrid.Rows[Grid.TotalBeforeTax].Cells[2].Value);
 
             if (txtCddays.Text != "")
                 billRow.CDDAYS = Convert.ToInt32(txtCddays.Text);
