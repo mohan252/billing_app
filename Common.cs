@@ -200,7 +200,7 @@ namespace BillingApplication
             var lineIncrementDash = 15;
             var igstY = startParticularsValueY + lineIncrement;
             gdiPage.DrawString("IGST " + data.Particulars.IgstPercent + "%  " + Common.PadDigits(data.Particulars.IgstAmount), coverFont, Brushes.Black,
-                       X("DIGST") - amountPaddingLeft, igstY);
+                       X("DIGST"), igstY);
             var dash1Y = igstY + lineIncrementDash;
             gdiPage.DrawString("--------------", coverFont, Brushes.Black,
                        X("DDash1") - amountPaddingLeft, dash1Y);
