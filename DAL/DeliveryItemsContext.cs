@@ -23,20 +23,34 @@ namespace BillingApplication
             myAdap.SelectCommand = myCmd;
         }
 
-        public static List<DeliveryEntity> GetDeliveryItems(DateTime? deliveryDate)
+        public static string GetAccountingYearFromDate(DateTime deliveryDate)
         {
-            if (deliveryDate == null)
-                deliveryDate = Common.NextBusinessDay();
+            if (deliveryDate.Year == DateTime.Now.Year && deliveryDate.Month > 3)
+            {
+                return "";
+            }
+            if (deliveryDate.Month > 3)
+            {
+                return deliveryDate.Year + "-" + deliveryDate.Year + 1;
+            }
+            return deliveryDate.Year -1 + "-" + deliveryDate.Year;
+        }
+
+        public static List<DeliveryEntity> GetDeliveryItems(DateTime? deliveryDate1)
+        {
+            var deliveryDate = Common.NextBusinessDay();
+            if (deliveryDate1.HasValue)
+                deliveryDate = deliveryDate1.Value;
             var query = @";WITH CTE AS
                             (
 	                            SELECT *, ROW_NUMBER() OVER (PARTITION BY BILLNO ORDER BY ITEMNO) AS RN
-	                            FROM [BILLITEMS]
+	                            FROM [BILLITEMS" + GetAccountingYearFromDate(deliveryDate) + @"]
                             )
                             SELECT B.BILLNO, B.ADDRESS, A.GST, B.BALENO, B.FWDBY, B.FWDTO, P.NAME AS PARTYNAME, P.ADDR1 AS PARTYADDR1, P.ADDR2 AS PARTYADDR2, P.CITY AS PARTYCITY,P.STATE AS PARTYSTATE,P.PIN AS PARTYPIN, P.GST AS PARTYGST,
                             B.BILLNO AS INVOICENUMBER, B.BILLDATE AS INVOICEDATE,
                             B.PARTICULARS AS PARTICULARSDESCR, B.TOTALMTRS AS PARTICULARSTOTALMTRS , B.TOTALQTY AS PARTICULARSNETQTY,B.TOTALBEFORETAX AS TOTALAMOUNTBEFORETAX, B.IGST, (B.TOTALBEFORETAX * (B.IGST/100)) AS IGSTAMOUNT, B.TOTALAFTERTAX AS TOTALBILLVALUE,
                             CTE.HSN AS HSN
-                              FROM BILLS B
+                            FROM [BILLS" + GetAccountingYearFromDate(deliveryDate) + @"] B
                             INNER JOIN ADDRESS A ON B.ADDRESS = A.NAME 
                             INNER JOIN PARTIES P ON P.ID = B.PARTYID
                             INNER JOIN CTE ON CTE.BILLNO = B.BILLNO AND CTE.RN = 1
@@ -72,7 +86,7 @@ namespace BillingApplication
                     var totalMtrsPairsValue = "";
                     if (dr["PARTICULARSTOTALMTRS"] != null && dr["PARTICULARSTOTALMTRS"].ToString().Trim() != "" && Convert.ToDecimal(dr["PARTICULARSTOTALMTRS"]) > 0)
                     {
-                        totalMtrsPairsValue = Convert.ToString(dr["PARTICULARSNETQTY"]);
+                        totalMtrsPairsValue = Convert.ToString(dr["PARTICULARSTOTALMTRS"]);
                     }
                     else
                     {
@@ -99,7 +113,7 @@ namespace BillingApplication
                         Invoice = new Invoice
                         {
                             Number = "G-" + Convert.ToString(dr["BILLNO"]),
-                            Date = deliveryDate.Value.ToShortDateString()
+                            Date = Common.GetDate(deliveryDate)
                         },
                         Particulars = new Particulars
                         {

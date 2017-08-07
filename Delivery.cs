@@ -253,7 +253,7 @@ namespace BillingApplication
         private void pd_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             var item = items.Current;
-            Common.PrintDelivery(e.Graphics, item as DeliveryEntity, 3);
+            Common.PrintDelivery(e.Graphics, item as DeliveryEntity);
             e.HasMorePages = items.MoveNext();
         }
 
