@@ -257,7 +257,7 @@ namespace BillingApplication
                                itemY + (lineY++ * itemLineHeight));
                     gdiPage.DrawString("----------------", itemFont, Brushes.Black,
                        X("Amount") - dashLineAdjt, itemY + (lineY++ * itemLineHeight));
-                    total -= LessDiscount(1);//pinning less
+                    total -= LessDiscount(rowIndex);
                     total = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
                     string strTota1 = GetCurrencyFormat(total);
                     gdiPage.DrawString(strTota1, itemFont, Brushes.Black,
