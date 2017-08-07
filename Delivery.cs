@@ -55,13 +55,6 @@ namespace BillingApplication
                 {
                     column.Header.Caption = "";
                 }
-                //if (column.Header.Caption != "IsSelected")
-                //    column.CellActivation = Activation.NoEdit;
-                //else
-                //{
-                //    column.CellActivation = Activation.AllowEdit;
-                //    column.Header.Caption = "";
-                //}
             }
         }
 

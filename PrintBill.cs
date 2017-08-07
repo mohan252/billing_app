@@ -165,13 +165,16 @@ namespace BillingApplication
                         gdiPage.DrawString("Stamping : " + grdItem.Rows[r].Cells["STAMP"].Value.ToString(), itemFont, Brushes.Black,
                             //Increment line as nothing to be printed in the current line after stamp
                                 itemX, itemY + (lineY++ * itemLineHeight));
-                    //Item HSC Code
-                    if (grdItem.Rows[r].Cells["HSN"] != null && grdItem.Rows[r].Cells["HSN"].Value != null && !grdItem.Rows[r].Cells["HSN"].Value.ToString().Equals(string.Empty))
+                    //Item HSC Code'. print only once at the end
+                    if (r == rowCount - 1)
                     {
-                        var hsnCodeToBePrinted = "HSN/ASC Code : " + grdItem.Rows[r].Cells["HSN"].Value.ToString();
-                        gdiPage.DrawString(hsnCodeToBePrinted, itemFont, Brushes.Black,
-                            //Increment line as nothing to be printed in the current line after stamp
-                                itemX, itemY + (lineY++ * itemLineHeight));
+                        if (grdItem.Rows[r].Cells["HSN"] != null && grdItem.Rows[r].Cells["HSN"].Value != null && !grdItem.Rows[r].Cells["HSN"].Value.ToString().Equals(string.Empty))
+                        {
+                            var hsnCodeToBePrinted = "HSN/ASC Code : " + grdItem.Rows[r].Cells["HSN"].Value.ToString();
+                            gdiPage.DrawString(hsnCodeToBePrinted, itemFont, Brushes.Black,
+                                //Increment line as nothing to be printed in the current line after stamp
+                                    itemX, itemY + (lineY++ * itemLineHeight));
+                        }
                     }
                     //If itemwise pin, then print the pinning details in the next line
                     if (ckItemPin.Checked && grdItem.Rows[r].Cells["PINNINGLESS"] != null && grdItem.Rows[r].Cells["PINNINGLESS"].Value != null && !grdItem.Rows[r].Cells["PINNINGLESS"].Value.ToString().Equals(string.Empty))
