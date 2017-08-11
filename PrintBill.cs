@@ -19,7 +19,6 @@ namespace BillingApplication
         float charWidth = 10;
         float totalWidth = 0;
         int dashLineAdjt = 10;
-        decimal printBalance = 0;
         decimal totalAmountAfterTax = 0;
         int lineY = 0;
         float itemX = 0;
@@ -267,7 +266,6 @@ namespace BillingApplication
                                itemY + (lineY++ * itemLineHeight));
                 total += Convert.ToDecimal(btmGrid[2, Grid.Fwd].Value.ToString());
             }
-            printBalance = System.Math.Round(total, 0, MidpointRounding.AwayFromZero);
             
             Dictionary<string, int> nameIndex = new Dictionary<string, int>
             {

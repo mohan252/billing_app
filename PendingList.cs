@@ -75,6 +75,9 @@ namespace BillingApplication
             dgBills.DisplayLayout.Bands[0].Columns["BILLDATE"].Width = 100;
             //Set summaries
             dgBills.DisplayLayout.Bands[0].Columns["TOTALWOCD"].AllowRowSummaries = AllowRowSummaries.True;
+            dgBills.DisplayLayout.Bands[0].Columns["TOTALBEFORETAX"].AllowRowSummaries = AllowRowSummaries.True;
+            dgBills.DisplayLayout.Bands[0].Columns["IGST"].AllowRowSummaries = AllowRowSummaries.True;
+            dgBills.DisplayLayout.Bands[0].Columns["TOTALAFTERTAX"].AllowRowSummaries = AllowRowSummaries.True;
             if (dgBills.Rows.Count > 0)
             {
                 txtBillNo.Enabled = true;

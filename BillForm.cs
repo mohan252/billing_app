@@ -627,6 +627,18 @@ namespace BillingApplication
                 return 0;
             }
         }
+
+        private decimal GetTotalWoCd()
+        {
+            decimal total = Convert.ToDecimal(btmGrid[2, Grid.Balance].Value);
+            total -= LessDiscount(Grid.PinLess);
+            total -= LessDiscount(Grid.Discount1);
+            //total -= LessDiscount(Grid.Cd);
+            if (Convert.ToString(btmGrid[2, Grid.Fwd].Value) != "")
+                total += Convert.ToDecimal(btmGrid[2, Grid.Fwd].Value);
+            return System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
+        }
+
         private void UpdateBalance()
         {
             //Disable grid cell value change event
@@ -900,7 +912,7 @@ namespace BillingApplication
             billRow.LRNO = txtLR.Text != "" ? txtLR.Text : null;
             billRow.LRDATE = dtpLRDate.Value;
             billRow.DOCSENTMODE = cbCourier.Text;
-            billRow.TOTALWOCD = Convert.ToDouble(printBalance);
+            billRow.TOTALWOCD = Convert.ToDouble(GetTotalWoCd());
             if (txtTotalmtrs.Text != "")
                 billRow.TOTALMTRS = Convert.ToDouble(txtTotalmtrs.Text);
             else if (state == BillState.Old)
@@ -979,29 +991,6 @@ namespace BillingApplication
             }
             return -1;
         }
-        //xml format
-        //<Meters>
-        //<Meter>100</Meter>
-        //<Meter>200</Meter>
-        //<Total>300</Total>
-        //</Meters>
-        //private void UpdateBottomGridValues(int rowIndex)
-        //{
-        //    if ((rowIndex == Grid.PinLess || rowIndex == Grid.Discount1 || rowIndex == Grid.Cd))
-        //    {
-        //        LessDiscount(rowIndex);
-        //        UpdateBalance();
-        //    }
-        //    else if (rowIndex == Grid.Fwd &&
-        //        btmGrid.Rows[rowIndex].Cells.IndexOf(btmGrid.SelectedCells[0]) == 2)
-        //    {
-        //        UpdateBalance();
-        //    }
-        //    else if (rowIndex == Grid.Sgst || rowIndex == Grid.Cgst || rowIndex == Grid.Igst)
-        //    {
-        //        UpdateTotalAfterTax(rowIndex);
-        //    }
-        //}
         private void txtPin_TextChanged(object sender, EventArgs e)
         {
             if (txtPin.Text != "")

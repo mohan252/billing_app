@@ -113,8 +113,12 @@ namespace BillingApplication
             dgBills.DisplayLayout.Bands[0].Columns["AGENT"].Width = 150;
             dgBills.DisplayLayout.Bands[0].Columns["PARTY"].Width = 200;
             dgBills.DisplayLayout.Bands[1].Columns["CHBRANCH"].Width = 50;
+            dgBills.DisplayLayout.Bands[0].Columns["TOTALWOCD"].Width = 150;
             //Set summaries
             dgBills.DisplayLayout.Bands[0].Columns["TOTALWOCD"].AllowRowSummaries = AllowRowSummaries.True;
+            dgBills.DisplayLayout.Bands[0].Columns["TOTALBEFORETAX"].AllowRowSummaries = AllowRowSummaries.True;
+            dgBills.DisplayLayout.Bands[0].Columns["TOTALAFTERTAX"].AllowRowSummaries = AllowRowSummaries.True;
+            dgBills.DisplayLayout.Bands[0].Columns["IGST"].AllowRowSummaries = AllowRowSummaries.True;
         }
         private void btnGet_Click(object sender, EventArgs e)
         {

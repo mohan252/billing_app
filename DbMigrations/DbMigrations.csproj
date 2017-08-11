@@ -11,6 +11,8 @@
     <AssemblyName>DbMigrations</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,6 +49,9 @@
     <Compile Include="M004_Update_SET_NEWACCOUNTINGYEARTABLES.cs" />
     <Compile Include="M005_AddTotalBeforeTaxParam_SET_UPDATEBILLDATA.cs" />
     <Compile Include="M006_AddTotalBeforeTaxParam_SET_INSERTBILLDATA.cs" />
+    <Compile Include="M007_AddColumnsGET_DDENTRYBILLQUERY.cs" />
+    <Compile Include="M008_AddColumnsGET_PENDINGLISTQUERY.cs" />
+    <Compile Include="M009_AddColumnsGET_PENDINGLISTDATA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="M003_AddTotalBeforeTaxColumn.cs" />
   </ItemGroup>
@@ -74,10 +79,20 @@
   <ItemGroup>
     <EmbeddedResource Include="Scripts\M006_AddTotalBeforeTaxParam_SET_INSERTBILLDATA.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\M007_AddColumnsGET_DDENTRYBILLQUERY.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\M008_AddColumnsGET_PENDINGLISTQUERY.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\M009_AddColumnsGET_PENDINGLISTDATA.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy $(TargetPath) ..\..\..\Releases\.</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
