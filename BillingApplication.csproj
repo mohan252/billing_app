@@ -110,6 +110,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CompanyDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Address.cs" />
     <Compile Include="DAL\DAL.cs" />
     <Compile Include="DAL\DeliveryItemsContext.cs" />
     <Compile Include="Delivery.cs">
@@ -118,8 +119,16 @@
     <Compile Include="Delivery.Designer.cs">
       <DependentUpon>Delivery.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="GSTFilingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GSTFilingForm.Designer.cs">
+      <DependentUpon>GSTFilingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\DeliveryEntity.cs" />
+    <Compile Include="Models\GstItem.cs" />
     <Compile Include="Models\GSTJson.cs" />
     <Compile Include="PieCollectedDataHelper.cs" />
     <Compile Include="PrintBill.cs">
@@ -182,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Delivery.resx">
       <DependentUpon>Delivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GSTFilingForm.resx">
+      <DependentUpon>GSTFilingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ItemPopUp.resx">
       <SubType>Designer</SubType>

@@ -74,5 +74,12 @@ namespace BillingApplication
             deliveryForm.MdiParent = this;
             deliveryForm.Show();
         }
+
+        private void gSTFilingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GSTFilingForm gstForm = new GSTFilingForm();
+            gstForm.MdiParent = this;
+            gstForm.Show();
+        }
     }
 }

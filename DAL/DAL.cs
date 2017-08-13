@@ -9,6 +9,7 @@ using System.Collections;
 using System.IO;
 using System.Collections.Specialized;
 using BillingApplication.Models;
+using System.Linq;
 
 namespace BillingApplication
 {
@@ -61,6 +62,62 @@ namespace BillingApplication
             myAdap.Fill(dt);
             return dt;
         }
+        public List<Address> GetAddresses()
+        {
+            DataTable dt = new DataTable();
+            myCmd.CommandText = "SELECT NAME,GST FROM ADDRESS";
+            myCmd.CommandType = CommandType.Text;
+            myAdap.Fill(dt);
+            List<Address> addresses = new List<Address>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                addresses.Add(new Address{ Name = Convert.ToString(dr["NAME"]), Gst= Convert.ToString(dr["GST"])} );
+            }
+            return addresses;
+        }
+
+        public IEnumerable<GstItem> GetGstDetailsByParty(DateTime fromDate, DateTime toDate)
+        {
+            var query = "";
+            if (fromDate.Month != 4)
+            {
+                query = @"SELECT P.GST AS PARTYGST, P.NAME
+                            'G-' + CONVERT(VARCHAR(10),B.BILLNO) AS INVOICENUMBER, 
+                            CONVERT(VARCHAR(100),B.BILLDATE,105) AS INVOICEDATE, 
+                            B.TOTALAFTERTAX, B.TOTALBEFORETAX, 
+                            B.IGST, 
+                            ROUND((B.IGST/100) * B.TOTALBEFORETAX,2) AS IGSTAMOUNT 
+                            FROM BILLS B INNER JOIN PARTIES P ON B.PARTYID = P.ID
+                            where b.BILLDATE >= @FROMDATE AND b.BILLDATE <= @TODATE
+                            ORDER BY PARTYGST";
+            }
+            DataTable dt = new DataTable();
+            myCmd.Parameters.Clear();
+            myCmd.CommandText = query;
+            myCmd.CommandType = CommandType.Text;
+            var parameter = new SqlParameter("@FROMDATE", SqlDbType.DateTime);
+            parameter.Value = fromDate;
+            myCmd.Parameters.Add(parameter);
+            parameter = new SqlParameter("@TODATE", SqlDbType.DateTime);
+            parameter.Value = toDate;
+            myCmd.Parameters.Add(parameter);
+            myAdap.Fill(dt);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return dt.Rows.Cast<DataRow>().Select(dr => new GstItem
+                {
+                    PartyGst = dr.Get("PARTYGST"),
+                    InvoiceNumber = dr.Get("INVOICENUMBER"),
+                    InvoiceDate = dr.Get("INVOICEDATE"),
+                    TotalBeforeTax = dr.Get("TOTALBEFORETAX"),
+                    IgstRate = dr.Get("IGST"),
+                    IgstAmount = dr.Get("IGSTAMOUNT"),
+                    TotalAfterTax = dr.Get("TOTALAFTERTAX")
+                });
+            }
+            return null;
+        }
+
         public int GetBillNo(string currAccYear, string runningYear, string address)
         {
             if (address != "")

@@ -36,10 +36,11 @@ namespace BillingApplication
             this.dDEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pendingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deliveryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ultraTabbedMdiManager1 = new Infragistics.Win.UltraWinTabbedMdi.UltraTabbedMdiManager(this.components);
-            this.deliveryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gSTFilingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ultraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
@@ -70,9 +71,10 @@ namespace BillingApplication
             this.dDEntryToolStripMenuItem,
             this.pendingListToolStripMenuItem,
             this.reportsToolStripMenuItem,
-            this.deliveryToolStripMenuItem});
+            this.deliveryToolStripMenuItem,
+            this.gSTFilingToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.fileToolStripMenuItem.Text = "Transactions";
             // 
@@ -108,6 +110,14 @@ namespace BillingApplication
             this.reportsToolStripMenuItem.Text = "Reports";
             this.reportsToolStripMenuItem.Click += new System.EventHandler(this.reportsToolStripMenuItem_Click);
             // 
+            // deliveryToolStripMenuItem
+            // 
+            this.deliveryToolStripMenuItem.Name = "deliveryToolStripMenuItem";
+            this.deliveryToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.deliveryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deliveryToolStripMenuItem.Text = "Delivery";
+            this.deliveryToolStripMenuItem.Click += new System.EventHandler(this.deliveryToolStripMenuItem_Click);
+            // 
             // configureToolStripMenuItem
             // 
             this.configureToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -127,13 +137,13 @@ namespace BillingApplication
             // 
             this.ultraTabbedMdiManager1.MdiParent = this;
             // 
-            // deliveryToolStripMenuItem
+            // gSTFilingToolStripMenuItem
             // 
-            this.deliveryToolStripMenuItem.Name = "deliveryToolStripMenuItem";
-            this.deliveryToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.deliveryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.deliveryToolStripMenuItem.Text = "Delivery";
-            this.deliveryToolStripMenuItem.Click += new System.EventHandler(this.deliveryToolStripMenuItem_Click);
+            this.gSTFilingToolStripMenuItem.Name = "gSTFilingToolStripMenuItem";
+            this.gSTFilingToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.gSTFilingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gSTFilingToolStripMenuItem.Text = "GST Filing";
+            this.gSTFilingToolStripMenuItem.Click += new System.EventHandler(this.gSTFilingToolStripMenuItem_Click);
             // 
             // Parent
             // 
@@ -168,6 +178,7 @@ namespace BillingApplication
         private System.Windows.Forms.ToolStripMenuItem entitiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deliveryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gSTFilingToolStripMenuItem;
 
     }
 }
