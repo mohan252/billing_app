@@ -91,6 +91,34 @@ namespace BillingApplication
                             where b.BILLDATE >= @FROMDATE AND b.BILLDATE <= @TODATE
                             ORDER BY PARTYGST, BILLNO";
             }
+            else
+            {
+                var previousYearBillTable = "[BILLS" + (DateTime.Today.Year - 1) + "-" + DateTime.Today.Year + "]";
+                query = @"select P.GST AS PARTYGST, P.NAME,INVOICENUMBER,INVOICEDATE,TOTALAFTERTAX,TOTALBEFORETAX,IGST,IGSTAMOUNT from
+                        (
+                        select
+                        'G-' + CONVERT(VARCHAR(10),B.BILLNO) AS INVOICENUMBER, 
+                        CONVERT(VARCHAR(100),B.BILLDATE,105) AS INVOICEDATE, 
+                        B.TOTALAFTERTAX, B.TOTALBEFORETAX, 
+                        B.IGST, 
+                        ROUND((B.IGST/100) * B.TOTALBEFORETAX,2) AS IGSTAMOUNT,
+                        B.PARTYID,B.BILLDATE 
+                        FROM BILLS B 
+                        union
+                        select 
+                        'G-' + CONVERT(VARCHAR(10),B.BILLNO) AS INVOICENUMBER, 
+                        CONVERT(VARCHAR(100),B.BILLDATE,105) AS INVOICEDATE, 
+                        B.TOTALAFTERTAX, B.TOTALBEFORETAX, 
+                        B.IGST, 
+                        ROUND((B.IGST/100) * B.TOTALBEFORETAX,2) AS IGSTAMOUNT, 
+                        B.PARTYID, B.BILLDATE
+                        FROM " + previousYearBillTable + @" B 
+                        ) B1
+                        INNER JOIN PARTIES P ON B1.PARTYID = P.ID
+                        where B1.BILLDATE >= @FROMDATE AND B1.BILLDATE <= @TODATE
+                        ORDER BY PARTYGST, INVOICENUMBER";
+            }
+
             DataTable dt = new DataTable();
             myCmd.Parameters.Clear();
             myCmd.CommandText = query;

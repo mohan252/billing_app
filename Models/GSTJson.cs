@@ -14,9 +14,9 @@ namespace BillingApplication.Models
         [JsonProperty(PropertyName = "fp", Order = 2)]
         public string CurrentFilingMonth { get; set; }
         [JsonProperty(PropertyName = "cur_gt", Order = 4)]
-        public int GrossTurnOver4CurrentFilingMonth { get; set; }
+        public decimal GrossTurnOver4CurrentFilingMonth { get; set; }
         [JsonProperty(PropertyName = "gt", Order = 3)]
-        public int GrossTurnOver4PreviousFinanicalYear { get; set; }
+        public decimal GrossTurnOver4PreviousFinanicalYear { get; set; }
         [JsonProperty(PropertyName = "version", Order = 5)]
         public string GstVersion { get; set; }
         [JsonProperty(PropertyName = "hash", Order = 6)]
@@ -41,7 +41,7 @@ namespace BillingApplication.Models
         [JsonProperty(PropertyName = "idt", Order = 2)]
         public string InvoiceDate { get; set; }
         [JsonProperty(PropertyName = "val", Order = 3)]
-        public int TotalAfterTax { get; set; }
+        public decimal TotalAfterTax { get; set; }
         [JsonProperty(PropertyName = "pos", Order = 4)]
         public string PartyStateCode { get; set; }
         [JsonProperty(PropertyName = "rchrg", Order = 5)]

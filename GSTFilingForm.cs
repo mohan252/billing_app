@@ -58,6 +58,19 @@ namespace BillingApplication
             this.cbAddress.ValueMember = "GST";
         }
 
+        private int ParseInt(string val)
+        {
+            int result = 0;
+            int.TryParse(val, out result);
+            return result;
+        }
+
+        private decimal ParseDecimal(string val)
+        {
+            decimal result = 0;
+            decimal.TryParse(val, out result);
+            return result;
+        }
         private void btnJson_Click(object sender, EventArgs e)
         {
             if(txtCurrentTurnover.Text.Trim() == "" || txtFilingMonth.Text.Trim() == "")
@@ -81,14 +94,14 @@ namespace BillingApplication
                     {
                         InvoiceNumber = g.InvoiceNumber,
                         InvoiceDate = g.InvoiceDate,
-                        TotalAfterTax = Convert.ToInt32(g.TotalAfterTax),
+                        TotalAfterTax = ParseDecimal(g.TotalAfterTax),
                         PartyStateCode = gstItemGroups[i].Key.Substring(0,2),
                         InvoiceItems = new FilingInvoiceItem[1] {
                             new FilingInvoiceItem{
                                 InvoiceDetail = new FilingInvoiceItemDetail{
-                                    TotalBeforeTax = Convert.ToInt32(g.TotalBeforeTax),
-                                    IgstRate = Convert.ToDecimal(g.IgstRate),
-                                    IgstAmount = Convert.ToDecimal(g.IgstAmount)
+                                    TotalBeforeTax = ParseInt(g.TotalBeforeTax),
+                                    IgstRate = ParseDecimal(g.IgstRate),
+                                    IgstAmount = ParseDecimal(g.IgstAmount)
                                 }
                             }
                         }
@@ -99,8 +112,8 @@ namespace BillingApplication
             {
                 MerchantGst = Convert.ToString(cbAddress.SelectedValue),
                 CurrentFilingMonth = txtFilingMonth.Text,
-                GrossTurnOver4CurrentFilingMonth = Convert.ToInt32(txtCurrentTurnover.Text),
-                GrossTurnOver4PreviousFinanicalYear = Convert.ToInt32(txtPrevTurnOver.Text),
+                GrossTurnOver4CurrentFilingMonth = ParseDecimal(txtCurrentTurnover.Text),
+                GrossTurnOver4PreviousFinanicalYear = ParseDecimal(txtPrevTurnOver.Text),
                 GstVersion = "GST1.00",
                 Hash = "hash",
                 B2B = b2b

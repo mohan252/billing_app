@@ -117,21 +117,21 @@
             this.txtCurrentTurnover.Location = new System.Drawing.Point(239, 133);
             this.txtCurrentTurnover.Name = "txtCurrentTurnover";
             this.txtCurrentTurnover.Size = new System.Drawing.Size(100, 20);
-            this.txtCurrentTurnover.TabIndex = 6;
+            this.txtCurrentTurnover.TabIndex = 4;
             // 
             // txtPrevTurnOver
             // 
             this.txtPrevTurnOver.Location = new System.Drawing.Point(239, 170);
             this.txtPrevTurnOver.Name = "txtPrevTurnOver";
             this.txtPrevTurnOver.Size = new System.Drawing.Size(100, 20);
-            this.txtPrevTurnOver.TabIndex = 7;
+            this.txtPrevTurnOver.TabIndex = 5;
             // 
             // btnJson
             // 
             this.btnJson.Location = new System.Drawing.Point(358, 215);
             this.btnJson.Name = "btnJson";
             this.btnJson.Size = new System.Drawing.Size(128, 23);
-            this.btnJson.TabIndex = 8;
+            this.btnJson.TabIndex = 7;
             this.btnJson.Text = "GENERATE JSON";
             this.btnJson.UseVisualStyleBackColor = true;
             this.btnJson.Click += new System.EventHandler(this.btnJson_Click);
@@ -158,14 +158,14 @@
             this.dpFrom.Location = new System.Drawing.Point(242, 64);
             this.dpFrom.Name = "dpFrom";
             this.dpFrom.Size = new System.Drawing.Size(124, 20);
-            this.dpFrom.TabIndex = 11;
+            this.dpFrom.TabIndex = 1;
             // 
             // dpTo
             // 
             this.dpTo.Location = new System.Drawing.Point(416, 63);
             this.dpTo.Name = "dpTo";
             this.dpTo.Size = new System.Drawing.Size(124, 20);
-            this.dpTo.TabIndex = 13;
+            this.dpTo.TabIndex = 2;
             // 
             // label7
             // 
@@ -181,7 +181,7 @@
             this.btnGetData.Location = new System.Drawing.Point(171, 215);
             this.btnGetData.Name = "btnGetData";
             this.btnGetData.Size = new System.Drawing.Size(128, 23);
-            this.btnGetData.TabIndex = 14;
+            this.btnGetData.TabIndex = 6;
             this.btnGetData.Text = "GET DATA";
             this.btnGetData.UseVisualStyleBackColor = true;
             this.btnGetData.Click += new System.EventHandler(this.btnGetData_Click);
