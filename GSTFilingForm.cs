@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using BillingApplication.Models;
 using Newtonsoft.Json;
 using System.IO;
+using Infragistics.Win.UltraWinGrid;
 
 namespace BillingApplication
 {
@@ -16,6 +17,8 @@ namespace BillingApplication
     public partial class GSTFilingForm : Form
     {
         DAL dal = new DAL();
+        IEnumerable<GstItem> gstItems;
+        CheckBoxOnHeader_CreationFilter aCheckBoxOnHeader_CreationFilter = new CheckBoxOnHeader_CreationFilter();
         public GSTFilingForm()
         {
             InitializeComponent();
@@ -42,6 +45,10 @@ namespace BillingApplication
                 dpFrom.Value = new DateTime(today.Year, today.Month, 11);
                 dpTo.Value = new DateTime(today.Year, today.Month + 1, 10);
             }
+
+            this.ugGst.CreationFilter = aCheckBoxOnHeader_CreationFilter;
+            this.ugGst.DisplayLayout.Override.DefaultRowHeight = 25;
+            
         }
         public void BindAddressList()
         {
@@ -53,8 +60,17 @@ namespace BillingApplication
 
         private void btnJson_Click(object sender, EventArgs e)
         {
-            var gstItems = dal.GetGstDetailsByParty(dpFrom.Value, dpTo.Value).ToList();
-            var gstItemGroups = gstItems.GroupBy(c => c.PartyGst).ToArray();
+            if(txtCurrentTurnover.Text.Trim() == "" || txtFilingMonth.Text.Trim() == "")
+            {
+                MessageBox.Show("Current Turnover and Previous Year Turnover cannot be empty");
+                return;
+            }
+            if (gstItems == null)
+            {
+                MessageBox.Show("First get data and verify. Then Generate Json");
+                return;
+            }
+            var gstItemGroups = gstItems.Where(g => g.IsSelected).GroupBy(c => c.PartyGst).ToArray();
             FilingParty[] b2b = new FilingParty[gstItemGroups.Length];
             for (int i = 0; i < gstItemGroups.Count(); i++)
             {
@@ -109,6 +125,19 @@ namespace BillingApplication
         private string GetDateString(DateTime date)
         {
             return Convert.ToString(date.Day) + "_" + Convert.ToString(date.Month) + "_" + Convert.ToString(date.Year);
+        }
+
+        private void btnGetData_Click(object sender, EventArgs e)
+        {
+            gstItems = dal.GetGstDetailsByParty(dpFrom.Value, dpTo.Value).ToList();
+            txtCurrentTurnover.Text = gstItems.Select(g => Convert.ToDecimal(g.TotalAfterTax)).Sum() + "";
+            ugGst.DataSource = gstItems;
+
+            var checkColumn = ugGst.DisplayLayout.Bands[0].Columns["ISSELECTED"];
+            checkColumn.CellActivation = Activation.AllowEdit;
+            checkColumn.Header.VisiblePosition = 0;
+            ugGst.DisplayLayout.Bands[0].Columns["PARTYNAME"].Width = 200;
+            ugGst.DisplayLayout.Bands[0].Columns["PARTYGST"].Width = 150;
         }
     }
 }

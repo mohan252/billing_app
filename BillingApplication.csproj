@@ -100,6 +100,7 @@
     <Compile Include="BillForm.Designer.cs">
       <DependentUpon>BillForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CheckBoxOnHeader_CreationFilter.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="CompanyDS.cs">
       <DependentUpon>CompanyDS.xsd</DependentUpon>

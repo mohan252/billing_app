@@ -81,7 +81,7 @@ namespace BillingApplication
             var query = "";
             if (fromDate.Month != 4)
             {
-                query = @"SELECT P.GST AS PARTYGST, P.NAME
+                query = @"SELECT P.GST AS PARTYGST, P.NAME,
                             'G-' + CONVERT(VARCHAR(10),B.BILLNO) AS INVOICENUMBER, 
                             CONVERT(VARCHAR(100),B.BILLDATE,105) AS INVOICEDATE, 
                             B.TOTALAFTERTAX, B.TOTALBEFORETAX, 
@@ -89,7 +89,7 @@ namespace BillingApplication
                             ROUND((B.IGST/100) * B.TOTALBEFORETAX,2) AS IGSTAMOUNT 
                             FROM BILLS B INNER JOIN PARTIES P ON B.PARTYID = P.ID
                             where b.BILLDATE >= @FROMDATE AND b.BILLDATE <= @TODATE
-                            ORDER BY PARTYGST";
+                            ORDER BY PARTYGST, BILLNO";
             }
             DataTable dt = new DataTable();
             myCmd.Parameters.Clear();
@@ -106,7 +106,9 @@ namespace BillingApplication
             {
                 return dt.Rows.Cast<DataRow>().Select(dr => new GstItem
                 {
+                    IsSelected = true,
                     PartyGst = dr.Get("PARTYGST"),
+                    PartyName = dr.Get("NAME"),
                     InvoiceNumber = dr.Get("INVOICENUMBER"),
                     InvoiceDate = dr.Get("INVOICEDATE"),
                     TotalBeforeTax = dr.Get("TOTALBEFORETAX"),
