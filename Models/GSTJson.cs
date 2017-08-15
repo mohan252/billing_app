@@ -24,6 +24,34 @@ namespace BillingApplication.Models
         //Each Party will have one item
         [JsonProperty(PropertyName = "b2b", Order = 7)]
         public FilingParty[] B2B { get; set; }
+        [JsonProperty(PropertyName = "hsn", Order = 8)]
+        public FilingHsn Hsn { get; set; }
+    }
+
+    public class FilingHsn
+    {
+        [JsonProperty(PropertyName = "data", Order = 1)]
+        public FilingHsnData[] Data { get; set; }
+    }
+
+    public class FilingHsnData
+    {
+        [JsonProperty(PropertyName = "num", Order = 1)]
+        public int SerialNumber { get; set; }
+        [JsonProperty(PropertyName = "hsn_sc", Order = 2)]
+        public string HsnCode { get; set; }
+        [JsonProperty(PropertyName = "desc", Order = 3)]
+        public string Description { get; set; }
+        [JsonProperty(PropertyName = "uqc", Order = 4)]
+        public string UQCUnits { get; set; }
+        [JsonProperty(PropertyName = "qty", Order = 5)]
+        public decimal TotalQuantity { get; set; }
+        [JsonProperty(PropertyName = "val", Order = 6)]
+        public decimal TotalValue { get; set; }
+        [JsonProperty(PropertyName = "txval", Order = 7)]
+        public decimal TaxableValue { get; set; }
+        [JsonProperty(PropertyName = "iamt", Order = 8)]
+        public decimal IntegratedTaxAmount { get; set; }
     }
 
     public class FilingParty
@@ -41,9 +69,9 @@ namespace BillingApplication.Models
         [JsonProperty(PropertyName = "idt", Order = 2)]
         public string InvoiceDate { get; set; }
         [JsonProperty(PropertyName = "val", Order = 3)]
-        public decimal TotalAfterTax { get; set; }
+        public decimal TotalAfterTax_InvoiceValue { get; set; }
         [JsonProperty(PropertyName = "pos", Order = 4)]
-        public string PartyStateCode { get; set; }
+        public string PartyStateCode_PlaceOfSupply { get; set; }
         [JsonProperty(PropertyName = "rchrg", Order = 5)]
         public string ReverseCharge = "N";
         [JsonProperty(PropertyName = "inv_typ", Order = 6)]
@@ -62,10 +90,10 @@ namespace BillingApplication.Models
 
     public class FilingInvoiceItemDetail{
         [JsonProperty(PropertyName = "txval", Order = 1)]
-        public int TotalBeforeTax { get; set; }
+        public decimal TotalBeforeTax_TaxableValue { get; set; }
         [JsonProperty(PropertyName = "rt", Order = 2)]
         public decimal IgstRate { get; set; }
         [JsonProperty(PropertyName = "iamt", Order = 3)]
-        public decimal IgstAmount { get; set; }
+        public decimal IgstAmount_CessAmount { get; set; }
     }
 }

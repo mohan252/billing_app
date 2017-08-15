@@ -86,7 +86,8 @@ namespace BillingApplication
                             CONVERT(VARCHAR(100),B.BILLDATE,105) AS INVOICEDATE, 
                             B.TOTALAFTERTAX, B.TOTALBEFORETAX, 
                             B.IGST, 
-                            ROUND((B.IGST/100) * B.TOTALBEFORETAX,2) AS IGSTAMOUNT 
+                            ROUND((B.IGST/100) * B.TOTALBEFORETAX,2) AS IGSTAMOUNT,
+                            B.TOTALMTRS,B.TOTALQTY 
                             FROM BILLS B INNER JOIN PARTIES P ON B.PARTYID = P.ID
                             where b.BILLDATE >= @FROMDATE AND b.BILLDATE <= @TODATE
                             and b.ADDRESS = @ADDRESS
@@ -95,7 +96,7 @@ namespace BillingApplication
             else
             {
                 var previousYearBillTable = "[BILLS" + (DateTime.Today.Year - 1) + "-" + DateTime.Today.Year + "]";
-                query = @"select P.GST AS PARTYGST, P.NAME,INVOICENUMBER,INVOICEDATE,TOTALAFTERTAX,TOTALBEFORETAX,IGST,IGSTAMOUNT from
+                query = @"select P.GST AS PARTYGST, P.NAME,INVOICENUMBER,INVOICEDATE,TOTALAFTERTAX,TOTALBEFORETAX,IGST,IGSTAMOUNT,TOTALMTRS,TOTALQTY from
                         (
                         select
                         'G-' + CONVERT(VARCHAR(10),B.BILLNO) AS INVOICENUMBER, 
@@ -103,7 +104,7 @@ namespace BillingApplication
                         B.TOTALAFTERTAX, B.TOTALBEFORETAX, 
                         B.IGST, 
                         ROUND((B.IGST/100) * B.TOTALBEFORETAX,2) AS IGSTAMOUNT,
-                        B.PARTYID,B.BILLDATE 
+                        B.PARTYID,B.BILLDATE ,B.TOTALMTRS,B.TOTALQTY
                         FROM BILLS B 
                         union
                         select 
@@ -112,11 +113,12 @@ namespace BillingApplication
                         B.TOTALAFTERTAX, B.TOTALBEFORETAX, 
                         B.IGST, 
                         ROUND((B.IGST/100) * B.TOTALBEFORETAX,2) AS IGSTAMOUNT, 
-                        B.PARTYID, B.BILLDATE
+                        B.PARTYID, B.BILLDATE,B.TOTALMTRS,B.TOTALQTY
                         FROM " + previousYearBillTable + @" B 
                         ) B1
                         INNER JOIN PARTIES P ON B1.PARTYID = P.ID
                         where B1.BILLDATE >= @FROMDATE AND B1.BILLDATE <= @TODATE
+                        and B1.ADDRESS = @ADDRESS
                         ORDER BY PARTYGST, INVOICENUMBER";
             }
 
@@ -143,10 +145,12 @@ namespace BillingApplication
                     PartyName = dr.Get("NAME"),
                     InvoiceNumber = dr.Get("INVOICENUMBER"),
                     InvoiceDate = dr.Get("INVOICEDATE"),
-                    TotalBeforeTax = dr.Get("TOTALBEFORETAX"),
-                    IgstRate = dr.Get("IGST"),
-                    IgstAmount = dr.Get("IGSTAMOUNT"),
-                    TotalAfterTax = dr.Get("TOTALAFTERTAX")
+                    TotalBeforeTax = Convert.ToDecimal(dr.Get("TOTALBEFORETAX")),
+                    IgstRate = Convert.ToDecimal(dr.Get("IGST")),
+                    IgstAmount = Convert.ToDecimal(dr.Get("IGSTAMOUNT")),
+                    TotalAfterTax = Convert.ToDecimal(dr.Get("TOTALAFTERTAX")),
+                    TotalMeters = Convert.ToDecimal(dr.Get("TOTALMTRS")),
+                    TotalBillQty = Convert.ToDecimal(dr.Get("TOTALQTY"))
                 });
             }
             return null;

@@ -48,7 +48,7 @@ namespace BillingApplication
 
             this.ugGst.CreationFilter = aCheckBoxOnHeader_CreationFilter;
             this.ugGst.DisplayLayout.Override.DefaultRowHeight = 25;
-            
+
         }
         public void BindAddressList()
         {
@@ -73,7 +73,7 @@ namespace BillingApplication
         }
         private void btnJson_Click(object sender, EventArgs e)
         {
-            if(txtCurrentTurnover.Text.Trim() == "" || txtFilingMonth.Text.Trim() == "")
+            if (txtCurrentTurnover.Text.Trim() == "" || txtFilingMonth.Text.Trim() == "")
             {
                 MessageBox.Show("Current Turnover and Previous Year Turnover cannot be empty");
                 return;
@@ -94,20 +94,36 @@ namespace BillingApplication
                     {
                         InvoiceNumber = g.InvoiceNumber,
                         InvoiceDate = g.InvoiceDate,
-                        TotalAfterTax = ParseDecimal(g.TotalAfterTax),
-                        PartyStateCode = gstItemGroups[i].Key.Substring(0,2),
+                        TotalAfterTax_InvoiceValue = g.TotalAfterTax,
+                        PartyStateCode_PlaceOfSupply = gstItemGroups[i].Key.Substring(0, 2),
                         InvoiceItems = new FilingInvoiceItem[1] {
                             new FilingInvoiceItem{
                                 InvoiceDetail = new FilingInvoiceItemDetail{
-                                    TotalBeforeTax = ParseInt(g.TotalBeforeTax),
-                                    IgstRate = ParseDecimal(g.IgstRate),
-                                    IgstAmount = ParseDecimal(g.IgstAmount)
+                                    TotalBeforeTax_TaxableValue = g.TotalBeforeTax,
+                                    IgstRate = g.IgstRate,
+                                    IgstAmount_CessAmount = g.IgstAmount
                                 }
                             }
                         }
                     }).ToArray()
                 };
             }
+
+            FilingHsn Hsn = new FilingHsn
+            {
+                Data = new FilingHsnData[] { 
+                    new FilingHsnData{
+                        SerialNumber = 1,
+                        HsnCode = "5208",
+                        Description = "BLEACHED CLOTH",
+                        UQCUnits = "MTR",
+                        TotalQuantity = gstItems.Sum( g => g.TotalMeters),
+                        TotalValue = gstItems.Sum( g => g.TotalAfterTax),
+                        TaxableValue = gstItems.Sum( g => g.TotalBeforeTax),
+                        IntegratedTaxAmount = gstItems.Sum( g => g.IgstAmount),
+                                        }
+                                          }
+            };
             var gstItem = new GSTJson
             {
                 MerchantGst = Convert.ToString(cbAddress.SelectedValue),
@@ -116,7 +132,8 @@ namespace BillingApplication
                 GrossTurnOver4PreviousFinanicalYear = ParseDecimal(txtPrevTurnOver.Text),
                 GstVersion = "GST1.00",
                 Hash = "hash",
-                B2B = b2b
+                B2B = b2b,
+                Hsn = Hsn
             };
             var jsonString = JsonConvert.SerializeObject(gstItem);
 
@@ -130,7 +147,7 @@ namespace BillingApplication
                 Directory.CreateDirectory(settings.PLDefaultFileLocation);
             path = settings.PLDefaultFileLocation + "\\" + path;
 
-            File.WriteAllText(path,jsonString);
+            File.WriteAllText(path, jsonString);
 
             MessageBox.Show("Exported to " + path + " successfully");
         }
@@ -150,9 +167,10 @@ namespace BillingApplication
             checkColumn.CellActivation = Activation.AllowEdit;
             checkColumn.Header.VisiblePosition = 0;
             ugGst.DisplayLayout.Bands[0].Columns["PARTYGST"].Header.VisiblePosition = 10;
-            //ugGst.DisplayLayout.Bands[0].Columns["INVOICENUMBER"].Header.VisiblePosition = 2;
             ugGst.DisplayLayout.Bands[0].Columns["PARTYNAME"].Width = 200;
             ugGst.DisplayLayout.Bands[0].Columns["PARTYGST"].Width = 150;
+
+            ugGst.DisplayLayout.Override.AllowRowSummaries = AllowRowSummaries.SingleSummaryBasedOnDataType;
         }
     }
 }
