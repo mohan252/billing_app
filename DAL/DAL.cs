@@ -76,7 +76,7 @@ namespace BillingApplication
             return addresses;
         }
 
-        public IEnumerable<GstItem> GetGstDetailsByParty(DateTime fromDate, DateTime toDate)
+        public IEnumerable<GstItem> GetGstDetailsByParty(DateTime fromDate, DateTime toDate, string address)
         {
             var query = "";
             if (fromDate.Month != 4)
@@ -89,7 +89,8 @@ namespace BillingApplication
                             ROUND((B.IGST/100) * B.TOTALBEFORETAX,2) AS IGSTAMOUNT 
                             FROM BILLS B INNER JOIN PARTIES P ON B.PARTYID = P.ID
                             where b.BILLDATE >= @FROMDATE AND b.BILLDATE <= @TODATE
-                            ORDER BY PARTYGST, BILLNO";
+                            and b.ADDRESS = @ADDRESS
+                            ORDER BY NAME, BILLNO";
             }
             else
             {
@@ -128,6 +129,9 @@ namespace BillingApplication
             myCmd.Parameters.Add(parameter);
             parameter = new SqlParameter("@TODATE", SqlDbType.DateTime);
             parameter.Value = toDate;
+            myCmd.Parameters.Add(parameter);
+            parameter = new SqlParameter("@ADDRESS", SqlDbType.VarChar);
+            parameter.Value = address;
             myCmd.Parameters.Add(parameter);
             myAdap.Fill(dt);
             if (dt != null && dt.Rows.Count > 0)

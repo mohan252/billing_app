@@ -142,13 +142,15 @@ namespace BillingApplication
 
         private void btnGetData_Click(object sender, EventArgs e)
         {
-            gstItems = dal.GetGstDetailsByParty(dpFrom.Value, dpTo.Value).ToList();
+            gstItems = dal.GetGstDetailsByParty(dpFrom.Value, dpTo.Value, cbAddress.Text).ToList();
             txtCurrentTurnover.Text = gstItems.Select(g => Convert.ToDecimal(g.TotalAfterTax)).Sum() + "";
             ugGst.DataSource = gstItems;
 
             var checkColumn = ugGst.DisplayLayout.Bands[0].Columns["ISSELECTED"];
             checkColumn.CellActivation = Activation.AllowEdit;
             checkColumn.Header.VisiblePosition = 0;
+            ugGst.DisplayLayout.Bands[0].Columns["PARTYGST"].Header.VisiblePosition = 10;
+            //ugGst.DisplayLayout.Bands[0].Columns["INVOICENUMBER"].Header.VisiblePosition = 2;
             ugGst.DisplayLayout.Bands[0].Columns["PARTYNAME"].Width = 200;
             ugGst.DisplayLayout.Bands[0].Columns["PARTYGST"].Width = 150;
         }
