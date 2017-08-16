@@ -8,11 +8,22 @@ namespace BillingApplication
 {
     public static class Extensions
     {
-        public static string Get(this DataRow dr, string field)
+        public static string Get(this DataRow dr, string field, bool isDecimal = false)
         {
+            var output = "0";
             if (dr != null && dr[field] != null)
-                return Convert.ToString(dr[field]);
-            return "";
+            {
+                output = Convert.ToString(dr[field]);
+                if (isDecimal)
+                {
+                    Decimal d;
+                    if (!decimal.TryParse(output, out d))
+                    {
+                        return "0";
+                    }
+                }
+            }
+            return output;
         }
     }
 }

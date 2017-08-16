@@ -145,12 +145,12 @@ namespace BillingApplication
                     PartyName = dr.Get("NAME"),
                     InvoiceNumber = dr.Get("INVOICENUMBER"),
                     InvoiceDate = dr.Get("INVOICEDATE"),
-                    TotalBeforeTax = Convert.ToDecimal(dr.Get("TOTALBEFORETAX")),
-                    IgstRate = Convert.ToDecimal(dr.Get("IGST")),
-                    IgstAmount = Convert.ToDecimal(dr.Get("IGSTAMOUNT")),
-                    TotalAfterTax = Convert.ToDecimal(dr.Get("TOTALAFTERTAX")),
-                    TotalMeters = Convert.ToDecimal(dr.Get("TOTALMTRS")),
-                    TotalBillQty = Convert.ToDecimal(dr.Get("TOTALQTY"))
+                    TotalBeforeTax = Convert.ToDecimal(dr.Get("TOTALBEFORETAX", true)),
+                    IgstRate = Convert.ToDecimal(dr.Get("IGST",true)),
+                    IgstAmount = Convert.ToDecimal(dr.Get("IGSTAMOUNT",true)),
+                    TotalAfterTax = Convert.ToDecimal(dr.Get("TOTALAFTERTAX",true)),
+                    TotalMeters = Convert.ToDecimal(dr.Get("TOTALMTRS",true)),
+                    TotalBillQty = Convert.ToDecimal(dr.Get("TOTALQTY",true))
                 });
             }
             return null;

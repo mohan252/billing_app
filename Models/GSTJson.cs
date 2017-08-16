@@ -93,7 +93,7 @@ namespace BillingApplication.Models
         public decimal TotalBeforeTax_TaxableValue { get; set; }
         [JsonProperty(PropertyName = "rt", Order = 2)]
         public decimal IgstRate { get; set; }
-        [JsonProperty(PropertyName = "iamt", Order = 3)]
+        [JsonProperty(PropertyName = "csamt", Order = 3)]
         public decimal IgstAmount_CessAmount { get; set; }
     }
 }
