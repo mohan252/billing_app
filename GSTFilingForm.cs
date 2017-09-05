@@ -94,13 +94,15 @@ namespace BillingApplication
                     {
                         InvoiceNumber = g.InvoiceNumber,
                         InvoiceDate = g.InvoiceDate,
-                        TotalAfterTax_InvoiceValue = g.TotalAfterTax,
+                        //TotalAfterTax_InvoiceValue = g.TotalAfterTax,
+                        TotalAfterTax_InvoiceValue = g.TotalBeforeTax,
                         PartyStateCode_PlaceOfSupply = gstItemGroups[i].Key.Substring(0, 2),
                         InvoiceItems = new FilingInvoiceItem[1] {
                             new FilingInvoiceItem{
                                 InvoiceDetail = new FilingInvoiceItemDetail{
                                     TotalBeforeTax_TaxableValue = g.TotalBeforeTax,
                                     IgstRate = g.IgstRate,
+                                    //is cess amount same as igst amount???
                                     IgstAmount_CessAmount = g.IgstAmount
                                 }
                             }
@@ -109,20 +111,41 @@ namespace BillingApplication
                 };
             }
 
+            var gstItemsByMeters = gstItems.Where(g => g.TotalMeters != 0).ToList();
+            var filingHsnDataList = new List<FilingHsnData>();
+            if (gstItemsByMeters.Count > 0)
+            {
+                filingHsnDataList.Add(new FilingHsnData
+                {
+                    SerialNumber = 1,
+                    HsnCode = "5208",
+                    Description = "BLEACHED CLOTH",
+                    UQCUnits = "MTR",
+                    TotalQuantity = gstItemsByMeters.Sum(g => g.TotalMeters),
+                    TotalValue = gstItemsByMeters.Sum(g => g.TotalAfterTax),
+                    TaxableValue = gstItemsByMeters.Sum(g => g.TotalBeforeTax),
+                    IntegratedTaxAmount = gstItemsByMeters.Sum(g => g.IgstAmount),
+                });
+            }
+            var gstItemsByQty = gstItems.Where(g => g.TotalMeters == 0).ToList();
+            if (gstItemsByQty.Count > 0)
+            {
+                filingHsnDataList.Add(new FilingHsnData
+                {
+                    SerialNumber = 1,
+                    HsnCode = "5208",
+                    Description = "BLEACHED CLOTH",
+                    UQCUnits = "MTR",
+                    TotalQuantity = gstItemsByQty.Sum(g => g.TotalBillQty),
+                    TotalValue = gstItemsByQty.Sum(g => g.TotalAfterTax),
+                    TaxableValue = gstItemsByQty.Sum(g => g.TotalBeforeTax),
+                    IntegratedTaxAmount = gstItemsByQty.Sum(g => g.IgstAmount),
+                });
+            }
+
             FilingHsn Hsn = new FilingHsn
             {
-                Data = new FilingHsnData[] { 
-                    new FilingHsnData{
-                        SerialNumber = 1,
-                        HsnCode = "5208",
-                        Description = "BLEACHED CLOTH",
-                        UQCUnits = "MTR",
-                        TotalQuantity = gstItems.Sum( g => g.TotalMeters),
-                        TotalValue = gstItems.Sum( g => g.TotalAfterTax),
-                        TaxableValue = gstItems.Sum( g => g.TotalBeforeTax),
-                        IntegratedTaxAmount = gstItems.Sum( g => g.IgstAmount),
-                                        }
-                                          }
+                Data = filingHsnDataList.ToArray()
             };
             var gstItem = new GSTJson
             {
