@@ -329,9 +329,10 @@ namespace BillingApplication
                 int opColIndex = 1;
                 oSheet.Cells[rowNum, opColIndex].Value = Convert.ToString(serialNo++);
                 opColIndex++;
-                for (int i = 1; i < 7; i++)
+                for (int i = 1; i < 10; i++)
                 {
-                    if (i != 5) // skip agent value
+                    //i = 5 (agent value), i = 6 (total before cd) ,7 (total before tax) ,8 (igst)
+                    if (i != 5 && i != 6 && i != 7 && i != 8) // skip agent value
                     {
                         object dvalue = dr.ItemArray[i];
                         if (i == 6 && dr[dataCol] != System.DBNull.Value)
