@@ -25,6 +25,11 @@ namespace BillingApplication
 
         public static string GetAccountingYearFromDate(DateTime deliveryDate)
         {
+            //if new year, then return empty
+            if (deliveryDate.Month == 1 && deliveryDate.Day == 1)
+            {
+                return "";
+            }
             if (deliveryDate.Year == DateTime.Now.Year && deliveryDate.Month > 3)
             {
                 return "";
