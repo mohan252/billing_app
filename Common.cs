@@ -329,21 +329,40 @@ namespace BillingApplication
                 int opColIndex = 1;
                 oSheet.Cells[rowNum, opColIndex].Value = Convert.ToString(serialNo++);
                 opColIndex++;
-                for (int i = 1; i < 10; i++)
+                if (dataType == "COMISSIONSTMT")
                 {
-                    //i = 5 (agent value), i = 6 (total before cd) ,7 (total before tax) ,8 (igst)
-                    if (i != 5 && i != 6 && i != 7 && i != 8) // skip agent value
+                    for (int j = 1; j < 10; j++)
                     {
-                        object dvalue = dr.ItemArray[i];
-                        if (i == 6 && dr[dataCol] != System.DBNull.Value)
+                        //skip
+                        //i = 5 (agent value), 7 (total before tax) ,8 (igst), 9 (total after tax)
+                        if (j != 5 && j != 7 && j != 8 && j != 9)
                         {
-                            oSheet.Cells[rowNum, opColIndex].Value = Convert.ToString(dr[dataCol]);
-                            if (dataType == "COMISSIONSTMT")
+                            object dvalue = dr.ItemArray[j];
+                            if (j == 6 && dr[dataCol] != System.DBNull.Value)
+                            {
+                                oSheet.Cells[rowNum, opColIndex].Value = Convert.ToString(dr[dataCol]);
                                 totalValue += Convert.ToDouble(dr[dataCol]);
+                            }
+                            else
+                            {
+                                oSheet.Cells[rowNum, opColIndex].Value = Convert.ToString(dvalue);
+                            }
+                            opColIndex++;
                         }
-                        else
+                    }
+                }
+                else
+                {
+                    for (int i = 1; i < 10; i++)
+                    {
+                        //skip
+                        //i = 5 (agent value), i = 6 (total before cd) ,7 (total before tax) ,8 (igst)
+                        if (i != 5 && i != 6 && i != 7 && i != 8)
+                        {
+                            object dvalue = dr.ItemArray[i];
                             oSheet.Cells[rowNum, opColIndex].Value = Convert.ToString(dvalue);
-                        opColIndex++;
+                            opColIndex++;
+                        }
                     }
                 }
                 rowNum++;

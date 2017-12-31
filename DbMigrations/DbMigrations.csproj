@@ -52,6 +52,7 @@
     <Compile Include="M007_AddColumnsGET_DDENTRYBILLQUERY.cs" />
     <Compile Include="M008_AddColumnsGET_PENDINGLISTQUERY.cs" />
     <Compile Include="M009_AddColumnsGET_PENDINGLISTDATA.cs" />
+    <Compile Include="M010_UpdateTotalWoCD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="M003_AddTotalBeforeTaxColumn.cs" />
   </ItemGroup>

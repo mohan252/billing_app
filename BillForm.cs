@@ -632,7 +632,7 @@ namespace BillingApplication
         {
             decimal total = Convert.ToDecimal(btmGrid[2, Grid.Balance].Value);
             total -= LessDiscount(Grid.PinLess);
-            total -= LessDiscount(Grid.Discount1);
+            //total -= LessDiscount(Grid.Discount1); // discount 1 is cd in new version
             //total -= LessDiscount(Grid.Cd);
             if (Convert.ToString(btmGrid[2, Grid.Fwd].Value) != "")
                 total += Convert.ToDecimal(btmGrid[2, Grid.Fwd].Value);
