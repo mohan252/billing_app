@@ -674,6 +674,13 @@ namespace BillingApplication
             {
                 return Convert.ToDecimal(btmGrid[colIndex, rowIndex].Value);
             }
+            else
+            {
+                if(colIndex == 1)
+                {
+                    btmGrid[colIndex + 1, rowIndex].Value = "";
+                }
+            }
             return 0;
         }
 
