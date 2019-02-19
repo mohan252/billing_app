@@ -51,7 +51,11 @@ namespace BillingApplication.Models
         [JsonProperty(PropertyName = "txval", Order = 7)]
         public decimal TaxableValue { get; set; }
         [JsonProperty(PropertyName = "iamt", Order = 8)]
-        public decimal IntegratedTaxAmount { get; set; }
+        public decimal IgstTaxAmount { get; set; }
+        [JsonProperty(PropertyName = "samt", Order = 9)]
+        public decimal SgstTaxAmount { get; set; }
+        [JsonProperty(PropertyName = "camt", Order = 10)]
+        public decimal CgstTaxAmount { get; set; }
     }
 
     public class FilingParty
@@ -93,7 +97,11 @@ namespace BillingApplication.Models
         public decimal TotalBeforeTax_TaxableValue { get; set; }
         [JsonProperty(PropertyName = "rt", Order = 2)]
         public decimal IgstRate { get; set; }
-        [JsonProperty(PropertyName = "csamt", Order = 3)]
-        public decimal IgstAmount_CessAmount { get; set; }
+        [JsonProperty(PropertyName = "iamt", Order = 3)]
+        public decimal? IgstAmount { get; set; }
+        [JsonProperty(PropertyName = "camt", Order = 4)]
+        public decimal? CgstAmount { get; set; }
+        [JsonProperty(PropertyName = "samt", Order = 5)]
+        public decimal? SgstAmount { get; set; }
     }
 }

@@ -87,6 +87,16 @@ namespace BillingApplication
                             B.TOTALAFTERTAX, B.TOTALBEFORETAX, 
                             B.IGST, 
                             ROUND((B.IGST/100) * B.TOTALBEFORETAX,2) AS IGSTAMOUNT,
+                            B.SGST,
+						    CASE WHEN B.SGST IS NOT NULL
+							    THEN ROUND((B.SGST/100) * B.TOTALBEFORETAX,2)
+							    ELSE NULL
+						    END AS SGSTAMOUNT,
+						    B.CGST,
+						    CASE WHEN B.CGST IS NOT NULL
+							    THEN ROUND((B.CGST/100) * B.TOTALBEFORETAX,2)
+							    ELSE NULL
+						    END AS CGSTAMOUNT,
                             B.TOTALMTRS,B.TOTALQTY 
                             FROM BILLS B INNER JOIN PARTIES P ON B.PARTYID = P.ID
                             where b.BILLDATE >= @FROMDATE AND b.BILLDATE <= @TODATE
@@ -96,7 +106,7 @@ namespace BillingApplication
             else
             {
                 var previousYearBillTable = "[BILLS" + (DateTime.Today.Year - 1) + "-" + DateTime.Today.Year + "]";
-                query = @"select P.GST AS PARTYGST, P.NAME,INVOICENUMBER,INVOICEDATE,TOTALAFTERTAX,TOTALBEFORETAX,IGST,IGSTAMOUNT,TOTALMTRS,TOTALQTY from
+                query = @"select P.GST AS PARTYGST, P.NAME,INVOICENUMBER,INVOICEDATE,TOTALAFTERTAX,TOTALBEFORETAX,IGST,IGSTAMOUNT,SGST,SGSTAMOUNT,CGST,CGSTAMOUNT,TOTALMTRS,TOTALQTY from
                         (
                         select
                         'G-' + CONVERT(VARCHAR(10),B.BILLNO) AS INVOICENUMBER, 
@@ -104,7 +114,17 @@ namespace BillingApplication
                         B.TOTALAFTERTAX, B.TOTALBEFORETAX, 
                         B.IGST, 
                         ROUND((B.IGST/100) * B.TOTALBEFORETAX,2) AS IGSTAMOUNT,
-                        B.PARTYID,B.BILLDATE ,B.TOTALMTRS,B.TOTALQTY
+                        B.SGST,
+						CASE WHEN B.SGST IS NOT NULL
+							THEN ROUND((B.SGST/100) * B.TOTALBEFORETAX,2)
+							ELSE NULL
+						END AS SGSTAMOUNT,
+						B.CGST,
+						CASE WHEN B.CGST IS NOT NULL
+							THEN ROUND((B.CGST/100) * B.TOTALBEFORETAX,2)
+							ELSE NULL
+						END AS CGSTAMOUNT,
+                        B.PARTYID,B.BILLDATE ,B.TOTALMTRS,B.TOTALQTY,B.ADDRESS
                         FROM BILLS B 
                         union
                         select 
@@ -113,7 +133,17 @@ namespace BillingApplication
                         B.TOTALAFTERTAX, B.TOTALBEFORETAX, 
                         B.IGST, 
                         ROUND((B.IGST/100) * B.TOTALBEFORETAX,2) AS IGSTAMOUNT, 
-                        B.PARTYID, B.BILLDATE,B.TOTALMTRS,B.TOTALQTY
+                        B.SGST,
+						CASE WHEN B.SGST IS NOT NULL
+							THEN ROUND((B.SGST/100) * B.TOTALBEFORETAX,2)
+							ELSE NULL
+						END AS SGSTAMOUNT,
+						B.CGST,
+						CASE WHEN B.CGST IS NOT NULL
+							THEN ROUND((B.CGST/100) * B.TOTALBEFORETAX,2)
+							ELSE NULL
+						END AS CGSTAMOUNT,
+                        B.PARTYID, B.BILLDATE,B.TOTALMTRS,B.TOTALQTY,B.ADDRESS
                         FROM " + previousYearBillTable + @" B 
                         ) B1
                         INNER JOIN PARTIES P ON B1.PARTYID = P.ID
@@ -146,8 +176,12 @@ namespace BillingApplication
                     InvoiceNumber = dr.Get("INVOICENUMBER"),
                     InvoiceDate = dr.Get("INVOICEDATE"),
                     TotalBeforeTax = Convert.ToDecimal(dr.Get("TOTALBEFORETAX", true)),
-                    IgstRate = Convert.ToDecimal(dr.Get("IGST",true)),
-                    IgstAmount = Convert.ToDecimal(dr.Get("IGSTAMOUNT",true)),
+                    IgstRate = dr.Get("IGST") != null ? Convert.ToDecimal(dr.Get("IGST",true)) : (decimal?)null,
+                    IgstAmount = dr.Get("IGSTAMOUNT") != null ? Convert.ToDecimal(dr.Get("IGSTAMOUNT",true)) : (decimal?)null,
+                    CgstRate = dr.Get("CGST") != null ? Convert.ToDecimal(dr.Get("CGST", true)) : (decimal?)null,
+                    CgstAmount = dr.Get("CGSTAMOUNT") != null ? Convert.ToDecimal(dr.Get("CGSTAMOUNT", true)) : (decimal?)null,
+                    SgstRate = dr.Get("SGST") != null ? Convert.ToDecimal(dr.Get("SGST", true)) : (decimal?)null,
+                    SgstAmount = dr.Get("SGSTAMOUNT") != null ? Convert.ToDecimal(dr.Get("SGSTAMOUNT", true)) : (decimal?)null,
                     TotalAfterTax = Convert.ToDecimal(dr.Get("TOTALAFTERTAX",true)),
                     TotalMeters = Convert.ToDecimal(dr.Get("TOTALMTRS",true)),
                     TotalBillQty = Convert.ToDecimal(dr.Get("TOTALQTY",true))

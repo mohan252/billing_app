@@ -83,7 +83,16 @@ namespace BillingApplication
                 MessageBox.Show("First get data and verify. Then Generate Json");
                 return;
             }
-            var gstItemGroups = gstItems.Where(g => g.IsSelected).GroupBy(c => c.PartyGst).ToArray();
+            if(gstItems.Any(g => string.IsNullOrEmpty(g.PartyGst)))
+            {
+                MessageBox.Show("Json will be generated only for the bills having non empty party gst");
+            }
+            var gstItemGroups = gstItems.Where(g => g.IsSelected && !string.IsNullOrEmpty(g.PartyGst)).GroupBy(c => c.PartyGst).ToArray();
+            if(gstItemGroups.Count() == 0)
+            {
+                MessageBox.Show("Cannot generate json. All the selected bills are not having party gst");
+                return;
+            }
             FilingParty[] b2b = new FilingParty[gstItemGroups.Length];
             for (int i = 0; i < gstItemGroups.Count(); i++)
             {
@@ -101,9 +110,10 @@ namespace BillingApplication
                             new FilingInvoiceItem{
                                 InvoiceDetail = new FilingInvoiceItemDetail{
                                     TotalBeforeTax_TaxableValue = g.TotalBeforeTax,
-                                    IgstRate = g.IgstRate,
-                                    //is cess amount same as igst amount???
-                                    IgstAmount_CessAmount = g.IgstAmount
+                                    IgstRate = g.IgstRate == null || g.IgstAmount.Value == 0 ? g.CgstRate.Value + g.SgstRate.Value : g.IgstRate.Value,
+                                    IgstAmount = g.IgstAmount == null || g.IgstAmount.Value == 0 ? null : g.IgstAmount, 
+                                    SgstAmount = g.SgstAmount == null || g.SgstAmount.Value == 0 ? null : g.SgstAmount,
+                                    CgstAmount = g.CgstAmount == null || g.CgstAmount.Value == 0 ? null : g.CgstAmount
                                 }
                             }
                         }
@@ -111,7 +121,7 @@ namespace BillingApplication
                 };
             }
 
-            var gstItemsByMeters = gstItems.Where(g => g.TotalMeters != 0).ToList();
+            var gstItemsByMeters = gstItems.Where(g => g.IsSelected && !string.IsNullOrEmpty(g.PartyGst) && g.TotalMeters != 0).ToList();
             var filingHsnDataList = new List<FilingHsnData>();
             if (gstItemsByMeters.Count > 0)
             {
@@ -119,12 +129,14 @@ namespace BillingApplication
                 {
                     SerialNumber = 1,
                     HsnCode = "5208",
-                    Description = "BLEACHED CLOTH",
+                    Description = "COTTON CLOTH",
                     UQCUnits = "MTR",
                     TotalQuantity = gstItemsByMeters.Sum(g => g.TotalMeters),
                     TotalValue = gstItemsByMeters.Sum(g => g.TotalAfterTax),
                     TaxableValue = gstItemsByMeters.Sum(g => g.TotalBeforeTax),
-                    IntegratedTaxAmount = gstItemsByMeters.Sum(g => g.IgstAmount),
+                    IgstTaxAmount = gstItemsByMeters.Where(g => g.IgstAmount != null).Sum(g => g.IgstAmount.Value),
+                    SgstTaxAmount = gstItemsByMeters.Where(g => g.SgstAmount != null).Sum(g => g.SgstAmount.Value),
+                    CgstTaxAmount = gstItemsByMeters.Where(g => g.CgstAmount != null).Sum(g => g.CgstAmount.Value),
                 });
             }
             var gstItemsByQty = gstItems.Where(g => g.TotalMeters == 0).ToList();
@@ -134,12 +146,14 @@ namespace BillingApplication
                 {
                     SerialNumber = 1,
                     HsnCode = "5208",
-                    Description = "BLEACHED CLOTH",
+                    Description = "COTTON CLOTH",
                     UQCUnits = "MTR",
                     TotalQuantity = gstItemsByQty.Sum(g => g.TotalBillQty),
                     TotalValue = gstItemsByQty.Sum(g => g.TotalAfterTax),
                     TaxableValue = gstItemsByQty.Sum(g => g.TotalBeforeTax),
-                    IntegratedTaxAmount = gstItemsByQty.Sum(g => g.IgstAmount),
+                    IgstTaxAmount = gstItemsByMeters.Where(g => g.IgstAmount != null).Sum(g => g.IgstAmount.Value),
+                    SgstTaxAmount = gstItemsByMeters.Where(g => g.SgstAmount != null).Sum(g => g.SgstAmount.Value),
+                    CgstTaxAmount = gstItemsByMeters.Where(g => g.CgstAmount != null).Sum(g => g.CgstAmount.Value)
                 });
             }
 
@@ -158,7 +172,12 @@ namespace BillingApplication
                 B2B = b2b,
                 Hsn = Hsn
             };
-            var jsonString = JsonConvert.SerializeObject(gstItem);
+            var jsonString = JsonConvert.SerializeObject(gstItem,
+                                                        Formatting.Indented, 
+                                                        new JsonSerializerSettings
+                                                        {
+                                                            NullValueHandling = NullValueHandling.Ignore
+                                                        });
 
 
             string path = cbAddress.Text.Replace("/", "") + "_";
@@ -189,7 +208,7 @@ namespace BillingApplication
             var checkColumn = ugGst.DisplayLayout.Bands[0].Columns["ISSELECTED"];
             checkColumn.CellActivation = Activation.AllowEdit;
             checkColumn.Header.VisiblePosition = 0;
-            ugGst.DisplayLayout.Bands[0].Columns["PARTYGST"].Header.VisiblePosition = 10;
+            ugGst.DisplayLayout.Bands[0].Columns["PARTYGST"].Header.VisiblePosition = 2;
             ugGst.DisplayLayout.Bands[0].Columns["PARTYNAME"].Width = 200;
             ugGst.DisplayLayout.Bands[0].Columns["PARTYGST"].Width = 150;
 

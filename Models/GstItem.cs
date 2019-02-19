@@ -13,8 +13,12 @@ namespace BillingApplication.Models
         public string InvoiceNumber { get; set; }
         public string InvoiceDate { get; set; }
         public decimal TotalBeforeTax { get; set; }
-        public decimal IgstRate { get; set; }
-        public decimal IgstAmount { get; set; }
+        public decimal? IgstRate { get; set; }
+        public decimal? IgstAmount { get; set; }
+        public decimal? SgstRate { get; set; }
+        public decimal? SgstAmount { get; set; }
+        public decimal? CgstRate { get; set; }
+        public decimal? CgstAmount { get; set; }
         public decimal TotalAfterTax { get; set; }
         public decimal TotalMeters { get; set; }
         public decimal TotalBillQty { get; set; }
