@@ -656,10 +656,11 @@ namespace BillingApplication
             //printBalance = System.Math.Round(printTotal, 0);
             
             var totalRoundedOffToTwoDecimal = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
-            decimal whole = System.Math.Round(totalRoundedOffToTwoDecimal, 0, MidpointRounding.AwayFromZero);
-            decimal roundOff = whole - totalRoundedOffToTwoDecimal;
+            //decimal whole = System.Math.Round(totalRoundedOffToTwoDecimal, 0, MidpointRounding.AwayFromZero);
+            //decimal roundOff = whole - totalRoundedOffToTwoDecimal;
+            decimal whole = totalRoundedOffToTwoDecimal;
             btmGrid[2, Grid.TotalBeforeTax].Value = PadDigits(whole);
-            btmGrid[2, Grid.RoundOff].Value = PadDigits(roundOff);
+            //btmGrid[2, Grid.RoundOff].Value = PadDigits(roundOff);
             UpdateTotalAfterTax(Grid.Sgst, totalRoundedOffToTwoDecimal);
             UpdateTotalAfterTax(Grid.Cgst, totalRoundedOffToTwoDecimal);
             UpdateTotalAfterTax(Grid.Igst, totalRoundedOffToTwoDecimal);
@@ -683,14 +684,14 @@ namespace BillingApplication
             if (percent > 0)
             {
                 taxAmountRoundedOffTwoDecimal = totalBeforeTaxRoundedOffToTwoDecimal * percent / 100;
-                btmGrid[2, rowIndex].Value = PadDigits(Math.Round(taxAmountRoundedOffTwoDecimal, 0, MidpointRounding.AwayFromZero));
+                btmGrid[2, rowIndex].Value = PadDigits(Math.Round(taxAmountRoundedOffTwoDecimal, 2, MidpointRounding.AwayFromZero));
             }
             decimal totalAfterTax = totalBeforeTaxRoundedOffToTwoDecimal;
             totalAfterTax += getBotomRowValue(Grid.Cgst, 2);
             totalAfterTax += getBotomRowValue(Grid.Sgst, 2);
             totalAfterTax += getBotomRowValue(Grid.Igst, 2);
-            var totalAfterTaxRoundedOffToTwoDecimal = Math.Round(totalAfterTax, 0, MidpointRounding.AwayFromZero);
-            btmGrid[2, Grid.TotalAfterTax].Value = PadDigits(totalAfterTaxRoundedOffToTwoDecimal);
+            var totalAfterTaxRoundedOffToOne = Math.Round(totalAfterTax, 0, MidpointRounding.AwayFromZero);
+            btmGrid[2, Grid.TotalAfterTax].Value = PadDigits(totalAfterTaxRoundedOffToOne);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
