@@ -1,6 +1,8 @@
 bin/
+Releases/
 obj/
 Data/*
 *.user
 *.suo
 *.orig
+.vs/
