@@ -13,10 +13,13 @@ namespace BillingApplication.Models
         //082017
         [JsonProperty(PropertyName = "fp", Order = 2)]
         public string CurrentFilingMonth { get; set; }
-        [JsonProperty(PropertyName = "cur_gt", Order = 4)]
-        public decimal GrossTurnOver4CurrentFilingMonth { get; set; }
-        [JsonProperty(PropertyName = "gt", Order = 3)]
-        public decimal GrossTurnOver4PreviousFinanicalYear { get; set; }
+
+        //[JsonProperty(PropertyName = "cur_gt", Order = 4)]
+        //public decimal GrossTurnOver4CurrentFilingMonth { get; set; }
+
+        //[JsonProperty(PropertyName = "gt", Order = 3)]
+        //public decimal GrossTurnOver4PreviousFinanicalYear { get; set; }
+
         [JsonProperty(PropertyName = "version", Order = 5)]
         public string GstVersion { get; set; }
         [JsonProperty(PropertyName = "hash", Order = 6)]

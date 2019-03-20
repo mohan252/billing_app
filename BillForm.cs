@@ -178,7 +178,7 @@ namespace BillingApplication
             myCmd.CommandText = "SELECT * FROM AGENTS";
             myAdap.Fill(coDs, "AGENTS");
             //parties
-            myCmd.CommandText = "SELECT ID,NAME,ADDR1,ADDR2,CITY,STATE,PIN FROM PARTIES";
+            myCmd.CommandText = "SELECT ID,NAME,ADDR1,ADDR2,CITY,STATE,PIN,GST FROM PARTIES";
             myAdap.Fill(coDs, "PARTIES");
         }
         private void FillItemsData()
@@ -203,7 +203,7 @@ namespace BillingApplication
             myCmd.Connection = new SqlConnection(myConn);
             myAdap.SelectCommand = myCmd;
             coDs = new CompanyDS();
-            myCmd.CommandText = "SELECT ID,NAME,ADDR1,ADDR2,CITY,STATE,PIN FROM PARTIES";
+            myCmd.CommandText = "SELECT ID,NAME,ADDR1,ADDR2,CITY,STATE,PIN, GST FROM PARTIES";
             myAdap.Fill(coDs, table);
         }
         private void FillFwdTables(string colName)
@@ -345,7 +345,7 @@ namespace BillingApplication
             btmGrid.Rows[Grid.Cgst].Cells[1].ValueType = Type.GetType("System.Double");
             btmGrid.Rows[Grid.Cgst].Cells[2].ValueType = Type.GetType("System.Double");
 
-            values = new string[2] { "IGST @ %", "5"};
+            values = new string[1] { "IGST @ %" };
             btmGrid.Rows.Add(values);
             btmGrid.Rows[Grid.Igst].Cells[0].ReadOnly = true;
             btmGrid.Rows[Grid.Igst].Cells[1].ValueType = Type.GetType("System.Double");
@@ -425,6 +425,27 @@ namespace BillingApplication
                         txtPartyPin.Text = "";
                 }
                 catch { txtPartyPin.Text = ""; }
+
+                //fill tax
+                try
+                {
+                    if (!string.IsNullOrEmpty(partyRow.GST))
+                    {                        
+                        if (partyRow.GST.StartsWith("33"))
+                        {
+                            btmGrid.Rows[Grid.Sgst].Cells[1].Value = "2.5";
+                            btmGrid.Rows[Grid.Cgst].Cells[1].Value = "2.5";
+                            btmGrid.Rows[Grid.Igst].Cells[1].Value = "";
+                        }
+                        else
+                        {
+                            btmGrid.Rows[Grid.Sgst].Cells[1].Value = "";
+                            btmGrid.Rows[Grid.Cgst].Cells[1].Value = "";
+                            btmGrid.Rows[Grid.Igst].Cells[1].Value = "5";
+                        }
+                    }                                   
+                }
+                catch { }
             }
         }
         private void txtPartyName_TextChanged(object sender, EventArgs e)
@@ -655,7 +676,7 @@ namespace BillingApplication
             //decimal printTotal = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
             //printBalance = System.Math.Round(printTotal, 0);
             
-            var totalRoundedOffToTwoDecimal = System.Math.Round(total, 2, MidpointRounding.AwayFromZero);
+            var totalRoundedOffToTwoDecimal = System.Math.Round(total, 0, MidpointRounding.AwayFromZero);
             //decimal whole = System.Math.Round(totalRoundedOffToTwoDecimal, 0, MidpointRounding.AwayFromZero);
             //decimal roundOff = whole - totalRoundedOffToTwoDecimal;
             decimal whole = totalRoundedOffToTwoDecimal;
@@ -1726,8 +1747,5 @@ namespace BillingApplication
                 SetNewBill(false);
             }
         }
-
-        
-
     }
 }

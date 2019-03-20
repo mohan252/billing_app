@@ -165,9 +165,9 @@ namespace BillingApplication
             {
                 MerchantGst = Convert.ToString(cbAddress.SelectedValue),
                 CurrentFilingMonth = txtFilingMonth.Text,
-                GrossTurnOver4CurrentFilingMonth = ParseDecimal(txtCurrentTurnover.Text),
-                GrossTurnOver4PreviousFinanicalYear = ParseDecimal(txtPrevTurnOver.Text),
-                GstVersion = "GST1.00",
+                //GrossTurnOver4CurrentFilingMonth = ParseDecimal(txtCurrentTurnover.Text),
+                //GrossTurnOver4PreviousFinanicalYear = ParseDecimal(txtPrevTurnOver.Text),
+                GstVersion = "GST2.3.0",
                 Hash = "hash",
                 B2B = b2b,
                 Hsn = Hsn
@@ -211,6 +211,9 @@ namespace BillingApplication
             ugGst.DisplayLayout.Bands[0].Columns["PARTYGST"].Header.VisiblePosition = 2;
             ugGst.DisplayLayout.Bands[0].Columns["PARTYNAME"].Width = 200;
             ugGst.DisplayLayout.Bands[0].Columns["PARTYGST"].Width = 150;
+            ugGst.DisplayLayout.Bands[0].Columns["IGSTRATE"].Hidden = true;
+            ugGst.DisplayLayout.Bands[0].Columns["SGSTRATE"].Hidden = true;
+            ugGst.DisplayLayout.Bands[0].Columns["CGSTRATE"].Hidden = true;
 
             ugGst.DisplayLayout.Override.AllowRowSummaries = AllowRowSummaries.SingleSummaryBasedOnDataType;
         }
