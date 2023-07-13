@@ -92,14 +92,6 @@
     <Setting Name="CSCDPercent" Type="System.Single" Scope="User">
       <Value Profile="(Default)">4</Value>
     </Setting>
-    <Setting Name="CompanyConnectionString" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30</Value>
-    </Setting>
     <Setting Name="TinNo" Type="System.String" Scope="User">
       <Value Profile="(Default)">0, 0</Value>
     </Setting>
@@ -160,22 +152,6 @@
     <Setting Name="CoverPrintY" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">125</Value>
     </Setting>
-    <Setting Name="companyConn1" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30</Value>
-    </Setting>
-    <Setting Name="companyConn" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30</Value>
-    </Setting>
     <Setting Name="StateCode" Type="System.String" Scope="User">
       <Value Profile="(Default)">55,90</Value>
     </Setting>
@@ -229,6 +205,30 @@
     </Setting>
     <Setting Name="DDash2" Type="System.String" Scope="User">
       <Value Profile="(Default)">44,320</Value>
+    </Setting>
+    <Setting Name="companyConn1" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30</Value>
+    </Setting>
+    <Setting Name="companyConn" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30</Value>
+    </Setting>
+    <Setting Name="CompanyConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=.\SQLEXPRESS;Initial Catalog=Company;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=password123;Connect Timeout=30</Value>
     </Setting>
   </Settings>
 </SettingsFile>
